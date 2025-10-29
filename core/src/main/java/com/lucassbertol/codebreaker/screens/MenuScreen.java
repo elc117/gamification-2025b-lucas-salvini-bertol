@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lucassbertol.codebreaker.MainGame; 
+
 public class MenuScreen implements Screen {
 
     private final SpriteBatch batch;
@@ -72,7 +73,7 @@ public class MenuScreen implements Screen {
         // Verifica se o usuário tocou na tela
         if (Gdx.input.isTouched()) {
             // Se tocou, troca para a tela de seleção de nível
-            game.setScreen(new LevelSelectScreen(game)); 
+            game.setScreen(new DifficultSelectScreen(game)); 
             dispose();
         }
     }
