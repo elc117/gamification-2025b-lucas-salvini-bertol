@@ -11,11 +11,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lucassbertol.codebreaker.MainGame; 
 public class MenuScreen implements Screen {
 
+    private final SpriteBatch batch;
+    private final Texture background;
+    private final BitmapFont font;
+    private final OrthographicCamera camera;
     private final MainGame game;
-    private SpriteBatch batch;
-    private Texture background;
-    private BitmapFont font;
-    private OrthographicCamera camera;
 
     // GlyphLayout nos ajuda a medir o tamanho do texto para centralizá-lo
     private final GlyphLayout layout;
@@ -35,11 +35,10 @@ public class MenuScreen implements Screen {
         
         // Usa a fonte padrão do libGDX. Para um jogo final, você pode criar a sua.
         font = new BitmapFont(); 
-        font.getData().setScale(2); // Aumenta o tamanho da fonte
+        font.getData().setScale(2.5f); // Aumenta o tamanho da fonte
 
         layout = new GlyphLayout(font, message);
     }
-
     @Override
     public void show() {
         // Este método é chamado quando a tela se torna a tela ativa.
@@ -73,9 +72,8 @@ public class MenuScreen implements Screen {
         // Verifica se o usuário tocou na tela
         if (Gdx.input.isTouched()) {
             // Se tocou, troca para a tela de seleção de nível
-            // game.setScreen(new LevelSelectionScreen(game)); // A classe LevelSelectionScreen ainda não existe
-            // Libera os recursos desta tela para não consumir memória
-            // dispose();
+            game.setScreen(new LevelSelectScreen(game)); 
+            dispose();
         }
     }
 
