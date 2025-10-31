@@ -4,110 +4,117 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.Scaling;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.lucassbertol.codebreaker.MainGame;
-
 
 public class DifficultSelectScreen implements Screen {
 
-	private final SpriteBatch batch;
-	private final Texture background;
-	private final BitmapFont font;
-	private final GlyphLayout layout;
-	private final Stage stage;
-	private final Skin skin;
-	
+    private final Stage stage;
+    private final Skin skin;
+    private final Texture backgroundTexture;
+    private final MainGame game;
 
-	   public DifficultSelectScreen(MainGame game) {
-        batch = new SpriteBatch();
-        background = new Texture(Gdx.files.internal("selectFase.png"));
+    public DifficultSelectScreen(MainGame game) {
+        this.game = game;
 
-        font = new BitmapFont();
-        font.getData().setScale(4f);
-        layout = new GlyphLayout(font, "Escolha a dificuldade");
+        // Stage com ScreenViewport: quando a janela muda de tamanho, a viewport ajusta a cena
+        stage = new Stage(new ScreenViewport());
 
-        stage = new Stage();
-        skin = new Skin(Gdx.files.internal("uiskin.json"));
-        Gdx.input.setInputProcessor(stage);
+        // skin (botões, labels)
+        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
-        float larguraBotao = 200f;
-        float alturaBotao = 80f;
-        float espacamento = 40f; // espaço entre os botões
+        // background que preenche a tela
+        backgroundTexture = new Texture(Gdx.files.internal("images/selectFase.png"));
+        Image backgroundImage = new Image(backgroundTexture);
+        backgroundImage.setScaling(Scaling.stretch);
+        backgroundImage.setFillParent(true); // ocupa toda a área do stage
+        stage.addActor(backgroundImage);
 
-        // Calcule a posição inicial para centralizar os dois botões juntos
-        float larguraTotal = (2 * larguraBotao) + espacamento;
-        float xInicial = (Gdx.graphics.getWidth() - larguraTotal) / 2;
-        float y = 200f; // altura dos botões	
+        // Table para organizar título e botões; Table facilita centralização e responsividade
+        Table table = new Table();
+        table.setFillParent(true);
+        table.center();
+        stage.addActor(table);
 
-        TextButton easyButton = new TextButton("Facil", skin);
-        easyButton.setSize(larguraBotao, alturaBotao);
-        easyButton.setPosition(xInicial, y);
+        // Título
+        Label.LabelStyle labelStyle = new Label.LabelStyle();
+        labelStyle.font = skin.getFont("default-font"); // usa a fonte do uiskin default
+        Label title = new Label("ESCOLHA A DIFICULDADE:", labelStyle);
+        title.setFontScale(3f); // escala do título
+
+        // Botões
+        TextButton easyButton = new TextButton("FACIL", skin);
+        TextButton hardButton = new TextButton("DIFICIL", skin);
+
         easyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // start jogo fácil
+                // iniciar jogo fácil
+                // game.setScreen(new GameScreen(game, Difficulty.EASY));
             }
         });
-        stage.addActor(easyButton);
 
-        TextButton hardButton = new TextButton("Difícil", skin);
-        hardButton.setSize(larguraBotao, alturaBotao);
-        hardButton.setPosition(xInicial + larguraBotao + espacamento, y);
         hardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // start jogo difícil
+                // iniciar jogo difícil
+                // game.setScreen(new GameScreen(game, Difficulty.HARD));
             }
         });
-        stage.addActor(hardButton);
+
+        // Monta o layout na table:
+        table.add(title).colspan(2).padBottom(90f);
+        table.row();
+        table.add(easyButton).width(220f).height(90f).padRight(40f);
+        table.add(hardButton).width(220f).height(90f).padLeft(40f);
+
+        // Input para a stage
+        Gdx.input.setInputProcessor(stage);
     }
 
-	@Override
-	public void show() { 
-	}
+    @Override
+    public void show() {
+    }
 
-	@Override
-	public void render(float delta) {
-		Gdx.gl.glClearColor(0f, 0f, 0.1f, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    @Override
+    public void render(float delta) {
+        // Limpa tela
+        Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		float x = (Gdx.graphics.getWidth() - layout.width) / 2;
-		float y = Gdx.graphics.getHeight() - 50; 
-		font.draw(batch, layout, x, y);
+        // Atualiza e desenha background, table, botões, título
+        stage.act(delta);
+        stage.draw();
+    }
 
-		batch.end();
+    @Override
+    public void resize(int width, int height) {
+        // Atualiza a viewport do stage para o novo tamanho e recenter no meio
+        stage.getViewport().update(width, height, true);
+    }
 
-		stage.act(delta);
-		stage.draw();
+    @Override
+    public void pause() { }
 
-	}
+    @Override
+    public void resume() { }
 
-	@Override
-	public void resize(int width, int height) { }
+    @Override
+    public void hide() { }
 
-	@Override
-	public void pause() { }
-
-	@Override
-	public void resume() { }
-
-	@Override
-	public void hide() { }
-
-	@Override
-	public void dispose() {
-		batch.dispose();
-		background.dispose();
-		stage.dispose();
-		skin.dispose();
-	}
+    @Override
+    public void dispose() {
+        stage.dispose();
+        skin.dispose();
+        backgroundTexture.dispose();
+    }
 }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.lucassbertol.codebreaker.MainGame;
 
-public class MenuScreen implements Screen {
+public class RulesAndCredits implements Screen {
 
     private final SpriteBatch batch;
     private final Texture background;
@@ -20,9 +20,9 @@ public class MenuScreen implements Screen {
 
     // GlyphLayout nos ajuda a medir o tamanho do texto para centralizá-lo
     private final GlyphLayout layout;
-    private final String message = "PRESS START";
+    private final String message = "O objetivo desse jogo é resolver variados\ndesafios de programação com intuito de evoluir\nseus conhecimentos.\n\nDesenvolvido por: Lucas Bertol\n\n[#00FF7F]AVANÇAR[]";
 
-    public MenuScreen(MainGame game) {
+    public RulesAndCredits(MainGame game) {
         this.game = game;
 
         camera = new OrthographicCamera();
@@ -32,11 +32,12 @@ public class MenuScreen implements Screen {
         batch = new SpriteBatch();
 
         // Carrega a imagem de fundo da pasta assets
-        background = new Texture("images/menu.png");
+        background = new Texture("images/regras.png");
 
         // Usa a fonte padrão do libGDX. Para um jogo final, você pode criar a sua.
         font = new BitmapFont();
         font.getData().setScale(3f); // Aumenta o tamanho da fonte
+        font.getData().markupEnabled = true;
 
         layout = new GlyphLayout(font, message);
     }
@@ -72,7 +73,9 @@ public class MenuScreen implements Screen {
 
         // Verifica se o usuário tocou na tela
         if (Gdx.input.justTouched()) {
-            game.setScreen(new RulesAndCredits(game));
+            // Se tocou, troca para a tela de seleção de nível
+            game.setScreen(new DifficultSelectScreen(game));
+            dispose();
         }
     }
 
