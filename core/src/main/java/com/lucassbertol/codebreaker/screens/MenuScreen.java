@@ -72,7 +72,7 @@ public class MenuScreen implements Screen {
 
         // Verifica se o usuário tocou na tela
         if (Gdx.input.justTouched()) {
-            game.setScreen(new RulesAndCredits(game));
+            game.setScreen(new UserInputScreen(game));
         }
     }
 

@@ -5,8 +5,8 @@ Todos os registros de mudanças notáveis deste projeto serão documentados nest
 
 ## [v1.1] - 2025-11-01
 ### Adicionado
-* Inicio de testes do viewport para formatação suportar diferentes telas
-* Tela de "rulesAndCredits"
+* Inicio de testes do viewport para formatação suportar diferentes telas.
+* Input de usuário para futuro leaderboard.
 
 ## [v1.0] - 2025-10-28
 ### Adicionado
