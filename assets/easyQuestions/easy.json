@@ -1,0 +1,27 @@
+{
+  "questoes": [
+    {
+      "title": "Fase teste I (FACIL)",
+      "text": "Complete o código corretamente para imprimir 'Hello World!'.",
+      "texto": "??????('Hello World!)'",
+      "answer": [
+        [
+          "printf"
+          ]
+      ]
+    },
+    {
+      "title": "Fase teste II (FACIL)",
+      "text": "Complete o código corretamente para imprimir 'Hello World!'.",
+      "question": "printf('????? ?????!)'",
+      "answer": [
+        [
+          "hello"
+        ],
+        [
+          "world"
+        ]
+      ]
+    }
+  ]
+}

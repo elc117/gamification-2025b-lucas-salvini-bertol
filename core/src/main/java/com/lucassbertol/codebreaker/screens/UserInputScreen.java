@@ -53,6 +53,7 @@ public class UserInputScreen implements Screen {
         TextField nameInput = new TextField("", skin);
         nameInput.setMessageText("DIGITE SEU NOME...");
 
+
         // Botões
         TextButton nextButton = new TextButton("CONTINUAR", skin);
 
@@ -60,7 +61,9 @@ public class UserInputScreen implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 String playerName = nameInput.getText();
-                game.setScreen(new DifficultSelectScreen(game));
+                if (!playerName.isEmpty()) { // Verifica se o nome não está vazio
+                    game.setScreen(new DifficultSelectScreen(game));
+                }
             }
         });
 
