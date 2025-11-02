@@ -7,6 +7,8 @@ Todos os registros de mudanças notáveis deste projeto serão documentados nest
 ### Adicionado
 * Inicio de testes do viewport para formatação suportar diferentes telas.
 * Input de usuário para futuro leaderboard.
+* .json com questões teste iniciais.
+* Exibição de primeiras questões no jogo.
 
 ## [v1.0] - 2025-10-28
 ### Adicionado

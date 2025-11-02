@@ -58,11 +58,9 @@ public class DifficultSelectScreen implements Screen {
         easyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                // iniciar jogo fácil
-                // game.setScreen(new GameScreen(game, Difficulty.EASY));
+                game.setScreen(new TextQuestionScreen(game));
             }
         });
-
         hardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {

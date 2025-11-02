@@ -34,7 +34,7 @@ public class MenuScreen implements Screen {
         // Carrega a imagem de fundo da pasta assets
         background = new Texture("images/menu.png");
 
-        // Usa a fonte padrão do libGDX. Para um jogo final, você pode criar a sua.
+        // Usa a fonte padrão do libGDX.
         font = new BitmapFont();
         font.getData().setScale(3f); // Aumenta o tamanho da fonte
 
