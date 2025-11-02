@@ -3,7 +3,7 @@
     {
       "id": 1,
       "title": "Fase teste I (FACIL)",
-      "text": "Complete o código corretamente para imprimir 'Hello World!'.",
+      "text": "(FACIL 1) Complete o código corretamente para imprimir 'Hello World!'.",
       "question": "??????('Hello World!)'",
       "answer": [
         [
@@ -14,7 +14,7 @@
     {
       "id": 2,
       "title": "Fase teste II (FACIL)",
-      "text": "Complete o código corretamente para imprimir 'Hello World!'.",
+      "text": "(FACIL 2) Complete o código corretamente para imprimir 'Hello World!'.",
       "question": "printf('????? ?????!)'",
       "answer": [
         [

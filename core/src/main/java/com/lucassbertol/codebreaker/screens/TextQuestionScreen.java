@@ -8,6 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.lucassbertol.codebreaker.MainGame;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.data.QuestionsParsing;
@@ -24,6 +29,8 @@ public class TextQuestionScreen implements Screen {
     private final MainGame game;
     private QuestionsParsing parser;
     private Question currentQuestion;
+    private final Stage stage;
+    private final Skin skin;
 
     public TextQuestionScreen(MainGame game) {
         this.game = game;
@@ -43,6 +50,32 @@ public class TextQuestionScreen implements Screen {
         // pega questão aleatória
         parser =  new QuestionsParsing();
         currentQuestion = parser.getRandomQuestion("easy");
+
+        // Cria o Stage e a Skin para os botões
+        stage = new Stage();
+        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+
+        // Cria o botão de iniciar
+        TextButton btnIniciar = new TextButton("INICIAR FASE", skin);
+        btnIniciar.setSize(250, 120);
+        btnIniciar.setPosition(
+            (Gdx.graphics.getWidth() - btnIniciar.getWidth()) / 2,
+            200
+        );
+
+        // Adiciona o listener para o clique
+        btnIniciar.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new UserInputScreen(game));
+            }
+        });
+
+        // Adiciona o botão ao stage
+        stage.addActor(btnIniciar);
+
+        // Define o stage como o processador de entrada
+        Gdx.input.setInputProcessor(stage);
 
     }
     @Override
@@ -67,19 +100,22 @@ public class TextQuestionScreen implements Screen {
         batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Desenha o enunciado formatado com quebra de linhas
-
         String enunciado = currentQuestion.getEnunciado();
         GlyphLayout layout = new GlyphLayout();
         layout.setText(font, enunciado, Color.WHITE, 700, Align.left, true);
 
-        font.draw(batch, layout, 50, 400);
+        // Calcula a posição X para centralizar o texto
+        float x = (Gdx.graphics.getWidth() - layout.width) / 2;
+        float y = Gdx.graphics.getHeight() - 200;
+
+        font.draw(batch, layout, x, y);
+        font.getData().setScale(2.5f);
 
         batch.end();
 
-        // Verifica se o usuário tocou na tela
-        if (Gdx.input.justTouched()) {
-            game.setScreen(new UserInputScreen(game));
-        }
+        // Renderiza o stage (botões)
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
@@ -105,5 +141,7 @@ public class TextQuestionScreen implements Screen {
         background.dispose();
         font.dispose();
         batch.dispose();
+        stage.dispose();
+        skin.dispose();
     }
 }

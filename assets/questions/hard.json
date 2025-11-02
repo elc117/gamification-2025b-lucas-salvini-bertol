@@ -2,7 +2,7 @@
   "questoes": [
     {
       "title": "Fase teste I (DIFICIL)",
-      "text": "Complete o código corretamente para imprimir 'Hello World!'.",
+      "text": "(DIFICIL 1) Complete o código corretamente para imprimir 'Hello World!'.",
       "texto": "??????('Hello World!)'",
       "answer": [
         [
@@ -12,7 +12,7 @@
     },
     {
       "title": "Fase teste II (DIFICIL)",
-      "text": "Complete o código corretamente para imprimir 'Hello World!'.",
+      "text": "(DIFICIL 2) Complete o código corretamente para imprimir 'Hello World!'.",
       "question": "printf('????? ?????!)'",
       "answer": [
         [
