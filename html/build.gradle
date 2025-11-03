@@ -1,7 +1,7 @@
-
 buildscript {
   repositories {
     mavenCentral()
+    maven { url 'https://plugins.gradle.org/m2/' }
   }
   dependencies {
     classpath 'org.gretty:gretty:3.1.5'
@@ -157,8 +157,8 @@ tasks.compileGwt.dependsOn("addSource")
 tasks.draftCompileGwt.dependsOn("addSource")
 tasks.checkGwt.dependsOn("addSource")
 
-java.sourceCompatibility = JavaVersion.VERSION_21
-java.targetCompatibility = JavaVersion.VERSION_21
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17
 sourceSets.main.java.srcDirs = [ "src/main/java/" ]
 
 eclipse.project.name = appName + "-html"

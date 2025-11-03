@@ -19,6 +19,9 @@ import com.lucassbertol.codebreaker.data.QuestionsParsing;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.utils.Align;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class TextQuestionScreen implements Screen {
 
@@ -31,9 +34,21 @@ public class TextQuestionScreen implements Screen {
     private Question currentQuestion;
     private final Stage stage;
     private final Skin skin;
+    private String difficulty;
+    private int questionsAnswered;
+    private List<Integer> usedQuestionIds;
 
-    public TextQuestionScreen(MainGame game) {
+    // Construtor para primeira vez (chamado do menu de dificuldade)
+    public TextQuestionScreen(MainGame game, String difficulty) {
+        this(game, difficulty, 0, new ArrayList<>());
+    }
+
+    // Construtor completo (chamado após acertar uma questão)
+    public TextQuestionScreen(MainGame game, String difficulty, int questionsAnswered, List<Integer> usedQuestionIds) {
         this.game = game;
+        this.difficulty = difficulty;
+        this.questionsAnswered = questionsAnswered;
+        this.usedQuestionIds = usedQuestionIds;
 
         camera = new OrthographicCamera();
         // Ajusta a câmera para o tamanho da tela do dispositivo
@@ -42,14 +57,14 @@ public class TextQuestionScreen implements Screen {
         batch = new SpriteBatch();
 
         // Carrega a imagem de fundo da pasta assets
-        background = new Texture("images/selectFase.png");
+        background = new Texture("images/question.png");
 
         // Usa a fonte padrão do libGDX.
         font = new BitmapFont();
 
-        // pega questão aleatória
-        parser =  new QuestionsParsing();
-        currentQuestion = parser.getRandomQuestion("easy");
+        // pega questão aleatória que ainda não foi usada
+        parser = new QuestionsParsing();
+        currentQuestion = parser.getRandomQuestionExcluding(difficulty, usedQuestionIds);
 
         // Cria o Stage e a Skin para os botões
         stage = new Stage();
@@ -67,7 +82,7 @@ public class TextQuestionScreen implements Screen {
         btnIniciar.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new UserInputScreen(game));
+                game.setScreen(new QuestionScreen(game, currentQuestion, difficulty, questionsAnswered, usedQuestionIds));
             }
         });
 
@@ -102,7 +117,7 @@ public class TextQuestionScreen implements Screen {
         // Desenha o enunciado formatado com quebra de linhas
         String enunciado = currentQuestion.getEnunciado();
         GlyphLayout layout = new GlyphLayout();
-        layout.setText(font, enunciado, Color.WHITE, 700, Align.left, true);
+        layout.setText(font, enunciado, Color.WHITE, 900, Align.left, true);
 
         // Calcula a posição X para centralizar o texto
         float x = (Gdx.graphics.getWidth() - layout.width) / 2;
@@ -145,3 +160,4 @@ public class TextQuestionScreen implements Screen {
         skin.dispose();
     }
 }
+

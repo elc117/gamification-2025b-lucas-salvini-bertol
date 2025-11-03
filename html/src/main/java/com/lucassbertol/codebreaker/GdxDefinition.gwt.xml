@@ -11,6 +11,9 @@
   <!-- libGDX GWT backend -->
   <inherits name="com.badlogic.gdx.backends.gdx_backends_gwt" />
 
+  <!-- Inherit core module -->
+  <inherits name="com.lucassbertol.codebreaker.MainGame" />
+
   <!-- Ponto de entrada do jogo -->
   <entry-point class="com.lucassbertol.codebreaker.gwt.GwtLauncher" />
 

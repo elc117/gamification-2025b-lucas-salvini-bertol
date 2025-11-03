@@ -2,36 +2,36 @@ package com.lucassbertol.codebreaker.data;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.google.gson.Gson;
+import com.badlogic.gdx.utils.Json;
 import java.util.List;
 import java.util.Random;
 
 public class QuestionsParsing {
-    private final Gson gson;
+    private final Json json;
     private final Random random;
 
     public QuestionsParsing() {
-        this.gson = new Gson();
+        this.json = new Json();
         this.random = new Random();
     }
 
     public QuestionsData loadEasyQuestions() {
         FileHandle file = Gdx.files.internal("questions/easy.json");
         String jsonContent = file.readString();
-        return gson.fromJson(jsonContent, QuestionsData.class);
+        return json.fromJson(QuestionsData.class, jsonContent);
     }
 
     public QuestionsData loadHardQuestions() {
         FileHandle file = Gdx.files.internal("questions/hard.json");
         String jsonContent = file.readString();
-        return gson.fromJson(jsonContent, QuestionsData.class);
+        return json.fromJson(QuestionsData.class, jsonContent);
     }
 
     public QuestionsData loadQuestionsByDifficulty(String difficulty) {
         String path = "questions/" + difficulty.toLowerCase() + ".json";
         FileHandle file = Gdx.files.internal(path);
         String jsonContent = file.readString();
-        return gson.fromJson(jsonContent, QuestionsData.class);
+        return json.fromJson(QuestionsData.class, jsonContent);
     }
 
     public Question getRandomQuestion(String difficulty) {
@@ -39,5 +39,28 @@ public class QuestionsParsing {
         List<Question> questions = data.getQuestoes();
         int randomIndex = random.nextInt(questions.size());
         return questions.get(randomIndex);
+    }
+
+    public Question getRandomQuestionExcluding(String difficulty, List<Integer> excludedIds) {
+        QuestionsData data = loadQuestionsByDifficulty(difficulty);
+        List<Question> questions = data.getQuestoes();
+
+        // Filtra as questões que ainda não foram usadas
+        List<Question> availableQuestions = new java.util.ArrayList<>();
+        for (Question question : questions) {
+            if (!excludedIds.contains(question.getId())) {
+                availableQuestions.add(question);
+            }
+        }
+
+        // Se não há questões disponíveis, retorna uma questão aleatória qualquer
+        if (availableQuestions.isEmpty()) {
+            int randomIndex = random.nextInt(questions.size());
+            return questions.get(randomIndex);
+        }
+
+        // Retorna uma questão aleatória das disponíveis
+        int randomIndex = random.nextInt(availableQuestions.size());
+        return availableQuestions.get(randomIndex);
     }
 }
