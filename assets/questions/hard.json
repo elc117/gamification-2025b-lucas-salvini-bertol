@@ -1,25 +1,118 @@
 {
   "questoes": [
     {
-      "title": "Fase teste I (DIFICIL)",
-      "text": "(DIFICIL 1) Complete o código corretamente para imprimir 'Hello World!'.",
-      "texto": "??????('Hello World!)'",
+      "id": 1,
+      "title": "Fase teste X (DIFICIL) - Acesso Negado",
+      "text": "(DIFICIL 10) O agente 'Cipher' precisa verificar se a senha (representada pela variável `pin`) é a correta. Complete a estrutura condicional para que a mensagem de 'Acesso concedido' só apareça se o PIN for exatamente **4721**.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int pin = 4721;\n    if (pin ?? 4721) {\n        printf(\"Acesso concedido\\n\");\n    }\n    ????? {\n        printf(\"Acesso negado\\n\");\n    }\n    return 0;\n}",
       "answer": [
         [
-          "printf"
+          "=="
+        ],
+        [
+          "else"
         ]
       ]
     },
     {
-      "title": "Fase teste II (DIFICIL)",
-      "text": "(DIFICIL 2) Complete o código corretamente para imprimir 'Hello World!'.",
-      "question": "printf('????? ?????!)'",
+      "id": 2,
+      "title": "Fase teste XI (DIFICIL) - Decifrando Mensagens",
+      "text": "(DIFICIL 11) A espiã 'Oracle' está capturando pacotes de dados. Ela precisa garantir que o programa só processe a 'Carga útil' se o tamanho do pacote (`tamanho`) for maior que 10. Complete a condição do `if`.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int tamanho = 15;\n    if (tamanho ?? 10) {\n        printf(\"Carga util processada.\\n\");\n    }\n    return 0;\n}",
       "answer": [
         [
-          "hello"
+          ">"
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Fase teste XII (DIFICIL) - Looping de Força Bruta",
+      "text": "(DIFICIL 12) O sistema de segurança está bloqueado. Complete o laço `for` que testa chaves de **0 a 9**, garantindo que o contador `i` comece em zero e vá até (e incluindo) o valor 9.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int i;\n    for (i = 0; i <= ??; ??????) {\n        printf(\"Tentando chave %d\\n\", i);\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "9"
         ],
         [
-          "world"
+          "i++"
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Fase teste XIII (DIFICIL) - Detecção de Anomalias",
+      "text": "(DIFICIL 13) O software antivírus 'Aegis' detecta um comportamento suspeito se o nível de ameaça (`nivel`) não for zero. Complete a condição para que o código imprima 'Alerta de Invasão!' apenas quando `nivel` for diferente de 0.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int nivel = 3;\n    if (nivel ?? 0) {\n        printf(\"Alerta de Invasao!\\n\");\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "!="
+        ]
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Fase teste XIV (DIFICIL) - Contagem de Bits",
+      "text": "(DIFICIL 14) O cryptógrafo 'Zero' precisa contar a quantidade de bits processados. Complete o laço `while` para que ele continue executando enquanto o contador (`contagem`) for menor que 8 (o número de bits em um byte).",
+      "question": "#include <stdio.h>\n\nint main() {\n    int contagem = 0;\n    while (contagem ?? 8) {\n        printf(\"Bit processado: %d\\n\", contagem);\n        contagem++;\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "<"
+        ]
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Fase teste XV (DIFICIL) - Ocultação de Dados",
+      "text": "(DIFICIL 15) Para ocultar uma mensagem secreta, a equipe 'Ghost' armazena parte dela em um array. Complete o código para declarar um array de inteiros de 5 posições e inicializá-lo com os valores **9, 8, 7, 6, 5**.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int dados ?? = {9, 8, 7, 6, 5};\n    printf(\"Primeiro dado: %d\\n\", dados[0]);\n    return 0;\n}",
+      "answer": [
+        [
+          "[]"
+        ]
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Fase teste XVI (DIFICIL) - Servidor Crítico",
+      "text": "(DIFICIL 16) O administrador de sistemas 'Sentinel' monitora a carga do servidor. Ele quer que o código imprima a carga (`carga`) e depois a **diminua em 1** em cada iteração. Complete a operação de decremento.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int carga = 5;\n    do {\n        printf(\"Carga atual: %d\\n\", carga);\n        ????????;\n    } while (carga > 0);\n    return 0;\n}",
+      "answer": [
+        [
+          "carga--"
+        ]
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Fase teste XVII (DIFICIL) - Chave Mestra",
+      "text": "(DIFICIL 17) A chave mestra do sistema tem o valor **99**. Crie a linha de código para declarar uma constante inteira chamada `CHAVE_MESTRA` com esse valor, garantindo que ela não possa ser alterada.",
+      "question": "#include <stdio.h>\n\nint main() {\n    const int CHAVE_MESTRA ?? 99;\n    printf(\"Chave: %d\\n\", CHAVE_MESTRA);\n    return 0;\n}",
+      "answer": [
+        [
+          "="
+        ]
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Fase teste XVIII (DIFICIL) - Firewall Duplo",
+      "text": "(DIFICIL 18) Para acessar a rede secreta, são necessários dois tokens. O acesso é permitido se **AMBOS** (`token_a` for 'ativo' **E** `token_b` for 'ativo'). Complete o operador lógico para a condição de acesso.",
+      "question": "#include <stdio.h>\n#include <stdbool.h>\n\nint main() {\n    bool token_a = true;\n    bool token_b = true;\n    if (token_a ?? token_b) {\n        printf(\"Acesso a Rede Secreta liberado.\\n\");\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "&&"
+        ]
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Fase teste XIX (DIFICIL) - Criptografia Simples",
+      "text": "(DIFICIL 19) O engenheiro de segurança 'Delta' está usando um deslocamento simples para criptografar um caractere. Complete o código para declarar uma variável do tipo **caractere** (`char`) e imprima seu valor.",
+      "question": "#include <stdio.h>\n\nint main() {\n    ?????? letra = 'A';\n    printf(\"Caractere: %c\\n\", letra);\n    return 0;\n}",
+      "answer": [
+        [
+          "char"
         ]
       ]
     }

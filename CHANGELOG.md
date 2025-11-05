@@ -1,6 +1,10 @@
 # Changelog
 Todos os registros de mudanças notáveis deste projeto serão documentados neste arquivo.
 
+## [v1.3] - 2025-11-05
+### Adicionado
+* Sistema de jogabilidade das questões 100% funcional.
+
 ## [v1.2] - 2025-11-02
 ### Adicionado
 * Implementação das classes da seleção de questões.
