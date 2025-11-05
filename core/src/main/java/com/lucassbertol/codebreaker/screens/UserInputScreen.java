@@ -14,7 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
 
 public class UserInputScreen implements Screen {
@@ -27,8 +27,8 @@ public class UserInputScreen implements Screen {
     public UserInputScreen(MainGame game) {
         this.game = game;
 
-        // Stage com ScreenViewport: quando a janela muda de tamanho, a viewport ajusta a cena
-        stage = new Stage(new ScreenViewport());
+        // Stage com FitViewport (1280x720): mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(1280, 720));
 
         // skin (botões, labels)
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));

@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.utils.AnswerValidator;
@@ -42,7 +42,8 @@ public class QuestionScreen implements Screen {
         // Adiciona a questão atual à lista de usadas
         gameState.markQuestionAsUsed(currentQuestion.getId());
 
-        stage = new Stage(new ScreenViewport());
+        // Stage com FitViewport (1280x720): mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(1280, 720));
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         // Background

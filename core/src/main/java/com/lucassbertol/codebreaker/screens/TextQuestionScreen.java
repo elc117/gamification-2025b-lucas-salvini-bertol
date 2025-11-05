@@ -13,6 +13,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lucassbertol.codebreaker.MainGame;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.data.QuestionsParsing;
@@ -29,6 +31,7 @@ public class TextQuestionScreen implements Screen {
     private final Texture background;
     private final BitmapFont font;
     private final OrthographicCamera camera;
+    private final Viewport viewport;
     private final MainGame game;
     private QuestionsParsing parser;
     private Question currentQuestion;
@@ -51,8 +54,9 @@ public class TextQuestionScreen implements Screen {
         this.usedQuestionIds = usedQuestionIds;
 
         camera = new OrthographicCamera();
-        // Ajusta a câmera para o tamanho da tela do dispositivo
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // Usa FitViewport com resolução virtual 1280x720 para manter proporções
+        viewport = new FitViewport(1280, 720, camera);
+        camera.position.set(1280 / 2f, 720 / 2f, 0);
 
         batch = new SpriteBatch();
 
@@ -66,15 +70,15 @@ public class TextQuestionScreen implements Screen {
         parser = new QuestionsParsing();
         currentQuestion = parser.getRandomQuestionExcluding(difficulty, usedQuestionIds);
 
-        // Cria o Stage e a Skin para os botões
-        stage = new Stage();
+        // Stage com FitViewport para manter proporções consistentes
+        stage = new Stage(new FitViewport(1280, 720));
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         // Cria o botão de iniciar
         TextButton btnIniciar = new TextButton("INICIAR FASE", skin);
         btnIniciar.setSize(250, 120);
         btnIniciar.setPosition(
-            (Gdx.graphics.getWidth() - btnIniciar.getWidth()) / 2,
+            (1280 - btnIniciar.getWidth()) / 2,
             200
         );
 
@@ -111,8 +115,8 @@ public class TextQuestionScreen implements Screen {
         // Inicia o desenho
         batch.begin();
 
-        // Desenha a imagem de fundo para preencher a tela
-        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // Desenha a imagem de fundo para preencher a viewport virtual (1280x720)
+        batch.draw(background, 0, 0, 1280, 720);
 
         // Desenha o enunciado formatado com quebra de linhas
         String enunciado = currentQuestion.getEnunciado();
@@ -120,8 +124,8 @@ public class TextQuestionScreen implements Screen {
         layout.setText(font, enunciado, Color.WHITE, 900, Align.left, true);
 
         // Calcula a posição X para centralizar o texto
-        float x = (Gdx.graphics.getWidth() - layout.width) / 2;
-        float y = Gdx.graphics.getHeight() - 200;
+        float x = (1280 - layout.width) / 2;
+        float y = 720 - 200;
 
         font.draw(batch, layout, x, y);
         font.getData().setScale(2.5f);
@@ -135,8 +139,9 @@ public class TextQuestionScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // Atualiza a câmera quando a janela é redimensionada
-        camera.setToOrtho(false, width, height);
+        // Atualiza os viewports quando a janela é redimensionada
+        viewport.update(width, height, true);
+        stage.getViewport().update(width, height, true);
     }
 
     @Override

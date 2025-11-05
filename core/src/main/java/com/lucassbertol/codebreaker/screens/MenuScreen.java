@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lucassbertol.codebreaker.MainGame;
 
 public class MenuScreen implements Screen {
@@ -16,6 +18,7 @@ public class MenuScreen implements Screen {
     private final Texture background;
     private final BitmapFont font;
     private final OrthographicCamera camera;
+    private final Viewport viewport;
     private final MainGame game;
 
     // GlyphLayout nos ajuda a medir o tamanho do texto para centralizá-lo
@@ -26,8 +29,9 @@ public class MenuScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        // Ajusta a câmera para o tamanho da tela do dispositivo
-        camera.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // FitViewport com resolução virtual 1280x720 para manter proporções
+        viewport = new FitViewport(1280, 720, camera);
+        camera.position.set(1280 / 2f, 720 / 2f, 0);
 
         batch = new SpriteBatch();
 
@@ -58,12 +62,12 @@ public class MenuScreen implements Screen {
         // Inicia o desenho
         batch.begin();
 
-        // Desenha a imagem de fundo para preencher a tela
-        batch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        // Desenha a imagem de fundo para preencher a viewport virtual (1280x720)
+        batch.draw(background, 0, 0, 1280, 720);
 
         // Calcula a posição para centralizar o texto
-        float textX = (Gdx.graphics.getWidth() - layout.width) / 2;
-        float textY = (Gdx.graphics.getHeight() + layout.height) / 2;
+        float textX = (1280 - layout.width) / 2;
+        float textY = (720 + layout.height) / 2;
 
         // Desenha o texto
         font.draw(batch, message, textX, textY);
@@ -78,8 +82,8 @@ public class MenuScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        // Atualiza a câmera quando a janela é redimensionada
-        camera.setToOrtho(false, width, height);
+        // Atualiza o viewport quando a janela é redimensionada
+        viewport.update(width, height, true);
     }
 
     @Override
