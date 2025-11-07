@@ -28,7 +28,7 @@ public class UserInputScreen implements Screen {
         this.game = game;
 
         // Stage com FitViewport (1280x720): mantém proporções e escala consistente
-        stage = new Stage(new FitViewport(1280, 720));
+        stage = new Stage(new FitViewport(1920, 1080));
 
         // skin (botões, labels)
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
@@ -48,11 +48,13 @@ public class UserInputScreen implements Screen {
 
         // Título
         Label.LabelStyle labelStyle = new Label.LabelStyle();
-        labelStyle.font = skin.getFont("default-font"); // usa a fonte do uiskin default
+        labelStyle.font = skin.getFont("default-font");
+        Label title = new Label("DIGITE SEU USERNAME:", labelStyle);
+        title.setFontScale(3.0f);
+
         // Input de texto
         TextField nameInput = new TextField("", skin);
-        nameInput.setMessageText("DIGITE SEU NOME...");
-
+        nameInput.setMessageText("");
 
         // Botões
         TextButton nextButton = new TextButton("CONTINUAR", skin);
@@ -66,12 +68,14 @@ public class UserInputScreen implements Screen {
                 }
             }
         });
+        nextButton.getLabel().setFontScale(1.5f);
 
         // Monta o layout na table:
+        table.add(title).colspan(2).padBottom(40f);
         table.row();
-        table.add(nameInput).width(400f).height(100f).colspan(2).padBottom(40f);
+        table.add(nameInput).width(500f).height(80f).colspan(2).padBottom(40f);
         table.row();
-        table.add(nextButton).width(220f).height(100f).colspan(2);
+        table.add(nextButton).width(300f).height(100f).colspan(2);
 
         // Input para a stage
         Gdx.input.setInputProcessor(stage);

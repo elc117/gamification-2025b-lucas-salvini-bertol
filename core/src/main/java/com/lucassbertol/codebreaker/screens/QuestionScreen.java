@@ -42,8 +42,8 @@ public class QuestionScreen implements Screen {
         // Adiciona a questão atual à lista de usadas
         gameState.markQuestionAsUsed(currentQuestion.getId());
 
-        // Stage com FitViewport (1280x720): mantém proporções e escala consistente
-        stage = new Stage(new FitViewport(1280, 720));
+        // Stage com FitViewport (1920x1080): mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(1920, 1080));
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
 
         // Background
@@ -66,15 +66,21 @@ public class QuestionScreen implements Screen {
         Table contentTable = new Table();
         contentTable.top();
 
+        // Label do enunciado (contexto da questão)
+        Label enunciadoLabel = new Label(currentQuestion.getEnunciado(), skin);
+        enunciadoLabel.setFontScale(2.0f);
+        enunciadoLabel.setWrap(true);
+        enunciadoLabel.setAlignment(com.badlogic.gdx.utils.Align.center);
+
         // Label da questão
         Label questionLabel = new Label(currentQuestion.getQuestaoTexto(), skin);
-        questionLabel.setFontScale(2f);
+        questionLabel.setFontScale(2.0f);
         questionLabel.setWrap(true);
 
         // Label de mensagem (erro/acerto)
         messageLabel = new Label("", skin);
         messageLabel.setColor(Color.RED);
-        messageLabel.setFontScale(1.5f);
+        messageLabel.setFontScale(1.8f);
 
         // Tabela para inputs
         Table inputTable = new Table();
@@ -88,16 +94,19 @@ public class QuestionScreen implements Screen {
                 checkAnswer();
             }
         });
+        verifyButton.getLabel().setFontScale(1.5f);
 
         // Montando a tabela de conteúdo
         contentTable.row().pad(20);
-        contentTable.add(questionLabel).width(Math.min(800, Gdx.graphics.getWidth() - 100)).top();
-        contentTable.row().pad(20);
+        contentTable.add(enunciadoLabel).width(1200).top();
+        contentTable.row().pad(30);
+        contentTable.add(questionLabel).width(1200).top();
+        contentTable.row().pad(30);
         contentTable.add(inputTable);
         contentTable.row().pad(20);
         contentTable.add(messageLabel);
-        contentTable.row().pad(20);
-        contentTable.add(verifyButton).width(250).height(80);
+        contentTable.row().pad(30);
+        contentTable.add(verifyButton).width(300).height(100);
         contentTable.row().padBottom(50); // Espaço no final
 
         // ScrollPane para permitir rolagem
@@ -125,12 +134,14 @@ public class QuestionScreen implements Screen {
 
         for (int i = 0; i < answers.size(); i++) {
             TextField input = new TextField("", skin);
-            input.setMessageText("Resposta " + (i + 1));
             inputFields.add(input);
 
-            table.row().pad(10);
-            table.add(new Label("Blank " + (i + 1) + ":", skin)).padRight(10);
-            table.add(input).width(300).height(50);
+            Label label = new Label("Resposta " + (i + 1) + ":", skin);
+            label.setFontScale(1.5f);
+
+            table.row().pad(15);
+            table.add(label).padRight(20);
+            table.add(input).width(500).height(80);
         }
     }
 
@@ -157,8 +168,11 @@ public class QuestionScreen implements Screen {
                     game.setScreen(new DifficultSelectScreen(game));
                 });
             } else {
-                // Vai para TextQuestionScreen para mostrar o enunciado da próxima questão
-                game.setScreen(new TextQuestionScreen(game, difficulty,
+                // Vai para a próxima questão
+                com.lucassbertol.codebreaker.data.QuestionsParsing parser = new com.lucassbertol.codebreaker.data.QuestionsParsing();
+                Question nextQuestion = parser.getRandomQuestionExcluding(difficulty, gameState.getUsedQuestionIds());
+
+                game.setScreen(new QuestionScreen(game, nextQuestion, difficulty,
                     gameState.getQuestionsAnswered(), gameState.getUsedQuestionIds()));
             }
         } else {

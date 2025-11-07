@@ -2,6 +2,7 @@ package com.lucassbertol.codebreaker.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -15,6 +16,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
+import com.lucassbertol.codebreaker.data.Question;
+import com.lucassbertol.codebreaker.data.QuestionsParsing;
+
+import java.util.ArrayList;
 
 public class DifficultSelectScreen implements Screen {
 
@@ -22,12 +27,17 @@ public class DifficultSelectScreen implements Screen {
     private final Skin skin;
     private final Texture backgroundTexture;
     private final MainGame game;
+    private Label messageLabel;
+    private boolean counting = false;
+    private float countdownTimer = 5f;
+    private String selectedDifficulty = "";
+    private Question selectedQuestion = null;
 
     public DifficultSelectScreen(MainGame game) {
         this.game = game;
 
-        // Stage com FitViewport (1280x720): mantém proporções e escala consistente
-        stage = new Stage(new FitViewport(1280, 720));
+        // Stage com FitViewport (1920x1080): mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(1920, 1080));
 
         // skin (botões, labels)
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
@@ -49,7 +59,7 @@ public class DifficultSelectScreen implements Screen {
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = skin.getFont("default-font"); // usa a fonte do uiskin default
         Label title = new Label("ESCOLHA A DIFICULDADE:", labelStyle);
-        title.setFontScale(3f); // escala do título
+        title.setFontScale(3.0f); // escala do título
 
         // Botões
         TextButton easyButton = new TextButton("FACIL", skin);
@@ -58,21 +68,61 @@ public class DifficultSelectScreen implements Screen {
         easyButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new TextQuestionScreen(game, "easy"));
+                if (!counting) {
+                    // Carrega a primeira questão
+                    QuestionsParsing parser = new QuestionsParsing();
+                    selectedQuestion = parser.getRandomQuestionExcluding("easy", new ArrayList<>());
+                    selectedDifficulty = "easy";
+
+                    // Inicia a contagem regressiva
+                    counting = true;
+                    countdownTimer = 5f;
+                    messageLabel.setText("Iniciando em 5 segundos, prepare-se!");
+                    messageLabel.setColor(Color.GREEN);
+
+                    // Desabilita os botões durante a contagem
+                    easyButton.setDisabled(true);
+                    hardButton.setDisabled(true);
+                }
             }
         });
+        easyButton.getLabel().setFontScale(1.5f);
+
         hardButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                game.setScreen(new TextQuestionScreen(game, "hard"));
+                if (!counting) {
+                    // Carrega a primeira questão
+                    QuestionsParsing parser = new QuestionsParsing();
+                    selectedQuestion = parser.getRandomQuestionExcluding("hard", new ArrayList<>());
+                    selectedDifficulty = "hard";
+
+                    // Inicia a contagem regressiva
+                    counting = true;
+                    countdownTimer = 5f;
+                    messageLabel.setText("Iniciando em 5 segundos, prepare-se!");
+                    messageLabel.setColor(Color.GREEN);
+
+                    // Desabilita os botões durante a contagem
+                    easyButton.setDisabled(true);
+                    hardButton.setDisabled(true);
+                }
             }
         });
+        hardButton.getLabel().setFontScale(1.5f);
+
+        // Label de mensagem (contagem regressiva)
+        messageLabel = new Label("", skin);
+        messageLabel.setFontScale(2.5f);
+        messageLabel.setColor(Color.GREEN);
 
         // Monta o layout na table:
-        table.add(title).colspan(2).padBottom(90f);
+        table.add(title).colspan(2).padBottom(60f);
         table.row();
-        table.add(easyButton).width(220f).height(90f).padRight(40f);
-        table.add(hardButton).width(220f).height(90f).padLeft(40f);
+        table.add(easyButton).width(300f).height(100f).padRight(30f);
+        table.add(hardButton).width(300f).height(100f).padLeft(30f);
+        table.row();
+        table.add(messageLabel).colspan(2).padTop(40f);
 
         // Input para a stage
         Gdx.input.setInputProcessor(stage);
@@ -87,6 +137,16 @@ public class DifficultSelectScreen implements Screen {
         // Limpa tela
         Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        // Se estiver contando, atualiza o contador
+        if (counting) {
+            countdownTimer -= delta;
+
+            // Quando o tempo acabar, vai para a próxima tela
+            if (countdownTimer <= 0) {
+                game.setScreen(new QuestionScreen(game, selectedQuestion, selectedDifficulty, 0, new ArrayList<>()));
+            }
+        }
 
         // Atualiza e desenha background, table, botões, título
         stage.act(delta);

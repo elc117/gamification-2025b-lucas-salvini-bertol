@@ -1,14 +1,18 @@
 # Changelog
 Todos os registros de mudanças notáveis deste projeto serão documentados neste arquivo.
 
+## [v1.4] - 2025-11-07
+### Adicionado
+* Padronização dos botões e inputs do jogo para melhor aparência visual.
+
 ## [v1.3] - 2025-11-05
 ### Adicionado
 * Sistema de jogabilidade das questões 100% funcional.
 
 ## [v1.2] - 2025-11-02
 ### Adicionado
+* **Primeira versão jogável com questões simples aleatórias.**
 * Implementação das classes da seleção de questões.
-* Primeira versão jogável com questões simples aleatórias.
 * Refatoração de classes para melhor organização do código com pastas específicas.
 
 

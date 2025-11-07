@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lucassbertol.codebreaker.MainGame;
@@ -20,6 +21,7 @@ public class MenuScreen implements Screen {
     private final OrthographicCamera camera;
     private final Viewport viewport;
     private final MainGame game;
+    private final Skin skin;
 
     // GlyphLayout nos ajuda a medir o tamanho do texto para centralizá-lo
     private final GlyphLayout layout;
@@ -30,17 +32,18 @@ public class MenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         // FitViewport com resolução virtual 1280x720 para manter proporções
-        viewport = new FitViewport(1280, 720, camera);
-        camera.position.set(1280 / 2f, 720 / 2f, 0);
+        viewport = new FitViewport(1920, 1080, camera);
+        camera.position.set(1920 / 2f, 1080 / 2f, 0);
 
         batch = new SpriteBatch();
 
         // Carrega a imagem de fundo da pasta assets
         background = new Texture("images/menu.png");
 
-        // Usa a fonte padrão do libGDX.
-        font = new BitmapFont();
-        font.getData().setScale(3f); // Aumenta o tamanho da fonte
+        // Usa a fonte do skin para melhor aparência
+        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        font = skin.getFont("default-font");
+        font.getData().setScale(3.0f); // Aumenta o tamanho da fonte
 
         layout = new GlyphLayout(font, message);
     }
@@ -62,12 +65,12 @@ public class MenuScreen implements Screen {
         // Inicia o desenho
         batch.begin();
 
-        // Desenha a imagem de fundo para preencher a viewport virtual (1280x720)
-        batch.draw(background, 0, 0, 1280, 720);
+        // Desenha a imagem de fundo para preencher a viewport virtual (1920x1080)
+        batch.draw(background, 0, 0, 1920, 1080);
 
         // Calcula a posição para centralizar o texto
-        float textX = (1280 - layout.width) / 2;
-        float textY = (720 + layout.height) / 2;
+        float textX = (1920 - layout.width) / 2;
+        float textY = (1080 + layout.height) / 2;
 
         // Desenha o texto
         font.draw(batch, message, textX, textY);
@@ -101,7 +104,7 @@ public class MenuScreen implements Screen {
     public void dispose() {
         // Libera os recursos para evitar vazamento de memória
         background.dispose();
-        font.dispose();
+        skin.dispose();
         batch.dispose();
     }
 }

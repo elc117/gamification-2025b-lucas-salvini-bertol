@@ -1,49 +1,220 @@
 {
   "questoes": [
     {
-      "id": 1,
-      "title": "Fase teste X (DIFICIL) - Acesso Negado",
-      "text": "(DIFICIL 10) O agente 'Cipher' precisa verificar se a senha (representada pela variável `pin`) é a correta. Complete a estrutura condicional para que a mensagem de 'Acesso concedido' só apareça se o PIN for exatamente **4721**.",
-      "question": "#include <stdio.h>\n\nint main() {\n    int pin = 4721;\n    if (pin ?? 4721) {\n        printf(\"Acesso concedido\\n\");\n    }\n    ????? {\n        printf(\"Acesso negado\\n\");\n    }\n    return 0;\n}",
+      "id": 151,
+      "title": "Funcao de Criptografia Simples",
+      "text": "Um algoritmo de criptografia basico desloca um caractere. Complete a funcao 'deslocar' para que ela receba um caractere e retorne o caractere seguinte na tabela ASCII.",
+      "question": "#include <stdio.h>\n\nchar deslocar(char c) {\n    return c + ??;\n}\n\nint main() {\n    printf(\"Caractere deslocado: %c\\n\", deslocar('A'));\n    return 0;\n}",
       "answer": [
         [
-          "=="
+          "1"
+        ]
+      ]
+    },
+    {
+      "id": 152,
+      "title": "Iniciando um Ataque",
+      "text": "Um script de ataque precisa primeiro definir o alvo e depois executar a acao. Reordene as linhas para declarar a variavel 'alvo', atribuir a ela um valor e depois imprimi-la.",
+      "question": "1 - int alvo;\n2 - printf(\"Atacando alvo %d\\n\", alvo);\n3 - int main() {\n4 - #include <stdio.h>\n5 - alvo = 101;\n6 - }\n7 - return 0;",
+      "answer": [
+        [
+          "4,3,1,5,2,7,6"
+        ]
+      ]
+    },
+    {
+      "id": 153,
+      "title": "Bypass com Condicao",
+      "text": "Um sistema de seguranca e desativado se o 'codigo' for 0 ou se a flag 'emergencia' for verdadeira. Qual operador logico representa a condicao 'OU'?",
+      "question": "#include <stdio.h>\n#include <stdbool.h>\n\nint main() {\n    int codigo = 5;\n    bool emergencia = true;\n    if (codigo == 0 ?? emergencia) {\n        printf(\"Bypass ativado.\\n\");\n    }\n    return 0;\n}\n\nA) &&\nB) AND\nC) ||\nD) !",
+      "answer": [
+        [
+          "C"
+        ]
+      ]
+    },
+    {
+      "id": 154,
+      "title": "Estrutura de Coordenadas",
+      "text": "Um missil teleguiado usa uma 'struct' para armazenar suas coordenadas. Complete o codigo para definir a estrutura e acessar o membro 'latitude'.",
+      "question": "#include <stdio.h>\n\n?? Coordenada {\n    float latitude;\n    float longitude;\n};\n\nint main() {\n    struct Coordenada c;\n    c.?? = 40.7128;\n    printf(\"Latitude: %f\\n\", c.latitude);\n    return 0;\n}",
+      "answer": [
+        [
+          "struct"
         ],
         [
-          "else"
+          "latitude"
         ]
       ]
     },
     {
-      "id": 2,
-      "title": "Fase teste XI (DIFICIL) - Decifrando Mensagens",
-      "text": "(DIFICIL 11) A espiã 'Oracle' está capturando pacotes de dados. Ela precisa garantir que o programa só processe a 'Carga útil' se o tamanho do pacote (`tamanho`) for maior que 10. Complete a condição do `if`.",
-      "question": "#include <stdio.h>\n\nint main() {\n    int tamanho = 15;\n    if (tamanho ?? 10) {\n        printf(\"Carga util processada.\\n\");\n    }\n    return 0;\n}",
+      "id": 155,
+      "title": "Leitura e Escrita de Variavel",
+      "text": "Um programa precisa ler um ID, armazena-lo e depois exibi-lo. Reordene as linhas para que o programa funcione corretamente.",
+      "question": "1 - printf(\"ID lido: %d\\n\", id);\n2 - int id;\n3 - scanf(\"%d\", &id);\n4 - #include <stdio.h>\n5 - printf(\"Digite o ID: \");\n6 - int main() {\n7 - }",
       "answer": [
         [
-          ">"
+          "4,6,2,5,3,1,7"
         ]
       ]
     },
     {
-      "id": 3,
-      "title": "Fase teste XII (DIFICIL) - Looping de Força Bruta",
-      "text": "(DIFICIL 12) O sistema de segurança está bloqueado. Complete o laço `for` que testa chaves de **0 a 9**, garantindo que o contador `i` comece em zero e vá até (e incluindo) o valor 9.",
-      "question": "#include <stdio.h>\n\nint main() {\n    int i;\n    for (i = 0; i <= ??; ??????) {\n        printf(\"Tentando chave %d\\n\", i);\n    }\n    return 0;\n}",
+      "id": 156,
+      "title": "Acesso a Estrutura com Ponteiro [DIFICIL]",
+      "text": "Um exploit manipula uma estrutura de dados do kernel atraves de um ponteiro. Qual operador e usado para acessar um membro de uma estrutura quando se tem um ponteiro para ela?",
+      "question": "#include <stdio.h>\n\nstruct Alvo { int id; };\n\nint main() {\n    struct Alvo a;\n    struct Alvo *ptr = &a;\n    ptr??id = 99;\n    printf(\"ID: %d\", a.id);\n    return 0;\n}\n\nA) .\nB) &\nC) *\nD) ->",
       "answer": [
         [
-          "9"
+          "D"
+        ]
+      ]
+    },
+    {
+      "id": 157,
+      "title": "Contando Caracteres",
+      "text": "Um cracker precisa saber o comprimento de uma senha. Complete o codigo para usar a funcao 'strlen' da biblioteca 'string.h'.",
+      "question": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char senha[] = \"senha_super_secreta\";\n    int comprimento = ??(??);\n    printf(\"A senha tem %d caracteres.\\n\", comprimento);\n    return 0;\n}",
+      "answer": [
+        [
+          "strlen"
         ],
         [
-          "i++"
+          "senha"
         ]
       ]
     },
     {
-      "id": 4,
-      "title": "Fase teste XIII (DIFICIL) - Detecção de Anomalias",
-      "text": "(DIFICIL 13) O software antivírus 'Aegis' detecta um comportamento suspeito se o nível de ameaça (`nivel`) não for zero. Complete a condição para que o código imprima 'Alerta de Invasão!' apenas quando `nivel` for diferente de 0.",
-      "question": "#include <stdio.h>\n\nint main() {\n    int nivel = 3;\n    if (nivel ?? 0) {\n        printf(\"Alerta de Invasao!\\n\");\n    }\n    return 0;\n}",
+      "id": 158,
+      "title": "Concatenando Payloads",
+      "text": "Um gerador de exploits precisa juntar um comando com seu argumento. Reordene o codigo para usar 'strcat' para concatenar as duas strings.",
+      "question": "1 - strcat(comando, argumento);\n2 - char comando[50] = \"run \";\n3 - #include <stdio.h>\n4 - char argumento[] = \"exploit.exe\";\n5 - #include <string.h>\n6 - int main() {\n7 - printf(\"%s\", comando); }",
+      "answer": [
+        [
+          "3,5,6,2,4,1,7"
+        ]
+      ]
+    },
+    {
+      "id": 159,
+      "title": "Verificacao de Igualdade",
+      "text": "A funcao 'strcmp' e usada para comparar strings. Ela retorna 0 se as strings sao iguais. Qual sera a saida deste programa?",
+      "question": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char s1[] = \"abacaxi\";\n    char s2[] = \"banana\";\n    if (strcmp(s1, s2) == 0) {\n        printf(\"Iguais\");\n    } else {\n        printf(\"Diferentes\");\n    }\n    return 0;\n}\n\nA) Iguais\nB) Diferentes\nC) 0\nD) O codigo nao compila",
+      "answer": [
+        [
+          "B"
+        ]
+      ]
+    },
+    {
+      "id": 160,
+      "title": "Obtendo Endereco de Memoria",
+      "text": "Um depurador precisa saber onde uma variavel esta armazenada. Complete o codigo para usar o operador 'endereco de' para obter e imprimir o endereco da variavel 'alvo'.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int alvo = 10;\n    int *ponteiro_para_alvo = ??alvo;\n    printf(\"Endereco: %p\\n\", ponteiro_para_alvo);\n    return 0;\n}",
+      "answer": [
+        [
+          "&"
+        ]
+      ]
+    },
+    {
+      "id": 161,
+      "title": "Escrevendo em Log",
+      "text": "Um spyware registra atividades em um arquivo. A logica e: abrir, verificar se abriu, escrever, fechar. Reordene as linhas para seguir essa sequencia.",
+      "question": "1 - #include <stdio.h>\n2 - int main() {\n3 - FILE *log = fopen(\"activity.log\", \"a\");\n4 - if (log != NULL) {\n5 - fprintf(log, \"Usuario logado.\\n\");\n6 - fclose(log);\n7 - } }",
+      "answer": [
+        [
+          "1,2,3,4,5,6,7"
+        ]
+      ]
+    },
+    {
+      "id": 162,
+      "title": "Lendo Valor com Ponteiro",
+      "text": "Um rootkit usa um ponteiro para ler o valor de uma variavel do sistema sem acessa-la diretamente. Qual operador 'dereferencia' um ponteiro para obter seu valor?",
+      "question": "#include <stdio.h>\n\nint main() {\n    int segredo = 42;\n    int *ptr = &segredo;\n    int valor_lido = ??ptr;\n    printf(\"O segredo e %d\\n\", valor_lido);\n    return 0;\n}\n\nA) &\nB) ->\nC) .\nD) *",
+      "answer": [
+        [
+          "D"
+        ]
+      ]
+    },
+    {
+      "id": 163,
+      "title": "Alocacao e Liberacao de Memoria [DIFICIL]",
+      "text": "Um malware aloca memoria para um buffer temporario e deve libera-la para nao deixar rastros. Complete as chamadas das funcoes 'malloc' e 'free'.",
+      "question": "#include <stdlib.h>\n\nint main() {\n    // Aloca espaco para 100 inteiros\n    int *buffer = ??(100 * sizeof(int));\n    \n    if (buffer != NULL) {\n        // Usa o buffer...\n        ??(buffer);\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "malloc"
+        ],
+        [
+          "free"
+        ]
+      ]
+    },
+    {
+      "id": 164,
+      "title": "Percorrendo Matriz",
+      "text": "Um algoritmo de imagem precisa percorrer todos os pixels (elementos) de uma matriz. Reordene os loops aninhados para imprimir a matriz linha por linha.",
+      "question": "1 - int main() {\n2 - for (int j = 0; j < 2; j++) { printf(\"%d \", m[i][j]); }\n3 - int m[2][2] = {{5, 8}, {3, 2}};\n4 - for (int i = 0; i < 2; i++) {\n5 - #include <stdio.h>\n6 - }\n7 - }",
+      "answer": [
+        [
+          "5,1,3,4,2,6,7"
+        ]
+      ]
+    },
+    {
+      "id": 165,
+      "title": "Argumentos de Programa",
+      "text": "Um utilitario de rede recebe o IP do host como argumento na linha de comando. Qual elemento de 'argv' contem o primeiro argumento real (e nao o nome do programa)?",
+      "question": "#include <stdio.h>\n\n// Executado como: ./programa 127.0.0.1\nint main(int argc, char *argv[]) {\n    if (argc > 1) {\n        printf(\"IP do Host: %s\\n\", ??);\n    }\n    return 0;\n}\n\nA) argv[0]\nB) argc\nC) argv[1]\nD) *argv",
+      "answer": [
+        [
+          "C"
+        ]
+      ]
+    },
+    {
+      "id": 166,
+      "title": "Troca de Chaves",
+      "text": "Um algoritmo de criptografia precisa trocar duas chaves. Complete o codigo que usa uma variavel auxiliar 'temp' para efetuar a troca.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int chaveA = 123, chaveB = 987;\n    printf(\"Antes: A=%d, B=%d\\n\", chaveA, chaveB);\n    int temp = ??;\n    chaveA = chaveB;\n    chaveB = ??;\n    printf(\"Depois: A=%d, B=%d\\n\", chaveA, chaveB);\n    return 0;\n}",
+      "answer": [
+        [
+          "chaveA"
+        ],
+        [
+          "temp"
+        ]
+      ]
+    },
+    {
+      "id": 167,
+      "title": "Funcao Recursiva Fatorial [DIFICIL]",
+      "text": "Um cracker precisa de uma funcao fatorial para um calculo de permutacao. Reordene as linhas para criar uma funcao fatorial recursiva.",
+      "question": "1 - } else {\n2 - return n * fatorial(n - 1);\n3 - if (n <= 1) { return 1; // Caso base\n4 - #include <stdio.h>\n5 - int fatorial(int n) {\n6 - } }\n7 - int main() { printf(\"%d\", fatorial(4)); }",
+      "answer": [
+        [
+          "4,5,3,1,2,6,7"
+        ]
+      ]
+    },
+    {
+      "id": 168,
+      "title": "Aritmetica de Ponteiros",
+      "text": "Se 'ptr' aponta para o inicio de um array de inteiros (4 bytes cada), para onde 'ptr + 2' aponta na memoria?",
+      "question": "#include <stdio.h>\n\nint main() {\n    int array[] = {10, 20, 30, 40};\n    int *ptr = array;\n    // Onde (ptr + 2) aponta?\n}\n\nA) 2 bytes a frente do endereco de ptr\nB) 8 bytes a frente do endereco de ptr\nC) Para o valor 12\nD) Para o endereco do valor 20",
+      "answer": [
+        [
+          "B"
+        ]
+      ]
+    },
+    {
+      "id": 169,
+      "title": "Verificacao de Nao Igualdade",
+      "text": "Um malware so ataca se o nome do processo nao for 'explorer.exe'. Complete a condicao que verifica se o resultado de 'strcmp' e diferente de 0.",
+      "question": "#include <stdio.h>\n#include <string.h>\n\nint main() {\n    char processo[] = \"svchost.exe\";\n    if (strcmp(processo, \"explorer.exe\") ?? 0) {\n        printf(\"Alvo valido. Atacando.\\n\");\n    }\n    return 0;\n}",
       "answer": [
         [
           "!="
@@ -51,68 +222,352 @@
       ]
     },
     {
-      "id": 5,
-      "title": "Fase teste XIV (DIFICIL) - Contagem de Bits",
-      "text": "(DIFICIL 14) O cryptógrafo 'Zero' precisa contar a quantidade de bits processados. Complete o laço `while` para que ele continue executando enquanto o contador (`contagem`) for menor que 8 (o número de bits em um byte).",
-      "question": "#include <stdio.h>\n\nint main() {\n    int contagem = 0;\n    while (contagem ?? 8) {\n        printf(\"Bit processado: %d\\n\", contagem);\n        contagem++;\n    }\n    return 0;\n}",
+      "id": 170,
+      "title": "Macro para Constante",
+      "text": "Para facilitar a alteracao, a versao de um backdoor e definida por uma macro. Reordene as linhas para definir a macro 'VERSAO' e usa-la no codigo.",
+      "question": "1 - int main() {\n2 - printf(\"Backdoor versao %f\\n\", VERSAO);\n3 - return 0;\n4 - }\n5 - #include <stdio.h>\n6 - #define VERSAO 1.2\n7 - // Inicio do programa",
       "answer": [
         [
-          "<"
+          "5,6,7,1,2,3,4"
         ]
       ]
     },
     {
-      "id": 6,
-      "title": "Fase teste XV (DIFICIL) - Ocultação de Dados",
-      "text": "(DIFICIL 15) Para ocultar uma mensagem secreta, a equipe 'Ghost' armazena parte dela em um array. Complete o código para declarar um array de inteiros de 5 posições e inicializá-lo com os valores **9, 8, 7, 6, 5**.",
-      "question": "#include <stdio.h>\n\nint main() {\n    int dados ?? = {9, 8, 7, 6, 5};\n    printf(\"Primeiro dado: %d\\n\", dados[0]);\n    return 0;\n}",
+      "id": 171,
+      "title": "Prototipo de Funcao",
+      "text": "Para usar uma funcao que e definida depois de 'main', seu prototipo deve ser declarado antes. Qual e o prototipo correto para a funcao 'conectar'?",
+      "question": "#include <stdio.h>\n\n??;\n\nint main() {\n    conectar(8080);\n    return 0;\n}\n\nvoid conectar(int porta) {\n    printf(\"Conectando a porta %d\\n\", porta);\n}\n\nA) void conectar(int porta)\nB) conectar(int);\nC) void conectar(int);\nD) function conectar(int porta);",
       "answer": [
         [
-          "[]"
+          "C"
         ]
       ]
     },
     {
-      "id": 7,
-      "title": "Fase teste XVI (DIFICIL) - Servidor Crítico",
-      "text": "(DIFICIL 16) O administrador de sistemas 'Sentinel' monitora a carga do servidor. Ele quer que o código imprima a carga (`carga`) e depois a **diminua em 1** em cada iteração. Complete a operação de decremento.",
-      "question": "#include <stdio.h>\n\nint main() {\n    int carga = 5;\n    do {\n        printf(\"Carga atual: %d\\n\", carga);\n        ????????;\n    } while (carga > 0);\n    return 0;\n}",
+      "id": 172,
+      "title": "Ponteiro para Array",
+      "text": "Um exploit precisa de um ponteiro que aponte para o inicio de um array de shellcode. Complete a atribuicao para fazer 'ptr' apontar para 'shellcode'.",
+      "question": "#include <stdio.h>\n\nint main() {\n    char shellcode[] = {0x90, 0x90, 0xCC};\n    char* ptr = ??;\n    if (ptr[0] == 0x90) {\n        printf(\"Ponteiro correto.\\n\");\n    }\n    return 0;\n}",
       "answer": [
         [
-          "carga--"
+          "shellcode"
         ]
       ]
     },
     {
-      "id": 8,
-      "title": "Fase teste XVII (DIFICIL) - Chave Mestra",
-      "text": "(DIFICIL 17) A chave mestra do sistema tem o valor **99**. Crie a linha de código para declarar uma constante inteira chamada `CHAVE_MESTRA` com esse valor, garantindo que ela não possa ser alterada.",
-      "question": "#include <stdio.h>\n\nint main() {\n    const int CHAVE_MESTRA ?? 99;\n    printf(\"Chave: %d\\n\", CHAVE_MESTRA);\n    return 0;\n}",
+      "id": 173,
+      "title": "Loop com Continue",
+      "text": "Um scanner de rede ignora a porta 22 (SSH). Reordene as linhas para que o loop pule a iteracao quando 'porta' for 22.",
+      "question": "1 - if (porta == 22) { continue; }\n2 - for (int porta = 20; porta < 25; porta++) {\n3 - int main() {\n4 - }\n5 - printf(\"Testando porta %d\\n\", porta);\n6 - #include <stdio.h>\n7 - }",
       "answer": [
         [
-          "="
+          "6,3,2,1,5,4,7"
         ]
       ]
     },
     {
-      "id": 9,
-      "title": "Fase teste XVIII (DIFICIL) - Firewall Duplo",
-      "text": "(DIFICIL 18) Para acessar a rede secreta, são necessários dois tokens. O acesso é permitido se **AMBOS** (`token_a` for 'ativo' **E** `token_b` for 'ativo'). Complete o operador lógico para a condição de acesso.",
-      "question": "#include <stdio.h>\n#include <stdbool.h>\n\nint main() {\n    bool token_a = true;\n    bool token_b = true;\n    if (token_a ?? token_b) {\n        printf(\"Acesso a Rede Secreta liberado.\\n\");\n    }\n    return 0;\n}",
+      "id": 174,
+      "title": "Retorno de Funcao Condicional",
+      "text": "Uma funcao verifica se um usuario e 'admin'. O que a funcao retorna se 'id' for 0?",
+      "question": "#include <stdbool.h>\n\nbool eh_admin(int id) {\n    if (id == 0) {\n        return true;\n    } else {\n        return false;\n    }\n}\n\nint main() {\n    // O que eh_admin(0) retorna?\n}\n\nA) 0\nB) false\nC) 1\nD) true",
       "answer": [
         [
-          "&&"
+          "D"
         ]
       ]
     },
     {
-      "id": 10,
-      "title": "Fase teste XIX (DIFICIL) - Criptografia Simples",
-      "text": "(DIFICIL 19) O engenheiro de segurança 'Delta' está usando um deslocamento simples para criptografar um caractere. Complete o código para declarar uma variável do tipo **caractere** (`char`) e imprima seu valor.",
-      "question": "#include <stdio.h>\n\nint main() {\n    ?????? letra = 'A';\n    printf(\"Caractere: %c\\n\", letra);\n    return 0;\n}",
+      "id": 175,
+      "title": "Acesso a Array Multidimensional",
+      "text": "Um mapa de ataque e representado por uma matriz. Complete o codigo para acessar o elemento na linha 1, coluna 2 (valor 6).",
+      "question": "#include <stdio.h>\n\nint main() {\n    int mapa[2][3] = {{1, 2, 3}, {4, 5, 6}};\n    int valor = mapa[??][??];\n    printf(\"Valor: %d\\n\", valor);\n    return 0;\n}",
       "answer": [
         [
-          "char"
+          "1"
+        ],
+        [
+          "2"
+        ]
+      ]
+    },
+    {
+      "id": 176,
+      "title": "Conversao de String para Numero",
+      "text": "Um programa recebe uma porta como string e precisa converte-la para inteiro. Reordene as linhas para usar 'atoi' (ASCII to integer) para a conversao.",
+      "question": "1 - int main() {\n2 - int porta_num = atoi(porta_str);\n3 - char porta_str[] = \"443\";\n4 - #include <stdlib.h> // para atoi\n5 - printf(\"Porta numerica: %d\", porta_num);\n6 - #include <stdio.h>\n7 - }",
+      "answer": [
+        [
+          "6,4,1,3,2,5,7"
+        ]
+      ]
+    },
+    {
+      "id": 177,
+      "title": "Switch com Default",
+      "text": "Um backdoor processa comandos. O que acontece se um comando desconhecido (ex: 99) e recebido?",
+      "question": "#include <stdio.h>\n\nvoid processar(int cmd) {\n    switch(cmd) {\n        case 1: printf(\"Executar\"); break;\n        case 2: printf(\"Parar\"); break;\n        default: printf(\"Comando invalido\"); break;\n    }\n}\nint main() { processar(99); }\n\nA) Nada e impresso.\nB) O programa da erro.\nC) Imprime 'Executar'.\nD) Imprime 'Comando invalido'.",
+      "answer": [
+        [
+          "D"
+        ]
+      ]
+    },
+    {
+      "id": 178,
+      "title": "Passagem por Referencia (Ponteiro)",
+      "text": "Uma funcao precisa resetar um contador que esta em 'main'. Complete a funcao 'resetar' para que ela receba um ponteiro e altere o valor original para 0.",
+      "question": "#include <stdio.h>\n\nvoid resetar(int ?? contador_ptr) {\n    ??contador_ptr = 0;\n}\n\nint main() {\n    int contador = 10;\n    resetar(&contador);\n    printf(\"Contador: %d\\n\", contador);\n    return 0;\n}",
+      "answer": [
+        [
+          "*"
+        ],
+        [
+          "*"
+        ]
+      ]
+    },
+    {
+      "id": 179,
+      "title": "sizeof para Alocacao",
+      "text": "Um programa precisa alocar memoria para exatamente uma estrutura 'Alvo'. Reordene as linhas para usar 'sizeof' com 'malloc'.",
+      "question": "1 - struct Alvo *ptr = malloc(sizeof(struct Alvo));\n2 - #include <stdlib.h>\n3 - struct Alvo { int id; };\n4 - if (ptr != NULL) { free(ptr); }\n5 - int main() {\n6 - #include <stdio.h>\n7 - }",
+      "answer": [
+        [
+          "6,2,3,5,1,4,7"
+        ]
+      ]
+    },
+    {
+      "id": 180,
+      "title": "Loop com Break",
+      "text": "Um cracker de senhas para de testar assim que encontra a correta. Qual palavra-chave e usada para sair de um loop prematuramente?",
+      "question": "#include <stdio.h>\n\nint main() {\n    for (int i=0; i < 100; i++) {\n        if (i == 42) { // Supoe que 42 e a senha\n            printf(\"Encontrado!\");\n            ??;\n        }\n    }\n    return 0;\n}\n\nA) continue\nB) return\nC) exit\nD) break",
+      "answer": [
+        [
+          "D"
+        ]
+      ]
+    },
+    {
+      "id": 181,
+      "title": "Verificacao de Ponteiro Nulo",
+      "text": "A funcao 'fopen' retorna NULL se nao conseguir abrir um arquivo. Complete o 'if' para verificar se o arquivo foi aberto com sucesso (ou seja, se o ponteiro nao e nulo).",
+      "question": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    FILE *f = fopen(\"nao_existe.txt\", \"r\");\n    if (f ?? NULL) {\n        printf(\"Falha ao abrir o arquivo!\\n\");\n        exit(1);\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "=="
+        ]
+      ]
+    },
+    {
+      "id": 182,
+      "title": "Declaracao de Array de Strings",
+      "text": "Um programa armazena uma lista de comandos. Reordene as linhas para declarar um array de ponteiros para char (um array de strings).",
+      "question": "1 - char *comandos[] = {\"start\", \"stop\", \"restart\"};\n2 - int main() {\n3 - printf(\"Primeiro comando: %s\\n\", comandos[0]);\n4 - #include <stdio.h>\n5 - }\n6 - return 0;\n7 - // Declaracao da lista",
+      "answer": [
+        [
+          "4,2,7,1,3,6,5"
+        ]
+      ]
+    },
+    {
+      "id": 183,
+      "title": "Casting de Tipo",
+      "text": "Para calcular uma media, um hacker precisa fazer uma divisao de ponto flutuante com inteiros. Qual e a sintaxe para converter 'soma' para 'float' antes da divisao?",
+      "question": "#include <stdio.h>\n\nint main() {\n    int soma = 10;\n    int total = 4;\n    float media = (??)soma / total;\n    printf(\"Media: %f\\n\", media);\n    return 0;\n}\n\nA) float(soma)\nB) soma as float\nC) <float>soma\nD) (float)soma",
+      "answer": [
+        [
+          "D"
+        ]
+      ]
+    },
+    {
+      "id": 184,
+      "title": "Loop Infinito Proposital",
+      "text": "Um 'daemon' de servidor precisa rodar indefinidamente, esperando por conexoes. Complete o loop 'while' para que ele nunca termine.",
+      "question": "#include <stdio.h>\n\nint main() {\n    while (??) {\n        printf(\"Esperando conexao...\\n\");\n        // Logica do servidor aqui\n        break; // Apenas para o exemplo nao rodar para sempre\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "1"
+        ]
+      ]
+    },
+    {
+      "id": 185,
+      "title": "Leitura de Arquivo Caractere por Caractere",
+      "text": "Um programa de analise forense le um arquivo byte a byte. Reordene as linhas para ler e imprimir cada caractere ate o fim do arquivo (EOF).",
+      "question": "1 - int main() {\n2 - while ((c = fgetc(fp)) != EOF) { printf(\"%c\", c); }\n3 - #include <stdio.h>\n4 - FILE *fp = fopen(\"data.txt\", \"r\");\n5 - int c;\n6 - fclose(fp);\n7 - }",
+      "answer": [
+        [
+          "3,1,4,5,2,6,7"
+        ]
+      ]
+    },
+    {
+      "id": 186,
+      "title": "Variavel Estatica [DIFICIL]",
+      "text": "Um 'logic bomb' usa uma variavel estatica para contar chamadas. Qual sera a saida do programa?",
+      "question": "#include <stdio.h>\n\nvoid trigger() {\n    static int chamadas = 0;\n    chamadas++;\n    printf(\"%d \", chamadas);\n}\n\nint main() { trigger(); trigger(); trigger(); return 0; }\n\nA) 1 1 1\nB) 0 1 2\nC) 1 2 3\nD) O codigo da erro.",
+      "answer": [
+        [
+          "C"
+        ]
+      ]
+    },
+    {
+      "id": 187,
+      "title": "Operador Ternario",
+      "text": "Um script ofuscado usa o operador ternario para definir um status. Complete a expressao para que 'msg' seja \"Ativo\" se 'online' for true, e \"Inativo\" caso contrario.",
+      "question": "#include <stdio.h>\n#include <stdbool.h>\n\nint main() {\n    bool online = false;\n    char *msg = online ?? \"Ativo\" ?? \"Inativo\";\n    printf(\"Status: %s\\n\", msg);\n    return 0;\n}",
+      "answer": [
+        [
+          "?"
+        ],
+        [
+          ":"
+        ]
+      ]
+    },
+    {
+      "id": 188,
+      "title": "Ponteiro para Ponteiro [DIFICIL]",
+      "text": "Um rootkit usa um ponteiro para ponteiro para alterar indiretamente para onde outro ponteiro aponta. Reordene o codigo para declarar e usar um ponteiro para ponteiro.",
+      "question": "1 - int **pp = &p;\n2 - int main() {\n3 - *pp = &b;\n4 - int a=1, b=2;\n5 - printf(\"%d\", *p);\n6 - int *p = &a;\n7 - }",
+      "answer": [
+        [
+          "2,4,6,1,3,5,7"
+        ]
+      ]
+    },
+    {
+      "id": 189,
+      "title": "Escopo de Variavel",
+      "text": "Onde a variavel 'chave_secreta' pode ser acessada?",
+      "question": "#include <stdio.h>\n\nvoid alguma_funcao() {\n    int chave_secreta = 123;\n}\n\nint main() {\n    // A 'chave_secreta' pode ser usada aqui?\n    return 0;\n}\n\nA) Sim, em qualquer lugar do programa.\nB) Apenas dentro da funcao main.\nC) Apenas dentro da funcao 'alguma_funcao'.\nD) Em qualquer funcao, mas apenas depois que 'alguma_funcao' for chamada.",
+      "answer": [
+        [
+          "C"
+        ]
+      ]
+    },
+    {
+      "id": 190,
+      "title": "sizeof(ponteiro)",
+      "text": "Um hacker precisa saber o tamanho de um ponteiro para calcular offsets de memoria. Em um sistema de 64 bits, qual e o tamanho tipico de qualquer ponteiro?",
+      "question": "#include <stdio.h>\n\nint main() {\n    char* char_ptr;\n    int* int_ptr;\n    double* double_ptr;\n    printf(\"%lu\", sizeof(int_ptr));\n    return 0;\n}\n\nA) 1 byte\nB) 4 bytes\nC) Depende do tipo para o qual ele aponta (4 para int*)\nD) 8 bytes",
+      "answer": [
+        [
+          "D"
+        ]
+      ]
+    },
+    {
+      "id": 191,
+      "title": "Acessando Array com Ponteiro",
+      "text": "Um exploit usa aritmetica de ponteiros para acessar o terceiro elemento de um array. Complete o codigo para que ele imprima o valor 30.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int dados[] = {10, 20, 30, 40};\n    int *ptr = dados;\n    printf(\"Valor: %d\\n\", *(ptr + ??));\n    return 0;\n}",
+      "answer": [
+        [
+          "2"
+        ]
+      ]
+    },
+    {
+      "id": 192,
+      "title": "Declaracao vs Definicao de Funcao",
+      "text": "Um programa e dividido em varios arquivos. Reordene as linhas para que o arquivo 'main.c' possa usar uma funcao que esta definida em outro arquivo, usando uma declaracao (prototipo).",
+      "question": "1 - // Em outro arquivo: int calcular_hash(int n) { return n*2; }\n2 - int main() {\n3 - int hash = calcular_hash(10);\n4 - #include <stdio.h>\n5 - int calcular_hash(int n); // Declaracao (prototipo)\n6 - }\n7 - return 0;",
+      "answer": [
+        [
+          "4,5,2,3,7,6,1"
+        ]
+      ]
+    },
+    {
+      "id": 193,
+      "title": "Enum para Estados",
+      "text": "Um malware usa um 'enum' para controlar seu estado (ocioso, atacando, escondido). Qual e a palavra-chave para definir este tipo de lista de constantes nomeadas?",
+      "question": "#include <stdio.h>\n\n?? Estado { OCIOSO, ATACANDO, ESCONDIDO };\n\nint main() {\n    enum Estado atual = ATACANDO;\n    if (atual == ATACANDO) {\n        printf(\"Modo de ataque ativo!\");\n    }\n    return 0;\n}\n\nA) struct\nB) enum\nC) union\nD) typedef",
+      "answer": [
+        [
+          "B"
+        ]
+      ]
+    },
+    {
+      "id": 194,
+      "title": "Incremento de Ponteiro",
+      "text": "Um exploit esta percorrendo um array de caracteres. Complete o codigo para que o ponteiro 'ptr' avance para o proximo caractere no loop.",
+      "question": "#include <stdio.h>\n\nint main() {\n    char msg[] = \"root\";\n    char *ptr = msg;\n    while (*ptr != '\\0') {\n        printf(\"%c-\", *ptr);\n        ptr??;\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "++"
+        ]
+      ]
+    },
+    {
+      "id": 195,
+      "title": "Copia Segura de String",
+      "text": "Para evitar um buffer overflow, um programador de seguranca usa 'strncpy'. Reordene as linhas para copiar de forma segura uma string para um buffer menor.",
+      "question": "1 - strncpy(destino, origem, 9);\n2 - char origem[] = \"stringmuitolonga\";\n3 - #include <string.h>\n4 - int main() {\n5 - char destino[10];\n6 - destino[9] = '\\0'; // Garante terminacao nula\n7 - }",
+      "answer": [
+        [
+          "3,4,2,5,1,6,7"
+        ]
+      ]
+    },
+    {
+      "id": 196,
+      "title": "Finalizando Programa com Erro",
+      "text": "Se um backdoor nao consegue se conectar ao servidor C&C, ele deve terminar imediatamente com um codigo de erro. Qual funcao da 'stdlib.h' faz isso?",
+      "question": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int conectado = 0; // falhou\n    if (!conectado) {\n        printf(\"Erro de conexao.\");\n        ??(1); // Termina com status de erro\n    }\n    return 0; // Nao deve chegar aqui\n}\n\nA) break;\nB) return 1;\nC) exit(1);\nD) continue;",
+      "answer": [
+        [
+          "C"
+        ]
+      ]
+    },
+    {
+      "id": 197,
+      "title": "Operacao Bitwise AND",
+      "text": "Um firewall usa uma mascara de bits para verificar permissoes. Complete a operacao bitwise AND para verificar se o bit de 'escrita' (valor 2) esta ativo em 'permissoes'.",
+      "question": "#include <stdio.h>\n\nint main() {\n    int permissoes = 7; // Leitura(4)+Escrita(2)+Execucao(1)\n    int mascara_escrita = 2;\n    if ((permissoes ?? mascara_escrita) == mascara_escrita) {\n        printf(\"Permissao de escrita concedida.\\n\");\n    }\n    return 0;\n}",
+      "answer": [
+        [
+          "&"
+        ]
+      ]
+    },
+    {
+      "id": 198,
+      "title": "Funcao que Retorna Ponteiro",
+      "text": "Um localizador de gadgets de ROP precisa de uma funcao que encontre um caractere em uma string e retorne um ponteiro para ele. Reordene as linhas da funcao 'encontrar'.",
+      "question": "1 - while(*s != c && *s != '\\0') { s++; }\n2 - char* encontrar(char *s, char c) {\n3 - return s;\n4 - #include <stdio.h>\n5 - }\n6 - int main() { char *p = encontrar(\"abcde\",'c'); }\n7 - // Retorna ponteiro para a primeira ocorrencia de c",
+      "answer": [
+        [
+          "4,7,2,1,3,5,6"
+        ]
+      ]
+    },
+    {
+      "id": 199,
+      "title": "Operacao Bitwise XOR [DIFICIL]",
+      "text": "Criptografia com XOR tem uma propriedade interessante: aplicar a mesma chave duas vezes restaura o original. Qual sera o valor final de 'dado'?",
+      "question": "#include <stdio.h>\n\nint main() {\n    char dado = 'A';  // 01000001\n    char chave = 'K'; // 01001011\n    \n    dado = dado ^ chave;\n    dado = dado ^ chave; // Aplica a chave novamente\n    \n    printf(\"%c\", dado);\n    return 0;\n}\n\nA) Um caractere invalido\nB) K\nC) A\nD) 0",
+      "answer": [
+        [
+          "C"
+        ]
+      ]
+    },
+    {
+      "id": 200,
+      "title": "Definindo o Tipo de Retorno",
+      "text": "Uma funcao 'get_status' foi criada para retornar o codigo de status atual do sistema (um numero inteiro). Complete a definicao da funcao com o tipo de retorno correto.",
+      "question": "#include <stdio.h>\n\n?? get_status() {\n    return 200;\n}\n\nint main() {\n    int status = get_status();\n    printf(\"Status: %d\\n\", status);\n    return 0;\n}",
+      "answer": [
+        [
+          "int"
         ]
       ]
     }
