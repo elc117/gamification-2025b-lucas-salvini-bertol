@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
+import com.lucassbertol.codebreaker.config.Constants;
 
 public class UserInputScreen implements Screen {
 
@@ -27,14 +28,14 @@ public class UserInputScreen implements Screen {
     public UserInputScreen(MainGame game) {
         this.game = game;
 
-        // Stage com FitViewport (1280x720): mantém proporções e escala consistente
-        stage = new Stage(new FitViewport(1920, 1080));
+        // Stage com FitViewport: mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT));
 
         // skin (botões, labels)
-        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
 
         // background que preenche a tela
-        backgroundTexture = new Texture(Gdx.files.internal("images/selectFase.png"));
+        backgroundTexture = new Texture(Gdx.files.internal(Constants.BG_SELECT));
         Image backgroundImage = new Image(backgroundTexture);
         backgroundImage.setScaling(Scaling.stretch);
         backgroundImage.setFillParent(true); // ocupa toda a área do stage
@@ -49,15 +50,16 @@ public class UserInputScreen implements Screen {
         // Título
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = skin.getFont("default-font");
-        Label title = new Label("DIGITE SEU USERNAME:", labelStyle);
-        title.setFontScale(3.0f);
+        Label title = new Label(Constants.MSG_ENTER_USERNAME, labelStyle);
+        title.setFontScale(Constants.TITLE_FONT_SCALE);
 
         // Input de texto
         TextField nameInput = new TextField("", skin);
+        nameInput.getStyle().font.getData().setScale(Constants.INPUT_FONT_SCALE);
         nameInput.setMessageText("");
 
         // Botões
-        TextButton nextButton = new TextButton("CONTINUAR", skin);
+        TextButton nextButton = new TextButton(Constants.BTN_CONTINUE, skin);
 
         nextButton.addListener(new ClickListener() {
             @Override
@@ -68,14 +70,14 @@ public class UserInputScreen implements Screen {
                 }
             }
         });
-        nextButton.getLabel().setFontScale(1.5f);
+        nextButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
 
         // Monta o layout na table:
         table.add(title).colspan(2).padBottom(40f);
         table.row();
-        table.add(nameInput).width(500f).height(80f).colspan(2).padBottom(40f);
+        table.add(nameInput).width(Constants.INPUT_WIDTH).height(Constants.INPUT_HEIGHT).colspan(2).padBottom(40f);
         table.row();
-        table.add(nextButton).width(300f).height(100f).colspan(2);
+        table.add(nextButton).width(Constants.BUTTON_WIDTH).height(Constants.BUTTON_HEIGHT).colspan(2);
 
         // Input para a stage
         Gdx.input.setInputProcessor(stage);

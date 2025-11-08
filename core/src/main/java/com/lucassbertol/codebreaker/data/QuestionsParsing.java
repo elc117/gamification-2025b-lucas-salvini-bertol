@@ -3,6 +3,7 @@ package com.lucassbertol.codebreaker.data;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Json;
+import com.lucassbertol.codebreaker.config.Constants;
 import java.util.List;
 import java.util.Random;
 
@@ -16,19 +17,19 @@ public class QuestionsParsing {
     }
 
     public QuestionsData loadEasyQuestions() {
-        FileHandle file = Gdx.files.internal("questions/easy.json");
+        FileHandle file = Gdx.files.internal(Constants.QUESTIONS_EASY);
         String jsonContent = file.readString();
         return json.fromJson(QuestionsData.class, jsonContent);
     }
 
     public QuestionsData loadHardQuestions() {
-        FileHandle file = Gdx.files.internal("questions/hard.json");
+        FileHandle file = Gdx.files.internal(Constants.QUESTIONS_HARD);
         String jsonContent = file.readString();
         return json.fromJson(QuestionsData.class, jsonContent);
     }
 
     public QuestionsData loadQuestionsByDifficulty(String difficulty) {
-        String path = "questions/" + difficulty.toLowerCase() + ".json";
+        String path = Constants.QUESTIONS_PATH + difficulty.toLowerCase() + ".json";
         FileHandle file = Gdx.files.internal(path);
         String jsonContent = file.readString();
         return json.fromJson(QuestionsData.class, jsonContent);

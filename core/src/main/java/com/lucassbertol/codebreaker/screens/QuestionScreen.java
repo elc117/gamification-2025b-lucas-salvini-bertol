@@ -12,9 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
+import com.lucassbertol.codebreaker.config.Constants;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.utils.AnswerValidator;
-import com.lucassbertol.codebreaker.utils.GameStateManager;
+import com.lucassbertol.codebreaker.managers.GameStateManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,17 +38,17 @@ public class QuestionScreen implements Screen {
         this.currentQuestion = question;
         this.difficulty = difficulty;
         this.inputFields = new ArrayList<>();
-        this.gameState = new GameStateManager(questionsAnswered, usedQuestionIds, 5);
+        this.gameState = new GameStateManager(questionsAnswered, usedQuestionIds, Constants.TOTAL_QUESTIONS);
 
         // Adiciona a questão atual à lista de usadas
         gameState.markQuestionAsUsed(currentQuestion.getId());
 
-        // Stage com FitViewport (1920x1080): mantém proporções e escala consistente
-        stage = new Stage(new FitViewport(1920, 1080));
-        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        // Stage com FitViewport: mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT));
+        skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
 
-        // Background
-        backgroundTexture = new Texture(Gdx.files.internal("images/question.png"));
+        // background que preenche a tela
+        backgroundTexture = new Texture(Gdx.files.internal(Constants.BG_QUESTION));
         Image backgroundImage = new Image(backgroundTexture);
         backgroundImage.setScaling(Scaling.stretch);
         backgroundImage.setFillParent(true);
@@ -60,7 +61,7 @@ public class QuestionScreen implements Screen {
 
         // Label de progresso no topo (fixo)
         progressLabel = new Label(gameState.getProgressText(), skin);
-        progressLabel.setFontScale(1.5f);
+        progressLabel.setFontScale(Constants.PROGRESS_FONT_SCALE);
 
         // Tabela de conteúdo (que vai no ScrollPane)
         Table contentTable = new Table();
@@ -68,23 +69,24 @@ public class QuestionScreen implements Screen {
 
         // Label do enunciado (contexto da questão)
         Label enunciadoLabel = new Label(currentQuestion.getEnunciado(), skin);
-        enunciadoLabel.setFontScale(2.0f);
+        enunciadoLabel.setFontScale(Constants.QUESTION_TEXT_SCALE);
         enunciadoLabel.setWrap(true);
         enunciadoLabel.setAlignment(com.badlogic.gdx.utils.Align.center);
 
         // Label da questão
         Label questionLabel = new Label(currentQuestion.getQuestaoTexto(), skin);
-        questionLabel.setFontScale(2.0f);
+        questionLabel.setFontScale(Constants.QUESTION_TEXT_SCALE);
         questionLabel.setWrap(true);
 
         // Label de mensagem (erro/acerto)
         messageLabel = new Label("", skin);
         messageLabel.setColor(Color.RED);
-        messageLabel.setFontScale(1.8f);
+        messageLabel.setFontScale(Constants.FEEDBACK_FONT_SCALE);
 
         // Tabela para inputs
         Table inputTable = new Table();
         createInputFields(inputTable);
+
 
         // Botão verificar
         TextButton verifyButton = new TextButton("VERIFICAR", skin);
@@ -94,7 +96,7 @@ public class QuestionScreen implements Screen {
                 checkAnswer();
             }
         });
-        verifyButton.getLabel().setFontScale(1.5f);
+        verifyButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
 
         // Montando a tabela de conteúdo
         contentTable.row().pad(20);
@@ -134,10 +136,11 @@ public class QuestionScreen implements Screen {
 
         for (int i = 0; i < answers.size(); i++) {
             TextField input = new TextField("", skin);
+            input.getStyle().font.getData().setScale(Constants.INPUT_FONT_SCALE);
             inputFields.add(input);
 
             Label label = new Label("Resposta " + (i + 1) + ":", skin);
-            label.setFontScale(1.5f);
+            label.setFontScale(Constants.BUTTON_FONT_SCALE);
 
             table.row().pad(15);
             table.add(label).padRight(20);

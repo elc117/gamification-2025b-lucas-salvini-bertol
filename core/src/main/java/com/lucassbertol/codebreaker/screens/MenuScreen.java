@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lucassbertol.codebreaker.MainGame;
+import com.lucassbertol.codebreaker.config.Constants;
 
 public class MenuScreen implements Screen {
 
@@ -25,25 +26,25 @@ public class MenuScreen implements Screen {
 
     // GlyphLayout nos ajuda a medir o tamanho do texto para centralizá-lo
     private final GlyphLayout layout;
-    private final String message = "PRESS START";
+    private final String message = Constants.MSG_PRESS_START;
 
     public MenuScreen(MainGame game) {
         this.game = game;
 
         camera = new OrthographicCamera();
-        // FitViewport com resolução virtual 1280x720 para manter proporções
-        viewport = new FitViewport(1920, 1080, camera);
-        camera.position.set(1920 / 2f, 1080 / 2f, 0);
+        // FitViewport com resolução virtual definida nas constantes
+        viewport = new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT, camera);
+        camera.position.set(Constants.VIEWPORT_WIDTH / 2f, Constants.VIEWPORT_HEIGHT / 2f, 0);
 
         batch = new SpriteBatch();
 
         // Carrega a imagem de fundo da pasta assets
-        background = new Texture("images/menu.png");
+        background = new Texture(Constants.BG_MENU);
 
         // Usa a fonte do skin para melhor aparência
-        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
         font = skin.getFont("default-font");
-        font.getData().setScale(3.0f); // Aumenta o tamanho da fonte
+        font.getData().setScale(Constants.TITLE_FONT_SCALE); // Aumenta o tamanho da fonte
 
         layout = new GlyphLayout(font, message);
     }
@@ -65,12 +66,12 @@ public class MenuScreen implements Screen {
         // Inicia o desenho
         batch.begin();
 
-        // Desenha a imagem de fundo para preencher a viewport virtual (1920x1080)
-        batch.draw(background, 0, 0, 1920, 1080);
+        // Desenha a imagem de fundo para preencher a viewport virtual
+        batch.draw(background, 0, 0, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 
         // Calcula a posição para centralizar o texto
-        float textX = (1920 - layout.width) / 2;
-        float textY = (1080 + layout.height) / 2;
+        float textX = (Constants.VIEWPORT_WIDTH - layout.width) / 2;
+        float textY = (Constants.VIEWPORT_HEIGHT + layout.height) / 2;
 
         // Desenha o texto
         font.draw(batch, message, textX, textY);

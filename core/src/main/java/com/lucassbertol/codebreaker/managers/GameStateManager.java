@@ -1,5 +1,6 @@
-package com.lucassbertol.codebreaker.utils;
+package com.lucassbertol.codebreaker.managers;
 
+import com.lucassbertol.codebreaker.config.Constants;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ public class GameStateManager {
     private final int totalQuestions;
 
     public GameStateManager() {
-        this(5); // Por padrão, 5 questões
+        this(Constants.TOTAL_QUESTIONS);
     }
 
     public GameStateManager(int totalQuestions) {

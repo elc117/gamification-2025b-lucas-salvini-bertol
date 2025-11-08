@@ -3,11 +3,16 @@ Todos os registros de mudanças notáveis deste projeto serão documentados nest
 
 ## [v1.4] - 2025-11-07
 ### Adicionado
+* Questões teste-finais do jogo implementadas.
+* Fix no viewport, agora 1920x1080 funciona corretamente.
+* Refatoração com criação de pasta 'constants' para melhor organização do código e manutenção.
 * Padronização dos botões e inputs do jogo para melhor aparência visual.
+* 'GameStateManager' implementado separadamente para melhor controle dos estados do jogo.
 
 ## [v1.3] - 2025-11-05
 ### Adicionado
 * Sistema de jogabilidade das questões 100% funcional.
+* 'GameStateManager' implementado junto a pasta utils.
 
 ## [v1.2] - 2025-11-02
 ### Adicionado

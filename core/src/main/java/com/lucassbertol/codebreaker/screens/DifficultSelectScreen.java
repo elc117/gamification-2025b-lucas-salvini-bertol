@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
+import com.lucassbertol.codebreaker.config.Constants;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.data.QuestionsParsing;
 
@@ -29,21 +30,21 @@ public class DifficultSelectScreen implements Screen {
     private final MainGame game;
     private Label messageLabel;
     private boolean counting = false;
-    private float countdownTimer = 5f;
+    private float countdownTimer = Constants.COUNTDOWN_TIME;
     private String selectedDifficulty = "";
     private Question selectedQuestion = null;
 
     public DifficultSelectScreen(MainGame game) {
         this.game = game;
 
-        // Stage com FitViewport (1920x1080): mantém proporções e escala consistente
-        stage = new Stage(new FitViewport(1920, 1080));
+        // Stage com FitViewport: mantém proporções e escala consistente
+        stage = new Stage(new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT));
 
         // skin (botões, labels)
-        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
+        skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
 
         // background que preenche a tela
-        backgroundTexture = new Texture(Gdx.files.internal("images/selectFase.png"));
+        backgroundTexture = new Texture(Gdx.files.internal(Constants.BG_SELECT));
         Image backgroundImage = new Image(backgroundTexture);
         backgroundImage.setScaling(Scaling.stretch);
         backgroundImage.setFillParent(true); // ocupa toda a área do stage
@@ -58,12 +59,12 @@ public class DifficultSelectScreen implements Screen {
         // Título
         Label.LabelStyle labelStyle = new Label.LabelStyle();
         labelStyle.font = skin.getFont("default-font"); // usa a fonte do uiskin default
-        Label title = new Label("ESCOLHA A DIFICULDADE:", labelStyle);
-        title.setFontScale(3.0f); // escala do título
+        Label title = new Label(Constants.MSG_SELECT_DIFFICULTY, labelStyle);
+        title.setFontScale(Constants.TITLE_FONT_SCALE); // escala do título
 
         // Botões
-        TextButton easyButton = new TextButton("FACIL", skin);
-        TextButton hardButton = new TextButton("DIFICIL", skin);
+        TextButton easyButton = new TextButton(Constants.BTN_EASY, skin);
+        TextButton hardButton = new TextButton(Constants.BTN_HARD, skin);
 
         easyButton.addListener(new ClickListener() {
             @Override
@@ -71,13 +72,13 @@ public class DifficultSelectScreen implements Screen {
                 if (!counting) {
                     // Carrega a primeira questão
                     QuestionsParsing parser = new QuestionsParsing();
-                    selectedQuestion = parser.getRandomQuestionExcluding("easy", new ArrayList<>());
-                    selectedDifficulty = "easy";
+                    selectedQuestion = parser.getRandomQuestionExcluding(Constants.DIFFICULTY_EASY, new ArrayList<>());
+                    selectedDifficulty = Constants.DIFFICULTY_EASY;
 
                     // Inicia a contagem regressiva
                     counting = true;
-                    countdownTimer = 5f;
-                    messageLabel.setText("Iniciando em 5 segundos, prepare-se!");
+                    countdownTimer = Constants.COUNTDOWN_TIME;
+                    messageLabel.setText(Constants.MSG_COUNTDOWN);
                     messageLabel.setColor(Color.GREEN);
 
                     // Desabilita os botões durante a contagem
@@ -86,7 +87,7 @@ public class DifficultSelectScreen implements Screen {
                 }
             }
         });
-        easyButton.getLabel().setFontScale(1.5f);
+        easyButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
 
         hardButton.addListener(new ClickListener() {
             @Override
@@ -94,13 +95,13 @@ public class DifficultSelectScreen implements Screen {
                 if (!counting) {
                     // Carrega a primeira questão
                     QuestionsParsing parser = new QuestionsParsing();
-                    selectedQuestion = parser.getRandomQuestionExcluding("hard", new ArrayList<>());
-                    selectedDifficulty = "hard";
+                    selectedQuestion = parser.getRandomQuestionExcluding(Constants.DIFFICULTY_HARD, new ArrayList<>());
+                    selectedDifficulty = Constants.DIFFICULTY_HARD;
 
                     // Inicia a contagem regressiva
                     counting = true;
-                    countdownTimer = 5f;
-                    messageLabel.setText("Iniciando em 5 segundos, prepare-se!");
+                    countdownTimer = Constants.COUNTDOWN_TIME;
+                    messageLabel.setText(Constants.MSG_COUNTDOWN);
                     messageLabel.setColor(Color.GREEN);
 
                     // Desabilita os botões durante a contagem
@@ -109,18 +110,18 @@ public class DifficultSelectScreen implements Screen {
                 }
             }
         });
-        hardButton.getLabel().setFontScale(1.5f);
+        hardButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
 
         // Label de mensagem (contagem regressiva)
         messageLabel = new Label("", skin);
-        messageLabel.setFontScale(2.5f);
+        messageLabel.setFontScale(Constants.MESSAGE_FONT_SCALE);
         messageLabel.setColor(Color.GREEN);
 
         // Monta o layout na table:
         table.add(title).colspan(2).padBottom(60f);
         table.row();
-        table.add(easyButton).width(300f).height(100f).padRight(30f);
-        table.add(hardButton).width(300f).height(100f).padLeft(30f);
+        table.add(easyButton).width(Constants.BUTTON_WIDTH).height(Constants.BUTTON_HEIGHT).padRight(30f);
+        table.add(hardButton).width(Constants.BUTTON_WIDTH).height(Constants.BUTTON_HEIGHT).padLeft(30f);
         table.row();
         table.add(messageLabel).colspan(2).padTop(40f);
 
