@@ -38,6 +38,7 @@ cada nota valerá uma pontuação específica para esse *score* final.
 
 ### Referências:
 
-[Slides da disciplina (Paradigmas de programação | ELC117 - 2025b)](https://github.com/AndreaInfUFSM/elc117-2025b/tree/main)  
-[Software de criação dos diagramas de classse (Astah)](https://astah.net/downloads/)
+- [Slides da disciplina (Paradigmas de programação | ELC117 - 2025b)](https://github.com/AndreaInfUFSM/elc117-2025b/tree/main)  
+- [Software de criação dos diagramas de classse (Astah)](https://astah.net/downloads/)  
+- [IA que gerou os assets do jogo (gemini)](https://gemini.google.com/app)
 
