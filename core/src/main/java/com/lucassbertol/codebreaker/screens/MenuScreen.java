@@ -41,7 +41,7 @@ public class MenuScreen implements Screen {
         // Carrega a imagem de fundo da pasta assets
         background = new Texture(Constants.BG_MENU);
 
-        // Usa a fonte do skin para melhor aparência
+        // Usa a fonte do skin
         skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
         font = skin.getFont("default-font");
         font.getData().setScale(Constants.TITLE_FONT_SCALE); // Aumenta o tamanho da fonte

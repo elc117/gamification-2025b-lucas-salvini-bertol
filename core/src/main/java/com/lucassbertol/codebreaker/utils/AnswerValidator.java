@@ -31,7 +31,7 @@ public class AnswerValidator {
         return true;
     }
 
-    // Limpa os campos de entrada
+    // Limpa os campos
     public static void clearInputFields(List<TextField> inputFields) {
         for (TextField field : inputFields) {
             field.setText("");

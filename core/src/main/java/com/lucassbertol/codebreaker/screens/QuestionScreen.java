@@ -100,6 +100,8 @@ public class QuestionScreen implements Screen {
 
         // Montando a tabela de conteúdo
         contentTable.row().pad(20);
+        contentTable.add(progressLabel).top();
+        contentTable.row().pad(15);
         contentTable.add(enunciadoLabel).width(1200).top();
         contentTable.row().pad(30);
         contentTable.add(questionLabel).width(1200).top();
@@ -107,25 +109,23 @@ public class QuestionScreen implements Screen {
         contentTable.add(inputTable);
         contentTable.row().pad(20);
         contentTable.add(messageLabel);
-        contentTable.row().pad(30);
+        contentTable.row().pad(0);
         contentTable.add(verifyButton).width(300).height(100);
-        contentTable.row().padBottom(50); // Espaço no final
+        contentTable.row().padBottom(50);
 
         // ScrollPane para permitir rolagem
         ScrollPane scrollPane = new ScrollPane(contentTable, skin);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false); // Apenas scroll vertical
 
-        // Remove o fundo do ScrollPane (deixa transparente)
+        // Remove o fundo do ScrollPane
         ScrollPane.ScrollPaneStyle scrollStyle = new ScrollPane.ScrollPaneStyle(scrollPane.getStyle());
-        scrollStyle.background = null; // Remove o fundo cinza
+        scrollStyle.background = null;
         scrollPane.setStyle(scrollStyle);
 
-        // Montando o layout principal
-        mainTable.row().pad(20);
-        mainTable.add(progressLabel).top();
+        // layout principal
         mainTable.row().expandY().fillY();
-        mainTable.add(scrollPane).expand().fill().pad(10);
+        mainTable.add(scrollPane).expand().fill().pad(10).maxHeight(900);
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -161,7 +161,7 @@ public class QuestionScreen implements Screen {
                 messageLabel.setText("PARABENS! Voce completou todas as questoes!");
                 messageLabel.setColor(Color.GREEN);
 
-                // Aguarda um pouco e volta para menu
+                // Aguarda um pouco e volta para menu por enquanto
                 Gdx.app.postRunnable(() -> {
                     try {
                         Thread.sleep(2000);

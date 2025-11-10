@@ -41,7 +41,7 @@ public class UserInputScreen implements Screen {
         backgroundImage.setFillParent(true); // ocupa toda a área do stage
         stage.addActor(backgroundImage);
 
-        // Table para organizar título e botões; Table facilita centralização e responsividade
+        // Table para organizar título e botões
         Table table = new Table();
         table.setFillParent(true);
         table.center();
