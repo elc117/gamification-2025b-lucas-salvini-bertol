@@ -132,7 +132,7 @@ public class QuestionScreen implements Screen {
 
     private void createInputFields(Table table) {
         inputFields.clear();
-        List<List<String>> answers = currentQuestion.getAnswer();
+        ArrayList<ArrayList<String>> answers = currentQuestion.getAnswer();
 
         for (int i = 0; i < answers.size(); i++) {
             TextField input = new TextField("", skin);

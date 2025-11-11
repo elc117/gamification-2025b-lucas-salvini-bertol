@@ -7,4 +7,6 @@
   <entry-point class="com.lucassbertol.codebreaker.gwt.GwtLauncher" />
   <set-configuration-property name="gdx.assetpath" value="../assets" />
   <set-configuration-property name="xsiframe.failIfScriptTag" value="FALSE"/>
+  <extend-configuration-property name="gdx.reflect.include" value="com.lucassbertol.codebreaker.data.QuestionsData" />
+  <extend-configuration-property name="gdx.reflect.include" value="com.lucassbertol.codebreaker.data.Question" />
 </module>

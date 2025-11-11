@@ -1,11 +1,12 @@
 package com.lucassbertol.codebreaker.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsData {
-    private List<Question> questoes;
+    private ArrayList<Question> questoes;
 
-    public List<Question> getQuestoes() {
+    public ArrayList<Question> getQuestoes() {
         return questoes;
     }
 }

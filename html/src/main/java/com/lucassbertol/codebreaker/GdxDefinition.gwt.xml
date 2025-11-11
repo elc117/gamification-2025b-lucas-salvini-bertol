@@ -25,4 +25,7 @@
   <set-property name="user.agent" value="gecko1_8,safari"/>
   <collapse-property name="user.agent" values="*" />
 
+  <extend-configuration-property name="gdx.reflect.include" value="com.lucassbertol.codebreaker.data.QuestionsData" />
+  <extend-configuration-property name="gdx.reflect.include" value="com.lucassbertol.codebreaker.data.Question" />
+
 </module>

@@ -1,13 +1,13 @@
 package com.lucassbertol.codebreaker.data;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Question {
     private int id;
     private String title;
     private String text;
     private String question;
-    private List<List<String>> answer;
+    private ArrayList<ArrayList<String>> answer;
 
     public int getId() {
         return id;
@@ -25,7 +25,7 @@ public class Question {
         return question;
     }
 
-    public List<List<String>> getAnswer() {
+    public ArrayList<ArrayList<String>> getAnswer() {
         return answer;
     }
 

@@ -3,12 +3,13 @@ package com.lucassbertol.codebreaker.utils;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.lucassbertol.codebreaker.data.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerValidator {
 
     public static boolean validateAnswers(List<TextField> inputFields, Question question) {
-        List<List<String>> correctAnswers = question.getAnswer();
+        ArrayList<ArrayList<String>> correctAnswers = question.getAnswer();
 
         // Verifica se todas as respostas estão corretas
         for (int i = 0; i < correctAnswers.size(); i++) {
