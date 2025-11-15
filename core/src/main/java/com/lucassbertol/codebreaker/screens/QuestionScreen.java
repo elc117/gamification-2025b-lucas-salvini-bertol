@@ -5,10 +5,13 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
@@ -16,6 +19,7 @@ import com.lucassbertol.codebreaker.config.Constants;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.utils.AnswerValidator;
 import com.lucassbertol.codebreaker.managers.GameStateManager;
+import com.lucassbertol.codebreaker.managers.TimerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,24 +30,31 @@ public class QuestionScreen implements Screen {
     private final Skin skin;
     private final Texture backgroundTexture;
     private final MainGame game;
-    private Question currentQuestion;
+    private final Question currentQuestion;
     private final String difficulty;
     private final List<TextField> inputFields;
-    private Label messageLabel;
-    private Label progressLabel;
-    private GameStateManager gameState;
+    private final Label messageLabel;
+    private final Label progressLabel;
+    private final GameStateManager gameState;
+    private final TimerManager timerManager;
+    private final Label timerLabel;
 
-    public QuestionScreen(MainGame game, Question question, String difficulty, int questionsAnswered, List<Integer> usedQuestionIds) {
+    public QuestionScreen(MainGame game, Question question, String difficulty, int questionsAnswered, List<Integer> usedQuestionIds, TimerManager timerManager) {
         this.game = game;
         this.currentQuestion = question;
         this.difficulty = difficulty;
         this.inputFields = new ArrayList<>();
         this.gameState = new GameStateManager(questionsAnswered, usedQuestionIds, Constants.TOTAL_QUESTIONS);
+        if (timerManager == null) {
+            this.timerManager = new TimerManager(difficulty);
+        } else {
+            this.timerManager = timerManager;
+        }
 
         // Adiciona a questão atual à lista de usadas
         gameState.markQuestionAsUsed(currentQuestion.getId());
 
-        // Stage com FitViewport: mantém proporções e escala consistente
+        // Stage com FitViewport
         stage = new Stage(new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT));
         skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
 
@@ -59,19 +70,24 @@ public class QuestionScreen implements Screen {
         mainTable.setFillParent(true);
         stage.addActor(mainTable);
 
-        // Label de progresso no topo (fixo)
-        progressLabel = new Label(gameState.getProgressText(), skin);
-        progressLabel.setFontScale(Constants.PROGRESS_FONT_SCALE);
+        // Timer Label (fora do ScrollPane)
+        timerLabel = new Label("0s", skin);
+        timerLabel.setFontScale(Constants.TIMER_FONT_SCALE);
 
         // Tabela de conteúdo (que vai no ScrollPane)
         Table contentTable = new Table();
         contentTable.top();
+
+        // Label de progresso (dentro do ScrollPane)
+        progressLabel = new Label(gameState.getProgressText(), skin);
+        progressLabel.setFontScale(Constants.PROGRESS_FONT_SCALE);
 
         // Label do enunciado (contexto da questão)
         Label enunciadoLabel = new Label(currentQuestion.getEnunciado(), skin);
         enunciadoLabel.setFontScale(Constants.QUESTION_TEXT_SCALE);
         enunciadoLabel.setWrap(true);
         enunciadoLabel.setAlignment(com.badlogic.gdx.utils.Align.center);
+        enunciadoLabel.setColor(Color.GREEN);
 
         // Label da questão
         Label questionLabel = new Label(currentQuestion.getQuestaoTexto(), skin);
@@ -87,7 +103,6 @@ public class QuestionScreen implements Screen {
         Table inputTable = new Table();
         createInputFields(inputTable);
 
-
         // Botão verificar
         TextButton verifyButton = new TextButton("VERIFICAR", skin);
         verifyButton.addListener(new ClickListener() {
@@ -99,9 +114,9 @@ public class QuestionScreen implements Screen {
         verifyButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
 
         // Montando a tabela de conteúdo
-        contentTable.row().pad(20);
-        contentTable.add(progressLabel).top();
-        contentTable.row().pad(15);
+        contentTable.pad(20);
+        contentTable.add(progressLabel).top().padBottom(15);
+        contentTable.row();
         contentTable.add(enunciadoLabel).width(1200).top();
         contentTable.row().pad(30);
         contentTable.add(questionLabel).width(1200).top();
@@ -109,7 +124,7 @@ public class QuestionScreen implements Screen {
         contentTable.add(inputTable);
         contentTable.row().pad(20);
         contentTable.add(messageLabel);
-        contentTable.row().pad(0);
+        contentTable.row().pad(20);
         contentTable.add(verifyButton).width(300).height(100);
         contentTable.row().padBottom(50);
 
@@ -123,9 +138,11 @@ public class QuestionScreen implements Screen {
         scrollStyle.background = null;
         scrollPane.setStyle(scrollStyle);
 
-        // layout principal
-        mainTable.row().expandY().fillY();
-        mainTable.add(scrollPane).expand().fill().pad(10).maxHeight(900);
+        // Layout principal com timer
+        mainTable.add(timerLabel).top().right().padTop(20).padRight(20);
+        mainTable.row();
+        mainTable.add(scrollPane).width(1770).height(900).pad(10);
+
 
         Gdx.input.setInputProcessor(stage);
     }
@@ -153,7 +170,7 @@ public class QuestionScreen implements Screen {
         boolean allCorrect = AnswerValidator.validateAnswers(inputFields, currentQuestion);
 
         if (allCorrect) {
-            // Incrementa o contador de questões respondidas
+            // aumenta o contador de questões respondidas
             gameState.incrementAnsweredQuestions();
 
             if (gameState.isGameCompleted()) {
@@ -176,7 +193,7 @@ public class QuestionScreen implements Screen {
                 Question nextQuestion = parser.getRandomQuestionExcluding(difficulty, gameState.getUsedQuestionIds());
 
                 game.setScreen(new QuestionScreen(game, nextQuestion, difficulty,
-                    gameState.getQuestionsAnswered(), gameState.getUsedQuestionIds()));
+                    gameState.getQuestionsAnswered(), gameState.getUsedQuestionIds(), timerManager));
             }
         } else {
             // Resposta incorreta
@@ -197,6 +214,14 @@ public class QuestionScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        timerManager.update(delta);
+        timerLabel.setText("" + timerManager.getFormattedTime());
+
+        if (timerManager.isTimeUp()) {
+            game.setScreen(new DifficultSelectScreen(game));
+            return;
+        }
 
         stage.act(delta);
         stage.draw();
@@ -223,4 +248,3 @@ public class QuestionScreen implements Screen {
         backgroundTexture.dispose();
     }
 }
-

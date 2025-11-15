@@ -14,7 +14,7 @@
     {
       "id": 2,
       "title": "Script de Ataque",
-      "text": "A agente 'Trinity' precisa montar um script simples para testar uma vulnerabilidade. O script deve apenas imprimir uma mensagem de sucesso. Reordene as linhas para o script funcionar.",
+      "text": "A agente 'Trinity' precisa montar um script simples para testar uma vulnerabilidade. O script deve apenas imprimir uma mensagem de sucesso. Reordene as linhas para o script funcionar. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - printf(\"Script executado com sucesso.\");\n2 - int main() {\n3 - return 0;\n4 - }\n5 - #include <stdio.h>",
       "answer": [
         [
@@ -47,7 +47,7 @@
     {
       "id": 5,
       "title": "Descompilador Simples",
-      "text": "Um programa foi quebrado em partes. 'Neo' precisa remonta-lo para declarar uma variavel 'chave' com valor 1234 e imprimi-la. Ordene as linhas.",
+      "text": "Um programa foi quebrado em partes. 'Neo' precisa remonta-lo para declarar uma variavel 'chave' com valor 1234 e imprimi-la. Ordene as linhas. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - int chave = 1234;\n2 - }\n3 - #include <stdio.h>\n4 - int main() {\n5 - printf(\"%d\", chave);",
       "answer": [
         [
@@ -58,7 +58,7 @@
     {
       "id": 6,
       "title": "Ignorando o Firewall",
-      "text": "Um script precisa continuar executando enquanto o firewall estiver inativo (valor 0). Complete a condicao do loop 'while' para testar se 'firewallAtivo' e igual a 0.",
+      "text": "Um script precisa continuar executando enquanto o firewall estiver inativo (valor 0). Escolha a alternativa que completa a condicao do loop 'while' para testar se 'firewallAtivo' e igual a 0.",
       "question": "#include <stdio.h>\n\nint main() {\n    int firewallAtivo = 0;\n    while (??) {\n        printf(\"Executando...\\n\");\n        firewallAtivo = 1; // Simula o firewall sendo ativado\n    }\n    return 0;\n}\n\nA) firewallAtivo == 1\nB) firewallAtivo > 0\nC) firewallAtivo == 0\nD) firewallAtivo != 1",
       "answer": [
         [
@@ -80,7 +80,7 @@
     {
       "id": 8,
       "title": "Mensagem Criptografada",
-      "text": "'Oracle' precisa de um programa que imprima o caractere 'X' na tela. Reorganize o codigo para que ele funcione corretamente.",
+      "text": "'Oracle' precisa de um programa que imprima o caractere 'X' na tela. Reorganize o codigo para que ele funcione corretamente. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - return 0;\n2 - int main() {\n3 - printf(\"%c\", 'X');\n4 - #include <stdio.h>\n5 - }",
       "answer": [
         [
@@ -91,7 +91,7 @@
     {
       "id": 9,
       "title": "Desativando a Seguranca",
-      "text": "Para desativar um sistema, a variavel 'seguranca' deve ser decrementada de 1 para 0. Qual operador faz isso?",
+      "text": "Para desativar um sistema, a variavel 'seguranca' deve ser decrementada de 1 para 0. Qual alternativa representa o operador que faz isso?",
       "question": "#include <stdio.h>\n\nint main() {\n    int seguranca = 1;\n    ??;\n    printf(\"Seguranca: %d\\n\", seguranca);\n    return 0;\n}\n\nA) seguranca++\nB) seguranca = 0\nC) seguranca--\nD) seguranca + 1",
       "answer": [
         [
@@ -113,7 +113,7 @@
     {
       "id": 11,
       "title": "Loop Infinito",
-      "text": "Um cracker criou um loop para sobrecarregar o sistema. Reordene as linhas para criar um programa que imprime 'Ataque!' continuamente.",
+      "text": "Um cracker criou um loop para sobrecarregar o sistema. Reordene as linhas para criar um programa que imprime 'Ataque!' continuamente. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - }\n2 - while(1) {\n3 - #include <stdio.h>\n4 - printf(\"Ataque!\\n\");\n5 - int main() {",
       "answer": [
         [
@@ -124,7 +124,7 @@
     {
       "id": 12,
       "title": "Contagem Regressiva",
-      "text": "Uma 'bomba logica' precisa de um contador que vai de 3 para 1. Complete o loop 'for' para essa contagem regressiva.",
+      "text": "Uma 'bomba logica' precisa de um contador que vai de 3 para 1. Qual alternativa completa o loop 'for' para essa contagem regressiva.",
       "question": "#include <stdio.h>\n\nint main() {\n    for (int i = 3; ??; i--) {\n        printf(\"%d..\\n\", i);\n    }\n    return 0;\n}\n\nA) i > 0\nB) i < 3\nC) i >= 0\nD) i == 0",
       "answer": [
         [
@@ -146,7 +146,7 @@
     {
       "id": 14,
       "title": "Executando o Exploit",
-      "text": "Um exploit precisa ser montado na ordem certa: incluir biblioteca, iniciar a funcao main e entao executar a acao. Ordene o codigo.",
+      "text": "Um exploit precisa ser montado na ordem certa: incluir biblioteca, iniciar a funcao main e entao executar a acao. Ordene o codigo. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - int main() {\n2 - }\n3 - printf(\"Exploit executado.\\n\");\n4 - #include <stdio.h>\n5 - return 0;",
       "answer": [
         [
@@ -157,7 +157,7 @@
     {
       "id": 15,
       "title": "Scanner de Rede",
-      "text": "Um scanner de rede simples deve testar portas ate 100. Qual condicao finaliza o loop 'for' corretamente, incluindo a porta 100?",
+      "text": "Um scanner de rede simples deve testar portas ate 100. Qual alternativa tem a condicao que finaliza o loop 'for' corretamente, incluindo a porta 100?",
       "question": "#include <stdio.h>\n\nint main() {\n    for (int porta = 1; ??; porta++) {\n        // Simula o teste da porta\n    }\n    printf(\"Scan completo.\\n\");\n    return 0;\n}\n\nA) porta < 100\nB) porta > 100\nC) porta == 100\nD) porta <= 100",
       "answer": [
         [
@@ -179,7 +179,7 @@
     {
       "id": 17,
       "title": "Injetor de Codigo",
-      "text": "Um injetor de codigo basico precisa declarar a funcao main e em seguida retornar 0, indicando sucesso. Reordene as linhas.",
+      "text": "Um injetor de codigo basico precisa declarar a funcao main e em seguida retornar 0, indicando sucesso. Reordene as linhas. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - return 0;\n2 - }\n3 - int main() {\n4 - // Codigo injetado aqui\n5 - #include <stdio.h>",
       "answer": [
         [
@@ -190,7 +190,7 @@
     {
       "id": 18,
       "title": "Tipo de Dado",
-      "text": "Um sniffer de rede capturou um valor de porta. Qual tipo de dado e mais apropriado para armazenar um numero inteiro como 443?",
+      "text": "Um sniffer de rede capturou um valor de porta. Qual alternativa repressenta o tipo de dado e mais apropriado para armazenar um numero inteiro como 443?",
       "question": "#include <stdio.h>\n\nint main() {\n    ?? porta = 443;\n    printf(\"Porta: %d\\n\", porta);\n    return 0;\n}\n\nA) float\nB) char\nC) int\nD) double",
       "answer": [
         [
@@ -212,7 +212,7 @@
     {
       "id": 20,
       "title": "Montando a Ferramenta",
-      "text": "'Khamul' esta criando uma ferramenta. Ela precisa primeiro incluir a biblioteca, depois definir main, e entao declarar a variavel 'status'. Reordene.",
+      "text": "'Khamul' esta criando uma ferramenta. Ela precisa primeiro incluir a biblioteca, depois definir main, e entao declarar a variavel 'status'. Reordene. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - int status = 1;\n2 - int main() {\n3 - }\n4 - return 0;\n5 - #include <stdio.h>",
       "answer": [
         [
@@ -223,7 +223,7 @@
     {
       "id": 21,
       "title": "Incremento de Privilegios",
-      "text": "Um exploit precisa aumentar o nivel de privilegio de 0 para 1. Qual e a forma mais curta de incrementar a variavel 'privilegio' em 1?",
+      "text": "Um exploit precisa aumentar o nivel de privilegio de 0 para 1. Qual alternativa tem a forma mais curta de incrementar a variavel 'privilegio' em 1?",
       "question": "#include <stdio.h>\n\nint main() {\n    int privilegio = 0;\n    ??;\n    printf(\"Novo privilegio: %d\\n\", privilegio);\n    return 0;\n}\n\nA) privilegio--\nB) privilegio++\nC) privilegio = 1\nD) privilegio + 1",
       "answer": [
         [
@@ -245,7 +245,7 @@
     {
       "id": 23,
       "title": "Decodificador de Caractere",
-      "text": "Um decodificador simples precisa ser montado. Ele deve declarar um 'char' e depois imprimi-lo. Organize as linhas de codigo.",
+      "text": "Um decodificador simples precisa ser montado. Ele deve declarar um 'char' e depois imprimi-lo. Organize as linhas de codigo. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - }\n2 - printf(\"%c\", letra);\n3 - #include <stdio.h>\n4 - int main() {\n5 - char letra = 'A';",
       "answer": [
         [
@@ -256,7 +256,7 @@
     {
       "id": 24,
       "title": "Quebra de Senha",
-      "text": "Um loop 'for' esta testando senhas de 4 digitos, de 1000 a 9999. Qual deve ser a condicao de parada para incluir o 9999?",
+      "text": "Um loop 'for' esta testando senhas de 4 digitos, de 1000 a 9999. Qual alternativa deve ser a condicao de parada para incluir o 9999?",
       "question": "#include <stdio.h>\n\nint main() {\n    for (int senha = 1000; ??; senha++) {\n        // Testa a senha\n    }\n    printf(\"Fim das tentativas.\\n\");\n    return 0;\n}\n\nA) senha < 9999\nB) senha <= 9999\nC) senha == 9999\nD) senha > 1000",
       "answer": [
         [
@@ -278,7 +278,7 @@
     {
       "id": 26,
       "title": "Logger Simples",
-      "text": "Um hacker precisa de um logger que declare uma variavel e imprima seu valor. Reordene o codigo para funcionar.",
+      "text": "Um hacker precisa de um logger que declare uma variavel e imprima seu valor. Reordene o codigo para funcionar. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - int main() {\n2 - int valor = 100;\n3 - #include <stdio.h>\n4 - printf(\"Valor: %d\", valor);\n5 - }",
       "answer": [
         [
@@ -289,7 +289,7 @@
     {
       "id": 27,
       "title": "Comando de Saida",
-      "text": "Todo programa em C bem-sucedido deve retornar um status. Qual comando indica que o programa terminou sem erros?",
+      "text": "Todo programa em C bem-sucedido deve retornar um status. Qual alternativa possui o comando que indica que o programa terminou sem erros?",
       "question": "#include <stdio.h>\n\nint main() {\n    printf(\"Executado.\\n\");\n    ??;\n}\n\nA) end 0\nB) exit 0\nC) return 0\nD) break 0",
       "answer": [
         [
@@ -311,7 +311,7 @@
     {
       "id": 29,
       "title": "Script de Impressao",
-      "text": "Um script precisa imprimir a palavra 'HACKED'. Reordene as linhas para que o programa execute corretamente.",
+      "text": "Um script precisa imprimir a palavra 'HACKED'. Reordene as linhas para que o programa execute corretamente. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - #include <stdio.h>\n2 - }\n3 - return 0;\n4 - int main() {\n5 - printf(\"HACKED\");",
       "answer": [
         [
@@ -322,7 +322,7 @@
     {
       "id": 30,
       "title": "Loop de Vigilancia",
-      "text": "Um programa de vigilancia deve rodar exatamente 10 vezes. Complete o loop 'for' para que ele execute de i=0 ate i=9.",
+      "text": "Um programa de vigilancia deve rodar exatamente 10 vezes. Qual alternativa completa o loop 'for' para que ele execute de i=0 ate i=9.",
       "question": "#include <stdio.h>\n\nint main() {\n    for (int i = 0; ??; i++) {\n        printf(\"Verificando...\\n\");\n    }\n    return 0;\n}\n\nA) i < 10\nB) i <= 10\nC) i > 10\nD) i == 9",
       "answer": [
         [
@@ -344,7 +344,7 @@
     {
       "id": 32,
       "title": "Programa 'Ola Hacker'",
-      "text": "Um hacker iniciante quer criar um programa que diz 'Ola Hacker'. Reordene o codigo para que ele funcione.",
+      "text": "Um hacker iniciante quer criar um programa que diz 'Ola Hacker'. Reordene o codigo para que ele funcione. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - }\n2 - return 0;\n3 - printf(\"Ola Hacker\");\n4 - #include <stdio.h>\n5 - int main() {",
       "answer": [
         [
@@ -355,7 +355,7 @@
     {
       "id": 33,
       "title": "Formatador de Saida",
-      "text": "Um script precisa imprimir um numero inteiro armazenado na variavel 'codigo'. Qual especificador de formato e usado para inteiros em 'printf'?",
+      "text": "Um script precisa imprimir um numero inteiro armazenado na variavel 'codigo'. Qual alternativa contem o especificador de formato e usado para inteiros em 'printf'?",
       "question": "#include <stdio.h>\n\nint main() {\n    int codigo = 200;\n    printf(\"Status: ??\", codigo);\n    return 0;\n}\n\nA) %f\nB) %c\nC) %s\nD) %d",
       "answer": [
         [
@@ -377,7 +377,7 @@
     {
       "id": 35,
       "title": "Declaracao de Variavel",
-      "text": "Um programa precisa armazenar um numero. Reordene as linhas para declarar a variavel 'num' e inicializa-la com o valor 10.",
+      "text": "Um programa precisa armazenar um numero. Reordene as linhas para declarar a variavel 'num' e inicializa-la com o valor 10. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - int num = 10;\n2 - #include <stdio.h>\n3 - }\n4 - return 0;\n5 - int main() {",
       "answer": [
         [
@@ -388,7 +388,7 @@
     {
       "id": 36,
       "title": "Cabecalho Necessario",
-      "text": "Para usar a funcao 'printf', qual biblioteca precisa ser incluida no inicio do arquivo C?",
+      "text": "Para usar a funcao 'printf', qual alternativa representa a biblioteca que precisa ser incluida no inicio do arquivo C?",
       "question": "??\n\nint main() {\n    printf(\"Biblioteca incluida!\");\n    return 0;\n}\n\nA) #include <math.h>\nB) #include <string.h>\nC) #include <stdio.h>\nD) #include <stdlib.h>",
       "answer": [
         [
@@ -410,7 +410,7 @@
     {
       "id": 38,
       "title": "Funcao Principal",
-      "text": "Todo programa em C precisa de um ponto de entrada. Reordene as linhas para criar a estrutura basica da funcao principal 'main'.",
+      "text": "Todo programa em C precisa de um ponto de entrada. Reordene as linhas para criar a estrutura basica da funcao principal 'main'. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - return 0;\n2 - int main() {\n3 - }\n4 - // Ponto de entrada\n5 - #include <stdio.h>",
       "answer": [
         [
@@ -421,7 +421,7 @@
     {
       "id": 39,
       "title": "Final de Instrucao",
-      "text": "Na linguagem C, a maioria das instrucoes deve terminar com um caractere especifico para indicar seu fim. Qual caractere e esse?",
+      "text": "Na linguagem C, a maioria das instrucoes deve terminar com um caractere especifico para indicar seu fim. Qual alternativa contem esse caractere?",
       "question": "#include <stdio.h>\n\nint main() {\n    int x = 5??\n    printf(\"%d\", x);\n    return 0;\n}\n\nA) .\nB) ,\nC) ;\nD) :",
       "answer": [
         [
@@ -443,7 +443,7 @@
     {
       "id": 41,
       "title": "Exibindo um Numero",
-      "text": "Um programa precisa exibir o numero 42 na tela. Reordene o codigo para que ele declare e imprima o numero.",
+      "text": "Um programa precisa exibir o numero 42 na tela. Reordene o codigo para que ele declare e imprima o numero. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - printf(\"%d\", numero);\n2 - int numero = 42;\n3 - }\n4 - int main() {\n5 - #include <stdio.h>",
       "answer": [
         [
@@ -454,7 +454,7 @@
     {
       "id": 42,
       "title": "Verificacao de Igualdade",
-      "text": "Um programa de autenticacao compara dois codigos. Qual operador e usado para verificar se 'codigo1' e 'codigo2' sao exatamente iguais?",
+      "text": "Um programa de autenticacao compara dois codigos. Qual alternativa contem o operador que e usado para verificar se 'codigo1' e 'codigo2' sao exatamente iguais?",
       "question": "#include <stdio.h>\n\nint main() {\n    int codigo1 = 1337;\n    int codigo2 = 1337;\n    if (codigo1 ?? codigo2) {\n        printf(\"Codigos conferem.\");\n    }\n    return 0;\n}\n\nA) =\nB) ==\nC) !=\nD) <>",
       "answer": [
         [
@@ -476,7 +476,7 @@
     {
       "id": 44,
       "title": "Estrutura Basica",
-      "text": "Reordene as linhas para formar o programa 'Hello, World!' mais simples possivel em C.",
+      "text": "Reordene as linhas para formar o programa 'Hello, World!' mais simples possivel em C. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - printf(\"Hello, World!\");\n2 - }\n3 - #include <stdio.h>\n4 - int main() {\n5 - return 0;",
       "answer": [
         [
@@ -487,7 +487,7 @@
     {
       "id": 45,
       "title": "Loop Decrescente",
-      "text": "Um script precisa contar de 5 ate 1. Complete a parte de atualizacao do loop 'for' para decrementar o contador 'i'.",
+      "text": "Um script precisa contar de 5 ate 1. Qual alternativa completa a parte de atualizacao do loop 'for' para decrementar o contador 'i'.",
       "question": "#include <stdio.h>\n\nint main() {\n    for (int i = 5; i > 0; ??) {\n        printf(\"%d\\n\", i);\n    }\n    return 0;\n}\n\nA) i++\nB) i = i - 1\nC) i--\nD) i-",
       "answer": [
         [
@@ -509,7 +509,7 @@
     {
       "id": 47,
       "title": "Variavel de Caractere",
-      "text": "Um programa precisa armazenar a inicial 'Z'. Reordene as linhas para declarar uma variavel do tipo 'char' e atribuir o valor a ela.",
+      "text": "Um programa precisa armazenar a inicial 'Z'. Reordene as linhas para declarar uma variavel do tipo 'char' e atribuir o valor a ela. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - }\n2 - #include <stdio.h>\n3 - int main() {\n4 - return 0;\n5 - char inicial = 'Z';",
       "answer": [
         [
@@ -520,7 +520,7 @@
     {
       "id": 48,
       "title": "Condicao de Parada",
-      "text": "Um loop 'while' deve parar quando a variavel 'continuar' se tornar 0. Qual condicao no 'while' faz o loop rodar enquanto 'continuar' for 1?",
+      "text": "Um loop 'while' deve parar quando a variavel 'continuar' se tornar 0. Qual alternativa tem a condicao no 'while' que faz o loop rodar enquanto 'continuar' for 1?",
       "question": "#include <stdio.h>\n\nint main() {\n    int continuar = 1;\n    while (??) {\n        printf(\"Em execucao...\\n\");\n        continuar = 0;\n    }\n    return 0;\n}\n\nA) continuar == 0\nB) continuar\nC) !continuar\nD) continuar < 0",
       "answer": [
         [
@@ -535,14 +535,14 @@
       "question": "#include <stdio.h>\n\nint main() {\n    printf(??);\n    return 0;\n}",
       "answer": [
         [
-          "(\"Infectado\")"
+          "\"Infectado\""
         ]
       ]
     },
     {
       "id": 50,
       "title": "Programa Vazio",
-      "text": "Um hacker quer criar um programa que compila mas nao faz nada. Reordene as linhas para criar um programa C minimo e vazio.",
+      "text": "Um hacker quer criar um programa que compila mas nao faz nada. Reordene as linhas para criar um programa C minimo e vazio. *( Utilize o formato 1,2,3,4[...] na resposta )*",
       "question": "1 - }\n2 - return 0;\n3 - #include <stdio.h>\n4 - int main() {\n5 - // Nenhuma acao",
       "answer": [
         [

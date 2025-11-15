@@ -1,6 +1,10 @@
 # Changelog
 Todos os registros de mudanças notáveis deste projeto serão documentados neste arquivo.
 
+## [v1.5] - 2025-14-07
+### Adicionado
+* Sistema de Timer visual implementado nas duas dificuldades.
+
 ## [v1.4] - 2025-11-07
 ### Adicionado
 * Questões teste-finais do jogo implementadas.

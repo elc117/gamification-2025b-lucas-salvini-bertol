@@ -19,6 +19,7 @@ import com.lucassbertol.codebreaker.MainGame;
 import com.lucassbertol.codebreaker.config.Constants;
 import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.data.QuestionsParsing;
+import com.lucassbertol.codebreaker.managers.TimerManager;
 
 import java.util.ArrayList;
 
@@ -145,7 +146,7 @@ public class DifficultSelectScreen implements Screen {
 
             // Quando o tempo acabar, vai para a próxima tela
             if (countdownTimer <= 0) {
-                game.setScreen(new QuestionScreen(game, selectedQuestion, selectedDifficulty, 0, new ArrayList<>()));
+                game.setScreen(new QuestionScreen(game, selectedQuestion, selectedDifficulty, 0, new ArrayList<>(), null));
             }
         }
 

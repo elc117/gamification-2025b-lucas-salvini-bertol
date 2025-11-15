@@ -34,6 +34,7 @@ public class Constants {
     public static final float MESSAGE_FONT_SCALE = 2.5f;
     public static final float INPUT_FONT_SCALE = 1.3f;
     public static final float PROGRESS_FONT_SCALE = 1.5f;
+    public static final float TIMER_FONT_SCALE = 1.8f;
     public static final float QUESTION_TEXT_SCALE = 2.0f;
     public static final float FEEDBACK_FONT_SCALE = 1.8f;
     public static final float BUTTON_WIDTH = 300f;
