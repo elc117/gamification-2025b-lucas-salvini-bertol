@@ -6,9 +6,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.lucassbertol.codebreaker.MainGame;
@@ -18,21 +22,17 @@ public class MenuScreen implements Screen {
 
     private final SpriteBatch batch;
     private final Texture background;
-    private final BitmapFont font;
     private final OrthographicCamera camera;
     private final Viewport viewport;
     private final MainGame game;
     private final Skin skin;
-
-    // GlyphLayout nos ajuda a medir o tamanho do texto para centralizá-lo
-    private final GlyphLayout layout;
-    private final String message = Constants.MSG_PRESS_START;
+    private final Stage stage;
 
     public MenuScreen(MainGame game) {
         this.game = game;
 
         camera = new OrthographicCamera();
-        // FitViewport com resolução virtual definida nas constantes
+        // FitViewport
         viewport = new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT, camera);
         camera.position.set(Constants.VIEWPORT_WIDTH / 2f, Constants.VIEWPORT_HEIGHT / 2f, 0);
 
@@ -43,14 +43,50 @@ public class MenuScreen implements Screen {
 
         // Usa a fonte do skin
         skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
-        font = skin.getFont("default-font");
-        font.getData().setScale(Constants.TITLE_FONT_SCALE); // Aumenta o tamanho da fonte
 
-        layout = new GlyphLayout(font, message);
+        // Cria o Stage
+        stage = new Stage(viewport, batch);
+        Gdx.input.setInputProcessor(stage);
+
+        // Cria a tabela para organizar os botões
+        Table table = new Table();
+        table.setFillParent(true);
+        table.bottom().padBottom(100); // Posiciona na parte inferior com padding
+        stage.addActor(table);
+
+        // Estilo dos botões
+        TextButton.TextButtonStyle buttonStyle = skin.get(TextButton.TextButtonStyle.class);
+        BitmapFont buttonFont = skin.getFont("default-font");
+        buttonFont.getData().setScale(Constants.BUTTON_FONT_SCALE);
+
+        // Botão JOGAR
+        TextButton playButton = new TextButton("JOGAR", buttonStyle);
+        playButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
+        playButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new UserInputScreen(game));
+            }
+        });
+
+        // Botão RANK
+        TextButton rankButton = new TextButton("RANK", buttonStyle);
+        rankButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
+        rankButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new ScoreScreenTable(game));
+            }
+        });
+
+        // Adiciona os botões à tabela com espaçamento
+        table.add(playButton).width(Constants.BUTTON_WIDTH).height(Constants.BUTTON_HEIGHT).padRight(50);
+        table.add(rankButton).width(Constants.BUTTON_WIDTH).height(Constants.BUTTON_HEIGHT);
     }
     @Override
     public void show() {
         // Este método é chamado quando a tela se torna a tela ativa.
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override
@@ -69,19 +105,11 @@ public class MenuScreen implements Screen {
         // Desenha a imagem de fundo para preencher a viewport virtual
         batch.draw(background, 0, 0, Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT);
 
-        // Calcula a posição para centralizar o texto
-        float textX = (Constants.VIEWPORT_WIDTH - layout.width) / 2;
-        float textY = (Constants.VIEWPORT_HEIGHT + layout.height) / 2;
-
-        // Desenha o texto
-        font.draw(batch, message, textX, textY);
-
         batch.end();
 
-        // Verifica se o usuário tocou na tela
-        if (Gdx.input.justTouched()) {
-            game.setScreen(new UserInputScreen(game));
-        }
+        // Atualiza e desenha o stage com os botões
+        stage.act(delta);
+        stage.draw();
     }
 
     @Override
@@ -106,6 +134,7 @@ public class MenuScreen implements Screen {
         // Libera os recursos para evitar vazamento de memória
         background.dispose();
         skin.dispose();
+        stage.dispose();
         batch.dispose();
     }
 }

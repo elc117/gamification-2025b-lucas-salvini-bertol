@@ -5,6 +5,7 @@ import com.lucassbertol.codebreaker.config.Constants;
 public class TimerManager {
     private float timeRemaining;
     private boolean timeUp;
+    private boolean stopped;
 
     public TimerManager(String difficulty) {
         if (Constants.DIFFICULTY_EASY.equals(difficulty)) {
@@ -13,16 +14,21 @@ public class TimerManager {
             this.timeRemaining = 155; // 2 minutos e 30 segundos
         }
         this.timeUp = false;
+        this.stopped = false;
     }
 
     public void update(float delta) {
-        if (timeRemaining > 0) {
+        if (!stopped && timeRemaining > 0) {
             timeRemaining -= delta;
             if (timeRemaining <= 0) {
                 timeRemaining = 0;
                 timeUp = true;
             }
         }
+    }
+
+    public void stop() {
+        this.stopped = true;
     }
 
     public boolean isTimeUp() {

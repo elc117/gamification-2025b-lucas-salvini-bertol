@@ -20,6 +20,9 @@ import com.lucassbertol.codebreaker.data.Question;
 import com.lucassbertol.codebreaker.utils.AnswerValidator;
 import com.lucassbertol.codebreaker.managers.GameStateManager;
 import com.lucassbertol.codebreaker.managers.TimerManager;
+import com.lucassbertol.codebreaker.managers.ScoreManager;
+import com.lucassbertol.codebreaker.leaderboard.LeaderboardService;
+import com.lucassbertol.codebreaker.leaderboard.LeaderboardService.SubmitCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,9 +40,10 @@ public class QuestionScreen implements Screen {
     private final Label progressLabel;
     private final GameStateManager gameState;
     private final TimerManager timerManager;
+    private final ScoreManager scoreManager;
     private final Label timerLabel;
 
-    public QuestionScreen(MainGame game, Question question, String difficulty, int questionsAnswered, List<Integer> usedQuestionIds, TimerManager timerManager) {
+    public QuestionScreen(MainGame game, Question question, String difficulty, int questionsAnswered, List<Integer> usedQuestionIds, TimerManager timerManager, ScoreManager scoreManager) {
         this.game = game;
         this.currentQuestion = question;
         this.difficulty = difficulty;
@@ -49,6 +53,11 @@ public class QuestionScreen implements Screen {
             this.timerManager = new TimerManager(difficulty);
         } else {
             this.timerManager = timerManager;
+        }
+        if (scoreManager == null) {
+            this.scoreManager = new ScoreManager(difficulty);
+        } else {
+            this.scoreManager = scoreManager;
         }
 
         // Adiciona a questão atual à lista de usadas
@@ -166,41 +175,58 @@ public class QuestionScreen implements Screen {
     }
 
     private void checkAnswer() {
-        // Usa o AnswerValidator para validar as respostas
         boolean allCorrect = AnswerValidator.validateAnswers(inputFields, currentQuestion);
 
         if (allCorrect) {
-            // aumenta o contador de questões respondidas
+            scoreManager.addCorrectAnswer();
             gameState.incrementAnsweredQuestions();
 
             if (gameState.isGameCompleted()) {
-                // Completou as 5 questões
-                messageLabel.setText("PARABENS! Voce completou todas as questoes!");
+                // Parar o timer e o score manager para fixar a pontuação
+                timerManager.stop();
+                scoreManager.stop();
+
+                messageLabel.setText("Calculando score...");
                 messageLabel.setColor(Color.GREEN);
 
-                // Aguarda um pouco e volta para menu por enquanto
-                Gdx.app.postRunnable(() -> {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        Gdx.app.log("QuestionScreen", "Error waiting: " + e.getMessage());
-                    }
-                    game.setScreen(new DifficultSelectScreen(game));
-                });
-            } else {
-                // Vai para a próxima questão
-                com.lucassbertol.codebreaker.data.QuestionsParsing parser = new com.lucassbertol.codebreaker.data.QuestionsParsing();
-                Question nextQuestion = parser.getRandomQuestionExcluding(difficulty, gameState.getUsedQuestionIds());
+                // Obter nome do jogador e pontuação final
+                String nomeJogador = game.getPlayerName();
+                int pontuacao = scoreManager.getScore();
 
-                game.setScreen(new QuestionScreen(game, nextQuestion, difficulty,
-                    gameState.getQuestionsAnswered(), gameState.getUsedQuestionIds(), timerManager));
+                LeaderboardService leaderboardService = new LeaderboardService();
+                leaderboardService.submitScore(nomeJogador, pontuacao, new SubmitCallback() {
+                    @Override
+                    public void onSuccess() {
+                        game.setScreen(new ScoreScreen(game, scoreManager));
+                    }
+
+                    @Override
+                    public void onError(String message) {
+                        game.setScreen(new ScoreScreen(game, scoreManager));
+                    }
+                });
+
+            } else {
+                com.lucassbertol.codebreaker.data.QuestionsParsing parser =
+                    new com.lucassbertol.codebreaker.data.QuestionsParsing();
+                Question nextQuestion = parser.getRandomQuestionExcluding(
+                    difficulty, gameState.getUsedQuestionIds()
+                );
+
+                game.setScreen(new QuestionScreen(
+                    game,
+                    nextQuestion,
+                    difficulty,
+                    gameState.getQuestionsAnswered(),
+                    gameState.getUsedQuestionIds(),
+                    timerManager,
+                    scoreManager
+                ));
             }
         } else {
-            // Resposta incorreta
-            messageLabel.setText("ERRADO! Tente novamente.");
+            scoreManager.addWrongAnswer();
+            messageLabel.setText("Tente novamente");
             messageLabel.setColor(Color.RED);
-
-            // Usa o AnswerValidator para limpar os campos
             AnswerValidator.clearInputFields(inputFields);
         }
     }
@@ -216,10 +242,11 @@ public class QuestionScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         timerManager.update(delta);
+        scoreManager.update(delta);
         timerLabel.setText("" + timerManager.getFormattedTime());
 
         if (timerManager.isTimeUp()) {
-            game.setScreen(new DifficultSelectScreen(game));
+            game.setScreen(new MenuScreen(game));
             return;
         }
 

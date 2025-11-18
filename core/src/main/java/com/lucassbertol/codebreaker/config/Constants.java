@@ -18,6 +18,8 @@ public class Constants {
     public static final String BG_MENU = "images/menu.png";
     public static final String BG_SELECT = "images/selectFase.png";
     public static final String BG_QUESTION = "images/question.png";
+    public static final String BG_SCORE = "images/scoreScreen.png";
+    public static final String BG_INPUT = "images/userInput.png";
 
     // Questions
     public static final String QUESTIONS_PATH = "questions/";
@@ -32,30 +34,34 @@ public class Constants {
     public static final float TITLE_FONT_SCALE = 3.0f;
     public static final float BUTTON_FONT_SCALE = 1.5f;
     public static final float MESSAGE_FONT_SCALE = 2.5f;
-    public static final float INPUT_FONT_SCALE = 1.3f;
+    public static final float INPUT_FONT_SCALE = 1.9f;
     public static final float PROGRESS_FONT_SCALE = 1.5f;
     public static final float TIMER_FONT_SCALE = 1.8f;
     public static final float QUESTION_TEXT_SCALE = 2.0f;
     public static final float FEEDBACK_FONT_SCALE = 1.8f;
+    public static final float SCORE_FONT_SCALE = 3.5f;
     public static final float BUTTON_WIDTH = 300f;
     public static final float BUTTON_HEIGHT = 100f;
     public static final float INPUT_WIDTH = 500f;
-    public static final float INPUT_HEIGHT = 80f;
+    public static final float INPUT_HEIGHT = 100f;
 
     // mensagens
-    public static final String MSG_PRESS_START = "PRESS START";
+    public static final String MSG_PRESS_START = "CLICK TO START";
     public static final String MSG_ENTER_USERNAME = "DIGITE SEU USERNAME:";
     public static final String MSG_SELECT_DIFFICULTY = "ESCOLHA A DIFICULDADE:";
-    public static final String MSG_COUNTDOWN = "Iniciando em 5 segundos, prepare-se!";
+    public static final String MSG_COUNTDOWN = "Carregando questoes";
 
     // botoes
     public static final String BTN_EASY = "FACIL";
     public static final String BTN_HARD = "DIFICIL";
     public static final String BTN_CONTINUE = "CONTINUAR";
 
-    // construtor para evitar instanciação
-    private Constants() {
-        throw new AssertionError("erro, classe não deve ser instanciada");
-    }
+    // api
+    public static final String SHEETS_API_URL = "https://sheets.googleapis.com/v4/spreadsheets/";
+    public static final String SPREADSHEET_ID = "1QOQF2nFjH06r9f4uhQJFXfnFREZ_cFlwoWj863E_pUw";
+    public static final String RANGE = "A2:D";
+    public static final String API_KEY = "AIzaSyCBgw-Q2hkL1sSqDZaJnusSjrj7KdIk4eQ";
+
 }
+
 

@@ -146,7 +146,7 @@ public class DifficultSelectScreen implements Screen {
 
             // Quando o tempo acabar, vai para a próxima tela
             if (countdownTimer <= 0) {
-                game.setScreen(new QuestionScreen(game, selectedQuestion, selectedDifficulty, 0, new ArrayList<>(), null));
+                game.setScreen(new QuestionScreen(game, selectedQuestion, selectedDifficulty, 0, new ArrayList<>(), null, null));
             }
         }
 
