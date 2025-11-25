@@ -126,8 +126,6 @@ public class Question {
 - A classe `QuestionsData`, é uma classe simples que armazena uma lista de questões e serve como estrutura intermediaria para o parsing dos JSONs, com as questões.
 
 ```json
-	// Estrutura dos JSONs das questões
-
 	{
       "id": 66,
       "title": "Troca de Chaves por Referencia [NIVEL MEDIO]",
@@ -418,7 +416,7 @@ Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` ger
 ---
 
 ## Diagrama de classes:
-![ClassDiagram](Diagrama/ClassDiagram.png)
+![ClassDiagram](Diagramas/ClassDiagram.png)
 
 ---
 
