@@ -405,7 +405,9 @@ propósitos únicos, como `QuestionsParsing` para o carregamento dos dados, `Ans
 Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` gerencia o estado geral e as telas, enquanto a `QuestionScreen`, por exemplo, agrupa
 `TimerManager` e `ScoreManager` para controlar suas funcionalidades.
 
-<img src="assets/readme/poo.jpg" width="350" alt="P.O.O">
+<img width="400" height="246" alt="Captura de tela 2025-11-25 005358" src="https://github.com/user-attachments/assets/b2d85280-f558-4247-a2af-1e1aa027d2e1" />
+
+
 
 ### <u>Assets e banco de questões</u>
 
@@ -416,7 +418,9 @@ Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` ger
 ---
 
 ## Diagrama de classes:
-![ClassDiagram](Diagramas/ClassDiagram.png)
+
+<img width="2021" height="1331" alt="classDiagram" src="https://github.com/user-attachments/assets/bf37d44b-7d44-4eeb-a36d-06222808db6b" />
+
 
 ---
 
