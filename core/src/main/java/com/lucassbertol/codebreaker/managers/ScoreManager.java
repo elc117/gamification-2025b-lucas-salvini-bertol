@@ -2,21 +2,13 @@ package com.lucassbertol.codebreaker.managers;
 
 import com.lucassbertol.codebreaker.config.Constants;
 
+import static com.lucassbertol.codebreaker.config.Constants.*;
+
 public class ScoreManager {
     private int score;
     private String difficulty;
     private float elapsedTime;
     private boolean stopped;
-
-    // pontos por acerto
-    private static final int EASY_CORRECT_POINTS = 100;
-    private static final int HARD_CORRECT_POINTS = 250;
-
-    // pontos perdidos por erro
-    private static final int WRONG_PENALTY = 20;
-
-    // pontos perdidos por tempo (2 pontos por segundo)
-    private static final int TIME_PENALTY_PER_SECOND = 2;
 
     public ScoreManager(String difficulty) {
         this.difficulty = difficulty;

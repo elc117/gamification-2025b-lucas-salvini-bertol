@@ -51,6 +51,19 @@ public class DifficultSelectScreen implements Screen {
         backgroundImage.setFillParent(true); // ocupa toda a área do stage
         stage.addActor(backgroundImage);
 
+        // Botão voltar no topo esquerdo
+        TextButton backButton = new TextButton(Constants.BTN_BACK, skin);
+        backButton.setSize(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT);
+        backButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
+        backButton.setPosition(Constants.BTN_BACK_PAD, Constants.VIEWPORT_HEIGHT - Constants.BUTTON_HEIGHT - Constants.BTN_BACK_PAD);
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new UserInputScreen(game));
+            }
+        });
+        stage.addActor(backButton);
+
         // Table para organizar título e botões; Table facilita centralização e responsividade
         Table table = new Table();
         table.setFillParent(true);
@@ -137,7 +150,7 @@ public class DifficultSelectScreen implements Screen {
     @Override
     public void render(float delta) {
         // Limpa tela
-        Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         // Se estiver contando, atualiza o contador

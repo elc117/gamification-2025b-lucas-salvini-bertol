@@ -76,6 +76,7 @@ public class ScoreScreen implements Screen {
         menuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                game.playMainMusic();
                 game.setScreen(new MenuScreen(game));
             }
         });
@@ -97,11 +98,12 @@ public class ScoreScreen implements Screen {
 
     @Override
     public void show() {
+        game.playPassedMusic();
     }
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);

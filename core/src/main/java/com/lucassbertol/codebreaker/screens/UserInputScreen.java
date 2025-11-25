@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,6 +18,7 @@ import com.badlogic.gdx.utils.Scaling;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.lucassbertol.codebreaker.MainGame;
 import com.lucassbertol.codebreaker.config.Constants;
+import com.lucassbertol.codebreaker.leaderboard.LeaderboardService;
 
 public class UserInputScreen implements Screen {
 
@@ -24,9 +26,14 @@ public class UserInputScreen implements Screen {
     private final Skin skin;
     private final Texture backgroundTexture;
     private final MainGame game;
+    private final LeaderboardService leaderboardService;
+    private Label messageLabel;
+    private TextButton nextButton;
+    private boolean isCheckingName = false;
 
     public UserInputScreen(MainGame game) {
         this.game = game;
+        this.leaderboardService = new LeaderboardService();
 
         stage = new Stage(new FitViewport(Constants.VIEWPORT_WIDTH, Constants.VIEWPORT_HEIGHT));
         skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
@@ -36,6 +43,19 @@ public class UserInputScreen implements Screen {
         backgroundImage.setScaling(Scaling.stretch);
         backgroundImage.setFillParent(true);
         stage.addActor(backgroundImage);
+
+        // Botão voltar no topo esquerdo
+        TextButton backButton = new TextButton(Constants.BTN_BACK, skin);
+        backButton.setSize(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT);
+        backButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
+        backButton.setPosition(Constants.BTN_BACK_PAD, Constants.VIEWPORT_HEIGHT - Constants.BUTTON_HEIGHT - Constants.BTN_BACK_PAD);
+        backButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                game.setScreen(new MenuScreen(game));
+            }
+        });
+        stage.addActor(backButton);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -51,29 +71,84 @@ public class UserInputScreen implements Screen {
         nameInput.getStyle().font.getData().setScale(Constants.INPUT_FONT_SCALE);
         nameInput.setMessageText("");
 
-        TextButton nextButton = new TextButton(Constants.BTN_CONTINUE, skin);
+        // Label de mensagem de feedback
+        messageLabel = new Label("", skin);
+        messageLabel.setFontScale(Constants.FEEDBACK_FONT_SCALE);
+        messageLabel.setColor(Color.RED);
 
+        nextButton = new TextButton(Constants.BTN_CONTINUE, skin);
         nextButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                String playerName = nameInput.getText();
-                if (!playerName.isEmpty()) {
-                    // AQUI: salva o nome no MainGame
-                    game.setPlayerName(playerName);
-
-                    // Depois de salvar, vai para a próxima tela
-                    game.setScreen(new DifficultSelectScreen(game));
+                if (isCheckingName) {
+                    return; // Evita múltiplos cliques durante verificação
                 }
+
+                String playerName = nameInput.getText().trim();
+                if (playerName.isEmpty()) {
+                    showErrorMessage("Por favor, digite um nome!");
+                    return;
+                }
+
+                if (playerName.length() < 3) {
+                    showErrorMessage("Nome deve ter pelo menos 3 caracteres!");
+                    return;
+                }
+
+                // Verifica se o nome já existe
+                checkAndProceed(playerName);
             }
         });
         nextButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
 
         table.row();
-        table.add(nameInput).width(Constants.INPUT_WIDTH).height(Constants.INPUT_HEIGHT).colspan(2).padBottom(40f);
+        table.add(nameInput).width(Constants.INPUT_WIDTH).height(Constants.INPUT_HEIGHT).colspan(2).padBottom(20f);
+        table.row();
+        table.add(messageLabel).colspan(2).padBottom(20f);
         table.row();
         table.add(nextButton).width(Constants.BUTTON_WIDTH).height(Constants.BUTTON_HEIGHT).colspan(2);
 
         Gdx.input.setInputProcessor(stage);
+    }
+
+    private void checkAndProceed(String playerName) {
+        isCheckingName = true;
+        showInfoMessage("Verificando nome...");
+        nextButton.setDisabled(true);
+
+        leaderboardService.checkNameExists(playerName, new LeaderboardService.CheckNameCallback() {
+            @Override
+            public void onNameExists(boolean exists) {
+                isCheckingName = false;
+                nextButton.setDisabled(false);
+
+                if (exists) {
+                    showErrorMessage("Nome '" + playerName + "' ja está em uso! Escolha outro.");
+                } else {
+                    // Nome disponível
+                    game.setPlayerName(playerName);
+                    game.setScreen(new DifficultSelectScreen(game));
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                isCheckingName = false;
+                nextButton.setDisabled(false);
+                showErrorMessage("Erro ao verificar nome. Tente novamente.");
+                Gdx.app.error("UserInputScreen", "Erro na verificação: " + message);
+            }
+        });
+    }
+
+    private void showErrorMessage(String message) {
+        messageLabel.setText(message);
+        messageLabel.setColor(Color.RED);
+    }
+
+    private void showInfoMessage(String message) {
+        messageLabel.setText(message);
+        messageLabel.setColor(Color.YELLOW);
     }
 
     @Override
@@ -81,7 +156,7 @@ public class UserInputScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0f, 0f, 0.1f, 1f);
+        Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act(delta);

@@ -11,24 +11,27 @@ public class LeaderboardService {
         void onError(String message);
     }
 
+    public interface CheckNameCallback {
+        void onNameExists(boolean exists);
+        void onError(String message);
+    }
+
     public LeaderboardService() {
     }
 
     public void submitScore(String nome, int pontos, SubmitCallback callback) {
         if (nome == null || nome.trim().isEmpty()) {
             if (callback != null) {
-                callback.onError("Nome inválido");
+                callback.onError("Nome invalido");
             }
             return;
         }
 
-        // Monta JSON manualmente: {"nome":"...","score":123}
+        // Monta JSON
         String jsonBody = "{\"nome\":\"" + escapeJson(nome) + "\",\"score\":" + pontos + "}";
 
         String url = LeaderboardConfig.getAppendUrl();
 
-        Gdx.app.log("LeaderboardService", "JSON enviado: " + jsonBody);
-        Gdx.app.log("LeaderboardService", "Enviando score para: " + url);
 
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
         request.setUrl(url);
@@ -40,10 +43,6 @@ public class LeaderboardService {
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
                 HttpStatus status = httpResponse.getStatus();
                 int statusCode = status.getStatusCode();
-                String result = httpResponse.getResultAsString();
-
-                Gdx.app.log("LeaderboardService",
-                    "Resposta HTTP " + statusCode + ": " + result);
 
                 if (statusCode >= 200 && statusCode < 300) {
                     if (callback != null) {
@@ -69,13 +68,145 @@ public class LeaderboardService {
 
             @Override
             public void cancelled() {
-                Gdx.app.log("LeaderboardService", "Requisição cancelada");
                 if (callback != null) {
                     Gdx.app.postRunnable(() ->
                         callback.onError("Requisição cancelada"));
                 }
             }
         });
+    }
+
+    public void checkNameExists(String nome, CheckNameCallback callback) {
+        if (nome == null || nome.trim().isEmpty()) {
+            if (callback != null) {
+                callback.onError("Nome invalido");
+            }
+            return;
+        }
+
+        String url = LeaderboardConfig.getFetchUrl();
+
+        Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.GET);
+        request.setUrl(url);
+
+        Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
+            @Override
+            public void handleHttpResponse(Net.HttpResponse httpResponse) {
+                HttpStatus status = httpResponse.getStatus();
+                int statusCode = status.getStatusCode();
+
+                if (statusCode >= 200 && statusCode < 300) {
+                    String result = httpResponse.getResultAsString();
+
+                    // Verifica se é HTML de erro
+                    if (result.trim().startsWith("<!DOCTYPE") || result.trim().startsWith("<html")) {
+                        Gdx.app.error("LeaderboardService", "ERRO");
+                        if (callback != null) {
+                            Gdx.app.postRunnable(() ->
+                                callback.onError("Script não configurado corretamente"));
+                        }
+                        return;
+                    }
+
+                    boolean nameExists = checkIfNameExistsInResponse(result, nome);
+
+
+                    if (callback != null) {
+                        Gdx.app.postRunnable(() -> callback.onNameExists(nameExists));
+                    }
+                } else {
+                    if (callback != null) {
+                        Gdx.app.postRunnable(() ->
+                            callback.onError("Erro ao verificar nome: HTTP " + statusCode));
+                    }
+                }
+            }
+
+            @Override
+            public void failed(Throwable t) {
+                Gdx.app.error("LeaderboardService",
+                    "Falha ao verificar nome: " + t.getMessage(), t);
+                if (callback != null) {
+                    Gdx.app.postRunnable(() ->
+                        callback.onError("Falha na verificação: " + t.getMessage()));
+                }
+            }
+
+            @Override
+            public void cancelled() {
+                if (callback != null) {
+                    Gdx.app.postRunnable(() ->
+                        callback.onError("Verificação cancelada"));
+                }
+            }
+        });
+    }
+
+    private boolean checkIfNameExistsInResponse(String jsonResponse, String nome) {
+        if (jsonResponse == null || jsonResponse.isEmpty()) {
+            return false;
+        }
+
+        try {
+
+            // Verifica se a resposta é HTML de erro ao invés de JSON
+            if (jsonResponse.trim().startsWith("<!DOCTYPE") || jsonResponse.trim().startsWith("<html")) {
+                return false;
+            }
+
+            // [{"nome":"João","score":100}]
+            String nomeNormalizado = nome.trim().toLowerCase();
+
+            // Remove espaços e quebras de linha para facilitar o parse
+            String jsonCleaned = jsonResponse.replaceAll("\\s+", " ").trim();
+            String jsonLower = jsonCleaned.toLowerCase();
+
+
+            // Procura pelo padrão "nome":"valor"
+            String pattern = "\"nome\":";
+            int index = 0;
+
+            while ((index = jsonLower.indexOf(pattern, index)) != -1) {
+                // Move para depois de "nome":
+                index += pattern.length();
+
+                // Pula espaços em branco
+                while (index < jsonLower.length() && (jsonLower.charAt(index) == ' ' || jsonLower.charAt(index) == '\t')) {
+                    index++;
+                }
+
+                // Verifica se tem aspas
+                if (index < jsonLower.length() && jsonLower.charAt(index) == '"') {
+                    index++; // Pula a aspas de abertura
+
+                    // Encontra a aspas de fechamento
+                    int endQuote = jsonLower.indexOf('"', index);
+
+                    if (endQuote != -1) {
+                        // Extrai o nome encontrado (da string original para manter case)
+                        String foundNameOriginal = jsonCleaned.substring(index, endQuote).trim();
+                        String foundName = foundNameOriginal.toLowerCase();
+
+                        if (foundName.equals(nomeNormalizado)) {
+                            return true;
+                        }
+
+                        index = endQuote + 1;
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+
+            return false;
+
+        } catch (Exception e) {
+            Gdx.app.error("LeaderboardService",
+                "Erro ao processar resposta JSON: " + e.getMessage(), e);
+            return false;
+        }
     }
 
     private String escapeJson(String value) {

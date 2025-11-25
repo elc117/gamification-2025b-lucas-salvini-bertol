@@ -14,11 +14,6 @@ import com.badlogic.gdx.Net;
 import com.badlogic.gdx.utils.Json;
 import com.lucassbertol.codebreaker.MainGame;
 import com.lucassbertol.codebreaker.config.Constants;
-
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import org.checkerframework.checker.units.qual.C;
-
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,13 +38,11 @@ public class ScoreScreenTable implements Screen {
         skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
         background = new Texture(Gdx.files.internal(Constants.BG_SCORE));
 
-        // Tabela principal
-        Table mainTable = new Table();
-        mainTable.setFillParent(true);
-        mainTable.top();
-
-        // Botão voltar no topo esquerdo
-        TextButton backButton = new TextButton("Voltar", skin);
+        // Botão voltar no topo esquerdo (posicionamento absoluto)
+        TextButton backButton = new TextButton(Constants.BTN_BACK, skin);
+        backButton.setSize(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT);
+        backButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);
+        backButton.setPosition(Constants.BTN_BACK_PAD, Constants.VIEWPORT_HEIGHT - Constants.BUTTON_HEIGHT - Constants.BTN_BACK_PAD);
         backButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -57,39 +50,40 @@ public class ScoreScreenTable implements Screen {
             }
         });
 
-        Table topTable = new Table();
-        topTable.add(backButton).left().pad(20);
-        mainTable.add(topTable).expandX().fillX().top().left().row();
+        // Tabela principal para o ranking
+        Table mainTable = new Table();
+        mainTable.setFillParent(true);
+        mainTable.center();
 
         // Tabela de scores
         scoreTable = new Table();
         scoreTable.pad(0);
 
         // Cabeçalho
-        Label headerPos = new Label("Posicao", skin);
+        Label headerPos = new Label(Constants.RANKING_HEADER_POS, skin);
         headerPos.setColor(Color.GREEN);
         headerPos.setFontScale(Constants.TITLE_FONT_SCALE);
-        Label headerName = new Label("Nome", skin);
+        Label headerName = new Label(Constants.RANKING_HEADER_NAME, skin);
         headerName.setColor(Color.GREEN);
         headerName.setFontScale(Constants.TITLE_FONT_SCALE);
-        Label headerPoints = new Label("Pontos", skin);
+        Label headerPoints = new Label(Constants.RANKING_HEADER_POINTS, skin);
         headerPoints.setColor(Color.GREEN);
         headerPoints.setFontScale(Constants.TITLE_FONT_SCALE);
 
-        scoreTable.add(headerPos).pad(30);
-        scoreTable.add(headerName).pad(30);
-        scoreTable.add(headerPoints).pad(30);
+        scoreTable.add(headerPos).pad(Constants.RANKING_HEADER_PAD);
+        scoreTable.add(headerName).pad(Constants.RANKING_HEADER_PAD);
+        scoreTable.add(headerPoints).pad(Constants.RANKING_HEADER_PAD);
         scoreTable.row();
 
         // ScrollPane para a tabela
         ScrollPane scrollPane = new ScrollPane(scoreTable, skin);
         scrollPane.setFadeScrollBars(false);
         scrollPane.setScrollingDisabled(true, false);
-        Drawable scrollPaneBackground = scrollPane.getStyle().background;
         scrollPane.getStyle().background = null;
-        mainTable.add(scrollPane).width(1280).height(600).expand().pad(0).row();
+        mainTable.add(scrollPane).width(Constants.RANKING_TABLE_WIDTH).height(Constants.RANKING_TABLE_HEIGHT).expand().pad(0).row();
 
         stage.addActor(mainTable);
+        stage.addActor(backButton);
 
         fetchScores();
     }
@@ -143,9 +137,9 @@ public class ScoreScreenTable implements Screen {
                             Label pointsLabel = new Label(row.get(1), skin);
                             pointsLabel.setFontScale(Constants.INPUT_FONT_SCALE);
 
-                            scoreTable.add(posLabel).pad(8);
-                            scoreTable.add(nameLabel).pad(8);
-                            scoreTable.add(pointsLabel).pad(8);
+                            scoreTable.add(posLabel).pad(Constants.RANKING_ROW_PAD);
+                            scoreTable.add(nameLabel).pad(Constants.RANKING_ROW_PAD);
+                            scoreTable.add(pointsLabel).pad(Constants.RANKING_ROW_PAD);
                             scoreTable.row();
                             position++;
                         }
@@ -162,9 +156,9 @@ public class ScoreScreenTable implements Screen {
 
     private void displayErrorMessage() {
         Gdx.app.postRunnable(() -> {
-            Label errorLabel = new Label("Erro ao carregar ranking", skin);
+            Label errorLabel = new Label(Constants.MSG_ERROR_RANKING, skin);
             errorLabel.setFontScale(Constants.FEEDBACK_FONT_SCALE);
-            scoreTable.add(errorLabel).colspan(3).pad(20);
+            scoreTable.add(errorLabel).colspan(3).pad(Constants.BTN_BACK_PAD);
         });
     }
 

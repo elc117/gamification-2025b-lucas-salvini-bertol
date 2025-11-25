@@ -4,7 +4,7 @@ public final class LeaderboardConfig {
 
     // URL do Web App do Apps Script (cole exatamente a URL gerada na implantação)
     private static final String APPS_SCRIPT_URL =
-        "https://script.google.com/macros/s/AKfycbzZLtg3FHqjyLqzhYSU3iv0qtoKVpL1EHE_4PddZmTOuBDUp0Nh_pe6pErkUjBbxT0VVg/exec";
+        "https://script.google.com/macros/s/AKfycbzTbK2onmRt8krhZ1tDLBeoAsMr_RM9Q8WK33A92DQvzr0n-nMVc4zBkGaOTa5rEjpfWw/exec";
 
     private LeaderboardConfig() {
     }

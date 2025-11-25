@@ -20,6 +20,8 @@ public class Constants {
     public static final String BG_QUESTION = "images/question.png";
     public static final String BG_SCORE = "images/scoreScreen.png";
     public static final String BG_INPUT = "images/userInput.png";
+    public static final String BG_OVER = "images/gameOver.png";
+
 
     // Questions
     public static final String QUESTIONS_PATH = "questions/";
@@ -50,17 +52,45 @@ public class Constants {
     public static final String MSG_ENTER_USERNAME = "DIGITE SEU USERNAME:";
     public static final String MSG_SELECT_DIFFICULTY = "ESCOLHA A DIFICULDADE:";
     public static final String MSG_COUNTDOWN = "Carregando questoes";
+    public static final String MSG_ERROR_RANKING = "ERRO AO CARREGAR RANKING";
+
+    // ranking
+    public static final String RANKING_HEADER_POS = "Posicao";
+    public static final String RANKING_HEADER_NAME = "Nome";
+    public static final String RANKING_HEADER_POINTS = "Pontos";
+    public static final float RANKING_HEADER_PAD = 30f;
+    public static final float RANKING_ROW_PAD = 8f;
+    public static final float RANKING_TABLE_WIDTH = 1280f;
+    public static final float RANKING_TABLE_HEIGHT = 600f;
 
     // botoes
     public static final String BTN_EASY = "FACIL";
     public static final String BTN_HARD = "DIFICIL";
     public static final String BTN_CONTINUE = "CONTINUAR";
+    public static final String BTN_BACK = "< VOLTAR";
+    public static final float BTN_BACK_PAD = 20f;
+
+    //PONTUAÇÃO
+    // pontos por acerto
+    public static final int EASY_CORRECT_POINTS = 100;
+    public static final int HARD_CORRECT_POINTS = 250;
+
+    // pontos perdidos por erro
+    public static final int WRONG_PENALTY = 20;
+
+    // pontos perdidos por tempo (2 pontos por segundo)
+    public static final int TIME_PENALTY_PER_SECOND = 2;
+
+    // Músicas
+    public static final String MUSIC_MAIN = "musics/main.mp3";
+    public static final String MUSIC_FAILED = "musics/failed.mp3";
+    public static final String MUSIC_PASSED = "musics/passed.mp3";
 
     // api
     public static final String SHEETS_API_URL = "https://sheets.googleapis.com/v4/spreadsheets/";
     public static final String SPREADSHEET_ID = "1QOQF2nFjH06r9f4uhQJFXfnFREZ_cFlwoWj863E_pUw";
     public static final String RANGE = "A2:D";
-    public static final String API_KEY = "API KEY**";
+    public static final String API_KEY = "api key";
 
 }
 
