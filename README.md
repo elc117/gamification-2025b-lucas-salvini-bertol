@@ -427,11 +427,13 @@ Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` ger
 
 ## Orientações para execução: 
 
-- [Link para jogar WEB pelo Itch.io]()
+- [Link para jogar WEB pelo Itch.io](https://lucassbertol.itch.io/codebreaker)
 
 ---
 
 ## Resultado final: 
+
+https://github.com/user-attachments/assets/8e6f05ec-2c71-47f3-a223-79e8882c11be
 
 ---
 
