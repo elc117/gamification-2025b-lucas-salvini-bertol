@@ -12,12 +12,9 @@
 
 ## Proposta 
 
-- Criação de um jogo utilizando o framework [LibGDX](https://libgdx.com/) onde você precisa resolver desafios de lógica e códigos de 
-programação de para aprimorar seus conhecimentos na área, e avançar de nível. Cada nível (1-5) tem um novo desafio de código, com opção 
-inicial de escolha de dificuldade. 
-Dependendo do tempo que o player  finalizar a fase, ele ganhará uma nota (A+, A, B, C, D) e um *score*, 
-cada nota valerá uma pontuação específica para esse *score* final. 
-    
+- Criação de um jogo em java utilizando o framework [LibGDX](https://libgdx.com/) onde você precisa resolver problemas de lógica e códigos de 
+programação (Na linguagem C) para aprimorar seus conhecimentos na área e avançar de nível. Cada partida, com 5 niveis, de dificuldades escolhidas previamennte, tem um novo desafio.
+Dependendo do tempo que o player  finalizar a fase, tentativas e acertos/erros, ele ganhará um **score** que ficará eternizado no **ranking** público do jogo.
 ---
 
 ## Processo de desenvolvimento
@@ -26,13 +23,13 @@ cada nota valerá uma pontuação específica para esse *score* final.
 
 - O primeiro passo foi ler a [documentação oficial WIKI Liibgdx](https://libgdx.com/wiki/) e criar o projeto com a ferrmenta deles. Inicialmenta não tinha entendido a estrutura do projeto com `core`, `lwjgl3`, `html` e outras, pesquisando melhor e analisando projetos de semestres anteriores entendi onde ficaria o código principal do jogo (`core`), sendo os outros apenas os lançadores para cada plataforma específica que ira rodar o projeto.
 
-- Agora, era necessário entender os métodos `create()`, `render()`e `dispose()` que ja vinham no projeto LibGDX. Descobri que `create()` configura o jogo, `render()`exibe tudo na tela, e `dispose()`é utilizado para liberar memória.
+- Agora, era necessário entender os métodos `create()`, `render()`e `dispose()` que ja vinham no projeto libGDX. Descobri que `create()` configura o jogo, `render()`exibe tudo na tela, e `dispose()`é utilizado para liberar memória.
 
 ### <u>Estruturando a interface das telas</u>
 
-- Pesquisando por padrões em projetos LibGDX, descobri o padrão da pasta `Screen` presente  em todos  eles. Desse jeito não fica toda lógica na classe principal `MainGame`. Outra descoberta foi passar a instância principal da classe `Game` para todas as telas dentro da pasta screen, permitindo qualquer tela ser isolada separadamente e "chamada" por `game.setScreen(new 'OutraScreen'(game))`.
+- Pesquisando por padrões em projetos libGDX, descobri o padrão da pasta `Screen` presente  em todos  eles. Desse jeito não fica toda lógica na classe principal `MainGame`. Outra descoberta foi passar a instância principal da classe `Game` para todas as telas dentro da pasta screen, permitindo qualquer tela ser isolada separadamente e "chamada" por `game.setScreen(new 'OutraScreen'(game))`.
 
-- Outro desafio foi resolver erros relacionados às `skins`, descobrindo que elas dependem de uma estrutura de arquivos (`.json, .atlas e .png`) que precisavam estar na pasta correta.
+- Outro desafio foi resolver erros relacionados às [skins](https://stackoverflow.com/questions/16182844/default-skin-libgdx), descobrindo que elas dependem de uma estrutura de arquivos (`.json, .atlas e .png`) que precisavam estar na pasta correta.
 
 - Inicialmente na implementação da primeira tela `MenuScreen`, exibi um background com dois botões "JOGAR" e "RANK" ainda sem funções, usando `Scene2D.UI`, no inicio estava tentando mapear a mão a posição de  tudo na tela mas vi que não funcionaria e seria muito trabalhoso, então, implementei com a classe `Table` deixando a interface organizada "automaticammente". No futuro, criei a classe `constants` para padronizar valores (tamanho de fontes, botões etc...) e alterá-los com muito mais praticidade. Para as outras telas, foi basicamente um "copia e cola" dessa primeira criada, por terem algumas semelhanças, mas destacando algumas diferenças pontuais.
 
