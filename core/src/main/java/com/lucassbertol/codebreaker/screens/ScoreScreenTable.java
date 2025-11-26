@@ -38,7 +38,7 @@ public class ScoreScreenTable implements Screen {
         skin = new Skin(Gdx.files.internal(Constants.SKIN_PATH));
         background = new Texture(Gdx.files.internal(Constants.BG_SCORE));
 
-        // Botão voltar no topo esquerdo (posicionamento absoluto)
+        // Botão voltar no topo esquerdo
         TextButton backButton = new TextButton(Constants.BTN_BACK, skin);
         backButton.setSize(Constants.BUTTON_WIDTH, Constants.BUTTON_HEIGHT);
         backButton.getLabel().setFontScale(Constants.BUTTON_FONT_SCALE);

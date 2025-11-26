@@ -29,18 +29,34 @@ public class LeaderboardService {
 
         // Monta JSON
         String jsonBody = "{\"nome\":\"" + escapeJson(nome) + "\",\"score\":" + pontos + "}";
-
         String url = LeaderboardConfig.getAppendUrl();
 
+        Gdx.app.log("LeaderboardService", "=== ENVIANDO REQUEST ===");
+        Gdx.app.log("LeaderboardService", "URL: " + url);
+        Gdx.app.log("LeaderboardService", "JSON: " + jsonBody);
 
         Net.HttpRequest request = new Net.HttpRequest(Net.HttpMethods.POST);
         request.setUrl(url);
         request.setHeader("Content-Type", "application/json; charset=utf-8");
+        request.setFollowRedirects(true);
+        request.setTimeOut(5000);
         request.setContent(jsonBody);
+
+        try {
+            byte[] contentBytes = jsonBody.getBytes("UTF-8");
+            request.setHeader("Content-Length", String.valueOf(contentBytes.length));
+        } catch (Exception e) {
+            Gdx.app.error("LeaderboardService", "Erro ao calcular Content-Length", e);
+        }
 
         Gdx.net.sendHttpRequest(request, new Net.HttpResponseListener() {
             @Override
             public void handleHttpResponse(Net.HttpResponse httpResponse) {
+
+                Gdx.app.log("LeaderboardService", "RESPOSTA RECEBIDA");
+                Gdx.app.log("LeaderboardService", "Status: " + httpResponse.getStatus().getStatusCode());
+                Gdx.app.log("LeaderboardService", "Body: " + httpResponse.getResultAsString());
+
                 HttpStatus status = httpResponse.getStatus();
                 int statusCode = status.getStatusCode();
 
@@ -58,6 +74,9 @@ public class LeaderboardService {
 
             @Override
             public void failed(Throwable t) {
+                Gdx.app.error("LeaderboardService", "ERRO NA REQUISIÇÃO");
+                Gdx.app.error("LeaderboardService", "Mensagem: " + t.getMessage());
+                Gdx.app.error("LeaderboardService", "Classe: " + t.getClass().getName());
                 Gdx.app.error("LeaderboardService",
                     "Falha ao enviar score: " + t.getMessage(), t);
                 if (callback != null) {

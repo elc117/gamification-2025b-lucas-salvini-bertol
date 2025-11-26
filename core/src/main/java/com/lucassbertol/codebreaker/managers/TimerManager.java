@@ -38,7 +38,9 @@ public class TimerManager {
     public String getFormattedTime() {
         int minutes = (int) timeRemaining / 60;
         int seconds = (int) timeRemaining % 60;
-        return String.format("%02d:%02d", minutes, seconds);
+
+        String minStr = (minutes < 10 ? "0" : "") + minutes;
+        String secStr = (seconds < 10 ? "0" : "") + seconds;
+        return minStr + ":" + secStr;
     }
 }
-

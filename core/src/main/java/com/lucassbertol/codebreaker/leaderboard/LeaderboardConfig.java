@@ -1,4 +1,6 @@
 package com.lucassbertol.codebreaker.leaderboard;
+import com.badlogic.gdx.Application;
+import com.badlogic.gdx.Gdx;
 
 public final class LeaderboardConfig {
 
@@ -14,10 +16,17 @@ public final class LeaderboardConfig {
     }
 
     public static String getFetchUrl() {
+        if (Gdx.app.getType() == Application.ApplicationType.WebGL) {
+            return "https://corsproxy.io/?" + APPS_SCRIPT_URL;
+        }
         return APPS_SCRIPT_URL;
     }
 
     public static String getAppendUrl() {
+        // Para GWT, usa proxy
+        if (Gdx.app.getType() == Application.ApplicationType.WebGL) {
+            return "https://corsproxy.io/?" + APPS_SCRIPT_URL;
+        }
         return APPS_SCRIPT_URL;
     }
 }

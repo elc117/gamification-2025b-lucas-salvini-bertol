@@ -61,7 +61,9 @@ public class ScoreScreen implements Screen {
         // Tempo decorrido
         int minutes = (int) scoreManager.getElapsedTime() / 60;
         int seconds = (int) scoreManager.getElapsedTime() % 60;
-        String timeText = String.format("Tempo: %02d:%02d", minutes, seconds);
+        String minStr = (minutes < 10 ? "0" : "") + minutes;
+        String secStr = (seconds < 10 ? "0" : "") + seconds;
+        String timeText = "Tempo: " + minStr + ":" + secStr;
         Label timeLabel = new Label(timeText, skin);
         timeLabel.setFontScale(Constants.FEEDBACK_FONT_SCALE);
         timeLabel.setColor(Color.WHITE);
@@ -134,4 +136,3 @@ public class ScoreScreen implements Screen {
         backgroundTexture.dispose();
     }
 }
-

@@ -413,6 +413,7 @@ Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` ger
 
 - Os assets visuais foram criados utilizando a ferramenta de IA do [Gemini](https://gemini.google.com/app).
 - O banco de questões foi gerado inicialmente com 3 questões (1 de cada tipo), elaboradas por mim, e depois, utilizei também o Gemini para criar mais questões, mantendo o mesmo estilo.
+- As trilhas sonoras foram retiradas integralmente do tema do jogo [Bully Scolarship Edition](https://www.google.com/search?q=bully+theme+songs&sca_esv=e0bffaec294651cc&hl=pt-BR&source=hp&ei=y1ImaZSgHcP35OUPkZOj2QU&iflsig=AOw8s4IAAAAAaSZg2zvZ3U7nX_llsMCe7DPO245d7ziF&ved=0ahUKEwjUseWm0I6RAxXDO7kGHZHJKFsQ4dUDCBg&uact=5&oq=bully+theme+songs&gs_lp=Egdnd3Mtd2l6IhFidWxseSB0aGVtZSBzb25nczIFEC4YgAQyBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB5IpBVQAFi9FHABeACQAQCYAb4BoAHYEaoBBDAuMTe4AQPIAQD4AQGYAhKgAqESwgILEC4YgAQYsQMYgwHCAgUQABiABMICDhAAGIAEGLEDGIMBGIoFwgIREC4YgAQYsQMY0QMYgwEYxwHCAgsQABiABBixAxiDAcICCBAuGIAEGLEDwgIUEC4YgAQYsQMY0QMYgwEYxwEYigXCAggQABiABBixA8ICDhAuGIAEGLEDGNEDGMcBwgIMEC4YgAQYsQMYChgLwgIFECEYoAGYAwCSBwQxLjE3oAeLowGyBwQwLjE3uAeeEsIHCDAuNi4xMS4xyAc4&sclient=gws-wiz), pois gosto e achei que combinou com a tematica do jogo.
 
 
 ---
@@ -432,8 +433,6 @@ Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` ger
 
 ## Resultado final: 
 
-https://github.com/user-attachments/assets/ae2adf9e-f3d4-4934-9fe0-effd063d9ba5
-
 ---
 
 ## Referências:
@@ -452,6 +451,7 @@ https://github.com/user-attachments/assets/ae2adf9e-f3d4-4934-9fe0-effd063d9ba5
   - [PlantUML](https://plantuml.com/): Ferramenta utilizada para a geração do diagrama de classes.
   - [Gemini](https://gemini.google.com/app): Utilizado para a criação dos assets.
   - [ChatGPT](https://chat.openai.com/): Auxílio na resolução de dúvidas e pesquisas rápidas durante o desenvolvimento.
+  - [Bully Scolarship Edition](https://www.google.com/search?q=bully+theme+songs&sca_esv=e0bffaec294651cc&hl=pt-BR&source=hp&ei=y1ImaZSgHcP35OUPkZOj2QU&iflsig=AOw8s4IAAAAAaSZg2zvZ3U7nX_llsMCe7DPO245d7ziF&ved=0ahUKEwjUseWm0I6RAxXDO7kGHZHJKFsQ4dUDCBg&uact=5&oq=bully+theme+songs&gs_lp=Egdnd3Mtd2l6IhFidWxseSB0aGVtZSBzb25nczIFEC4YgAQyBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB4yBhAAGBYYHjIGEAAYFhgeMgYQABgWGB5IpBVQAFi9FHABeACQAQCYAb4BoAHYEaoBBDAuMTe4AQPIAQD4AQGYAhKgAqESwgILEC4YgAQYsQMYgwHCAgUQABiABMICDhAAGIAEGLEDGIMBGIoFwgIREC4YgAQYsQMY0QMYgwEYxwHCAgsQABiABBixAxiDAcICCBAuGIAEGLEDwgIUEC4YgAQYsQMY0QMYgwEYxwEYigXCAggQABiABBixA8ICDhAuGIAEGLEDGNEDGMcBwgIMEC4YgAQYsQMYChgLwgIFECEYoAGYAwCSBwQxLjE3oAeLowGyBwQwLjE3uAeeEsIHCDAuNi4xMS4xyAc4&sclient=gws-wiz): Trilha sonora tema do jogo.
 
 ---
 

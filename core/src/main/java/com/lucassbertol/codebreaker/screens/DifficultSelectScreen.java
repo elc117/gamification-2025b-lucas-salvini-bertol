@@ -93,6 +93,7 @@ public class DifficultSelectScreen implements Screen {
                     counting = true;
                     countdownTimer = Constants.COUNTDOWN_TIME;
                     messageLabel.setText(Constants.MSG_COUNTDOWN);
+                    messageLabel.setFontScale(1.8f);
                     messageLabel.setColor(Color.GREEN);
 
                     // Desabilita os botões durante a contagem
@@ -116,6 +117,7 @@ public class DifficultSelectScreen implements Screen {
                     counting = true;
                     countdownTimer = Constants.COUNTDOWN_TIME;
                     messageLabel.setText(Constants.MSG_COUNTDOWN);
+                    messageLabel.setFontScale(1.8f);
                     messageLabel.setColor(Color.GREEN);
 
                     // Desabilita os botões durante a contagem

@@ -51,7 +51,7 @@ public class Constants {
     public static final String MSG_PRESS_START = "CLICK TO START";
     public static final String MSG_ENTER_USERNAME = "DIGITE SEU USERNAME:";
     public static final String MSG_SELECT_DIFFICULTY = "ESCOLHA A DIFICULDADE:";
-    public static final String MSG_COUNTDOWN = "Carregando questoes";
+    public static final String MSG_COUNTDOWN = "Carregando questoes...";
     public static final String MSG_ERROR_RANKING = "ERRO AO CARREGAR RANKING";
 
     // ranking
@@ -90,7 +90,7 @@ public class Constants {
     public static final String SHEETS_API_URL = "https://sheets.googleapis.com/v4/spreadsheets/";
     public static final String SPREADSHEET_ID = "1QOQF2nFjH06r9f4uhQJFXfnFREZ_cFlwoWj863E_pUw";
     public static final String RANGE = "A2:D";
-    public static final String API_KEY = "api key";
+    public static final String API_KEY = "AIzaSyCzTiOqYJ6D5Hz8lZn6sMNfJB4nn7Oktb8";
 
 }
 

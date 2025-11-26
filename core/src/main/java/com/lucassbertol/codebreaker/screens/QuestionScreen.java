@@ -187,7 +187,7 @@ public class QuestionScreen implements Screen {
     private void layoutMainTable(Table mainTable, ScrollPane scrollPane) {
         mainTable.add(timerLabel).top().right().padTop(20).padRight(20);
         mainTable.row();
-        mainTable.add(scrollPane).width(1770).height(900).pad(10);
+        mainTable.add(scrollPane).width(1650).height(890).pad(10);
     }
 
     private void createInputFields(Table table) {

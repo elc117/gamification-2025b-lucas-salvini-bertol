@@ -123,7 +123,7 @@ public class UserInputScreen implements Screen {
                 nextButton.setDisabled(false);
 
                 if (exists) {
-                    showErrorMessage("Nome '" + playerName + "' ja está em uso! Escolha outro.");
+                    showErrorMessage("Nome '" + playerName + "' ja em uso! Escolha outro.");
                 } else {
                     // Nome disponível
                     game.setPlayerName(playerName);
@@ -148,7 +148,7 @@ public class UserInputScreen implements Screen {
 
     private void showInfoMessage(String message) {
         messageLabel.setText(message);
-        messageLabel.setColor(Color.YELLOW);
+        messageLabel.setColor(Color.GREEN);
     }
 
     @Override
