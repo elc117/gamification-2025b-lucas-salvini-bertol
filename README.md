@@ -397,13 +397,28 @@ public void checkNameExists(String nome, CheckNameCallback callback) {
 
 ### <u>Recursos de Orientação a Objetos utilizados</u>
 
-Durante o desenvolvimento, busquei aplicar os princípios da orientação a objetos para criar um código mais organizado e de fácil manutenção. Para garantir a integridade dos dados, 
-utilizei o **encapsulamento** em classes como `Question`, `TimerManager` e `ScoreManager`, mantendo seus atributos privados e controlando com getters publicos. 
-O **polimorfismo** foi um grande aliado, pois, ao fazer com que todas as telas implementassem a interface `Screen` do LibGDX, a classe principal do 
-jogo teve como alternar entre elas de forma muito simples apenas com uma linha. Além disso, a **separação das responsabilidades** que foi uma ajuda enorme na organização, me levou a criar classes com 
-propósitos únicos, como `QuestionsParsing` para o carregamento dos dados, `AnswerValidator` para a validação das respostas e os diferentes *managers* para controlar o estado do jogo. 
-Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` gerencia o estado geral e as telas, enquanto a `QuestionScreen`, por exemplo, agrupa
-`TimerManager` e `ScoreManager` para controlar suas funcionalidades.
+Durante o desenvolvimento, apliquei os princípios de OO:
+
+**1. Encapsulamento**
+- Classes como `Question`, `TimerManager` e `ScoreManager` mantêm atributos privados
+- Acesso controlado através de getters públicos
+
+**2. Polimorfismo**
+- Todas as telas implementam a interface `Screen` do LibGDX
+- Permite alternância simples entre telas: `game.setScreen(new MenuScreen(game))`
+- Facilita manutenção e extensibilidade
+
+**3. Separação de Responsabilidades**
+- `QuestionsParsing`: carregamento de dados
+- `AnswerValidator`: validação de respostas
+- `TimerManager`: controle de tempo
+- `ScoreManager`: gerenciamento de pontuação
+- Cada classe com propósito único e bem definido
+
+**4. Composição**
+- `MainGame` gerencia estado geral e telas
+- `QuestionScreen` agrega `TimerManager` e `ScoreManager`
+- Favorece reutilização e manutenção
 
 <img width="400" height="246" alt="Captura de tela 2025-11-25 005358" src="https://github.com/user-attachments/assets/b2d85280-f558-4247-a2af-1e1aa027d2e1" />
 
@@ -425,9 +440,32 @@ Por fim, a **composição** foi util para conectar tudo: a classe `MainGame` ger
 
 ---
 
-## Orientações para execução: 
+## Orientações para execução:
 
+### Opção 1: Jogar Online (Recomendado)
 - [Link para jogar WEB pelo Itch.io](https://lucassbertol.itch.io/codebreaker)
+- Não requer instalação
+- Compatível com qualquer navegador moderno
+
+### Opção 2: Executar Localmente
+**Pré-requisitos:**
+- Java JDK 11 ou superior
+- Gradle (incluído no projeto via wrapper)
+
+**Passos:**
+1. Clone o repositório:
+```bash
+   git clone https://github.com/elc117/gamification-2025b-lucas-salvini-bertol
+   cd gamification-2025b-lucas-salvini-bertol
+```
+
+2. Execute o projeto:
+```bash
+   ./gradlew lwjgl3:run  # Linux/Mac
+   gradlew.bat lwjgl3:run  # Windows
+```
+
+**Observação:** A chave da API do Google Sheets não está incluída no repositório por questões de politicas do Google e segurança. Para funcionalidade completa do ranking, configure sua própria chave em `Constants.java`.
 
 ---
 
@@ -459,6 +497,15 @@ https://github.com/user-attachments/assets/8e6f05ec-2c71-47f3-a223-79e8882c11be
 
 ## I.A. / Prompts:
 
+**Nota:** Durante o desenvolvimento, utilizei IA como ferramenta de consulta e auxílio, principalmente para:
+- Esclarecimento de conceitos do LibGDX
+- Resolução de problemas específicos
+- Utilização da API do Google Sheets e APP Script
+- Geração de assets visuais
+- Criação do banco de questões
+
+A seguir, alguns prompts utilizados:
+
 - **Interface:**
     - Qual a melhor forma de gerenciar diferentes telas (menu, jogo, ranking) em um jogo LibGDX? Existe algum padrão de projeto comum para isso?
     - Qual a maneira correta de criar interfaces de usuário organizadas com o LibGDX?"
@@ -467,12 +514,15 @@ https://github.com/user-attachments/assets/8e6f05ec-2c71-47f3-a223-79e8882c11be
     - Viewport libGDX qual usar e como configura
     - O que são 'skins' no LibGDX e quais arquivos são necessários para usá-las (.json, .atlas, .png)? Onde devo colocá-los no projeto
     - Como funciona clicklistener Scene2D.UI
+
+- **Assets**
+  - Como colocar musica projetos libGDX
   
 - **Banco de questões:**
     - Baseado nessas 3 questões e nessa estrutura json, crie mais questões no mesmo padrão e variando os estilos.  
 
 - **Parsing JSON:**
-    - Como funciona a biblioteca JSON do LibGDX? Como fazer o parsing de um arquivo JSON para objetos Java?
+    - Como funciona a biblioteca JSON do LibGDX e como fazer o parsing de um arquivo JSON para objetos Java
     - É melhor usar ArrayList ou Array (do LibGDX) para armazenar listas de dados dinâmicas?
     - Parsing de questões libGDX JSON
 
@@ -488,4 +538,5 @@ https://github.com/user-attachments/assets/8e6f05ec-2c71-47f3-a223-79e8882c11be
 um método GET que retorne todos os dados em JSON.
 
 - **Arquitetura do código:** 
-  - É uma boa prática usar classes com métodos estáticos?
+  - Boas práticas de orientação a objetos em jogos Java com LibGDX
+  - Como organizar corretamente classes e responsabilidades em um jogo Java usando LibGDX seguindo princípios de orientação
