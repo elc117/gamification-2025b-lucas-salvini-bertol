@@ -90,7 +90,7 @@ public class Constants {
     public static final String SHEETS_API_URL = "https://sheets.googleapis.com/v4/spreadsheets/";
     public static final String SPREADSHEET_ID = "1QOQF2nFjH06r9f4uhQJFXfnFREZ_cFlwoWj863E_pUw";
     public static final String RANGE = "A2:D";
-    public static final String API_KEY = "AIzaSyCWOhmEY0yafNN7v4HjxyD0_P9YC9LJhIc";
+    public static final String API_KEY = "COLOCAR-API-KEY-AQUI";
 
 }
 
