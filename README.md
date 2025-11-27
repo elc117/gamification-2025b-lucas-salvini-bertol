@@ -13,7 +13,7 @@
 ## Proposta 
 
 - Criação de um jogo em java utilizando o framework [LibGDX](https://libgdx.com/) onde você precisa resolver problemas de lógica e códigos de 
-programação (Na linguagem C) para aprimorar seus conhecimentos na área e avançar de nível. Cada partida, com 5 niveis, de dificuldades escolhidas previamennte, tem um novo desafio.
+programação (Na linguagem C) para aprimorar seus conhecimentos na área e avançar de nível. Cada partida, com 5 niveis, de dificuldades escolhidas previamente, tem um novo desafio.
 Dependendo do tempo que o player  finalizar a fase, tentativas e acertos/erros, ele ganhará um **score** que ficará eternizado no **ranking** público do jogo.
 ---
 
@@ -53,7 +53,7 @@ Dependendo do tempo que o player  finalizar a fase, tentativas e acertos/erros, 
 ```    
 
 
-- Na `UserInputScreen`, o usuário digita seu usernamme, e salva-o na `MainGame` ao pressionar o botão com o `ClickListener` que foi adicionado nele.
+- Na `UserInputScreen`, o usuário digita seu username, e salva-o na `MainGame` ao pressionar o botão com o `ClickListener` que foi adicionado nele.
 
 ```java
         TextField nameInput = new TextField("", skin);
@@ -309,7 +309,7 @@ private void updateGameState(float delta) {
 - O sistema de pontuação é gerenciado pela classe `ScoreManager`, que calcula o score baseado em três fatores pré definidos:
 
   - Pontos por acerto: no modo facil, coloquei para ganhar +100 pontos por acerto, e no dificil +250 pontos. 
-  - Desconto por erro: -20 pontos nas duas difculdades, mas não deixa o score ficar negativo.
+  - Desconto por erro: -20 pontos nas duas dificuldades, mas não deixa o score ficar negativo.
   - Penalidade por tempo: jogador perde -2 pontos por segundo que passa.
 
 - Esses dados de pontuação e outros estão todos na classe `Constants`, para facilitar ajustes quando for necessário de forma mais fácil.
@@ -351,7 +351,7 @@ game.setScreen(new QuestionScreen(
 
 ### <u>Sistema de Ranking utilizando Google Sheets</u>
 
-- Nessa parte do projeto, implementei, seguindo dicas da professora de analisar o projeto do jogo da guilhotina e mais ajuda de IA (principalmente na parte de comunicação API -> jogo), um sistema de ranking simples que salva o nome do jogador e sua pontuação final em uma planilha do Google Sheets, utilizando a API do Google Sheets.
+- Nessa parte do projeto, implementei, seguindo dicas da professora de analisar o projeto do jogo da guilhotina e mais ajuda de IA, pois estava passando bastante dificuldade, (principalmente na parte de comunicação API -> jogo), um sistema de ranking simples que salva o nome do jogador e sua pontuação final em uma planilha do Google Sheets, utilizando a API do Google Sheets.
 
 - Tive problemas iniciais fazendo commit da chave API no github, o que não é uma boa prática, então coloquei ela na `Constants` e apago ela sempre antes de dar o commit para evitar problemas
 
@@ -362,7 +362,16 @@ game.setScreen(new QuestionScreen(
 
 - Google Apps Script tem um `doGet()` que retorna todos dados do ranking em JSON, e um `doPost()` que recebe o nome e pontuação do jogador e adiciona na planilha.
 
-- `LeaderboardService` faz o envio de score e uma verificação adicional de nome duplicado antes de enviar.
+- Foi implementado verificação para não permitir nomes duplicados no ranking (na hora que o jogador escolhe um username já usado, da erro e pede pra trocar se ja existir no rank)
+```java
+public void checkNameExists(String nome, CheckNameCallback callback) {
+    // GET request para buscar todos os dados
+    // Parse manual do JSON para verificar se nome já existe
+    // Retorna se ja existe ou não
+}
+```
+
+- `LeaderboardService` faz o envio de score 
 ```java
 public void submitScore(String nome, int pontos, SubmitCallback callback) {
     String jsonBody = "{\"nome\":\"" + escapeJson(nome) + "\",\"score\":" + pontos + "}";
@@ -375,13 +384,7 @@ public void submitScore(String nome, int pontos, SubmitCallback callback) {
     });
 }
 ```
-```java
-public void checkNameExists(String nome, CheckNameCallback callback) {
-    // GET request para buscar todos os dados
-    // Parse manual do JSON para verificar se nome já existe
-    // Retorna se ja existe ou não
-}
-```
+
 
 - Na `ScoreScreenTable`, implementei a exibição dos dados em uma tabela ordenada por pontuação, utilizando `Table` e `ScrollPane` do LibGDX. 
  - Os dados são buscados via API
@@ -391,37 +394,40 @@ public void checkNameExists(String nome, CheckNameCallback callback) {
 - Fluxo completo:
   - `QuestionScreen.finishGame()` -> `submitScore()` é chamado ->`ScoreScreen` exibe pontuação -> `fetchScores()` atualiza tabela -> tabela de ranking é exibida em seu menu
 
+### <u>Conclusão do Processo de Desenvolvimento</u>
 
-### <u>Recursos de Orientação a Objetos utilizados</u>
+- Durante o desenvolvimento deste projeto, aprofundei meus conhecimentos em Java, orientação a objetos e no framework LibGDX, enfrentando desafios reais de estruturação de código, integração de APIs externas e organização de interfaces. Aprendi a importância de separar responsabilidades entre classes, reutilizar componentes e documentar cada etapa do processo.
+
+---
+
+## <u>Recursos de Orientação a Objetos utilizados</u>
 
 Durante o desenvolvimento, apliquei os princípios de OO:
 
 **1. Encapsulamento**
-- Classes como `Question`, `TimerManager` e `ScoreManager` mantêm atributos privados
-- Acesso controlado através de getters públicos
+- Classes como `Question`, `TimerManager` e `ScoreManager` mantêm atributos privados com acesso controlado através de getters públicos
 
 **2. Polimorfismo**
 - Todas as telas implementam a interface `Screen` do LibGDX
 - Permite alternância simples entre telas: `game.setScreen(new MenuScreen(game))`
-- Facilita manutenção e extensibilidade
-
+- Facilita manutenção
+  
 **3. Separação de Responsabilidades**
 - `QuestionsParsing`: carregamento de dados
 - `AnswerValidator`: validação de respostas
 - `TimerManager`: controle de tempo
 - `ScoreManager`: gerenciamento de pontuação
-- Cada classe com propósito único e bem definido
+- Cada classe com propósito único e definido
 
 **4. Composição**
 - `MainGame` gerencia estado geral e telas
-- `QuestionScreen` agrega `TimerManager` e `ScoreManager`
-- Favorece reutilização e manutenção
+
 
 <img width="400" height="246" alt="Captura de tela 2025-11-25 005358" src="https://github.com/user-attachments/assets/b2d85280-f558-4247-a2af-1e1aa027d2e1" />
 
+---
 
-
-### <u>Assets e banco de questões</u>
+## <u>Assets e banco de questões</u>
 
 - Os assets visuais foram criados utilizando a ferramenta de IA do [Gemini](https://gemini.google.com/app).
 - O banco de questões foi gerado inicialmente com 3 questões (1 de cada tipo), elaboradas por mim, e depois, utilizei também o Gemini para criar mais questões, mantendo o mesmo estilo.
@@ -430,9 +436,11 @@ Durante o desenvolvimento, apliquei os princípios de OO:
 
 ---
 
-## Diagrama de classes:
+## ¹Diagrama de classes:
 
 <img width="2021" height="1331" alt="classDiagram" src="https://github.com/user-attachments/assets/bf37d44b-7d44-4eeb-a36d-06222808db6b" />
+
+¹ _O diagrama foi levemente simplificado por motivos de organização e de facilitar a visualização_
 
 
 ---
@@ -462,7 +470,7 @@ Durante o desenvolvimento, apliquei os princípios de OO:
    gradlew.bat lwjgl3:run  # Windows
 ```
 
-**Observação:** A chave da API do Google Sheets não está incluída no repositório por questões de politicas do Google e segurança. Para funcionalidade completa do ranking, configure sua própria chave em `Constants.java`.
+_(A chave da API do Google Sheets não está incluída no repositório por questões de politicas do Google e segurança. Para funcionalidade completa do ranking, configure sua própria chave em `Constants.java`.)_
 
 ---
 
